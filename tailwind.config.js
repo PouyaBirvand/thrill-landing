@@ -205,8 +205,8 @@ module.exports = {
         lg: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
         xl: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
         // Custom shadows
-        'primary-glow': '0 0 14px rgba(92, 254, 192, 0.6)',
-        'signin-glow': '0 0 10px rgba(92, 254, 192, 0.6)',
+        'primary-glow': '0px 0px 27.6px 0px rgba(92, 255, 193, 0.42)',
+        'signin-glow': '0px 0px 20px 0px rgba(92, 255, 193, 0.2)',
       },
 
       // Border Radius System
