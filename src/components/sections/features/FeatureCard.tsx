@@ -147,7 +147,11 @@ export default function FeatureCard({ title, description, image, stats }: Featur
             className={`flex-shrink-0 relative bg-[#858FA640] hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1 rounded-full border border-[#858FA640] transition-all duration-200 hover:scale-105 ${isExpanded ? "rotate-45" : "rotate-0"}`}
             aria-label={`Toggle ${title} details`}
           >
-            <Plus size={16} className="sm:w-5 sm:h-5 transition-colors duration-200" color={isExpanded ? "#83FFDA" : "#858FA660"} />
+            <Plus
+              size={16}
+              className="sm:w-5 sm:h-5 transition-colors duration-200"
+              color={isExpanded ? "#83FFDA" : "#858FA660"}
+            />
           </button>
         </div>
 

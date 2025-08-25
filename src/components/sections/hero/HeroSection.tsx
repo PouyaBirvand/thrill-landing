@@ -19,6 +19,7 @@ export default function HeroSection() {
           alt="right"
           width={500}
           height={500}
+          priority
           className="object-contain w-[56rem] sm:w-[40rem] md:w-[48rem] lg:w-[56rem]"
         />
       </motion.div>
@@ -35,6 +36,7 @@ export default function HeroSection() {
           alt="left"
           width={500}
           height={900}
+          priority
           className="object-contain w-[56rem] sm:w-[40rem] md:w-[48rem] lg:w-[56rem] scale-x-[-1]"
         />
       </motion.div>

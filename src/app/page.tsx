@@ -6,7 +6,7 @@ import HeroSection from "@/components/sections/hero/HeroSection"
 
 export default function Home() {
   return (
-    <div className="bg-body min-h-screen pb-20">
+    <div className="bg-body min-h-screen pb-20 overflow-x-hidden">
       <Container>
         <Header />
       </Container>

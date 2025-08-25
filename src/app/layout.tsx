@@ -66,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" >
-      <body className={` ${oxanium.className}`}>
+      <body className={` ${oxanium.className} overflow-x-hidden`}>
         {children}
       </body>
     </html>

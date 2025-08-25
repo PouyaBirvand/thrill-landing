@@ -23,7 +23,6 @@ export default function FeatureSlider() {
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      {/* Container for the slider that allows right overflow */}
       <div className="!overflow-visible">
         <Swiper
           modules={[Navigation, Autoplay]}
