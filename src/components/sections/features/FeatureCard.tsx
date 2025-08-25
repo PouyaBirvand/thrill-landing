@@ -26,7 +26,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded)
   }
-
+  
   return (
     <div className={`relative w-full h-full max-w-[490px] transition-all duration-500 ease-out`}>
       {/* Simple Border */}
