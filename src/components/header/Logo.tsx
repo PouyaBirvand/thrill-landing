@@ -1,5 +1,6 @@
 "use client"
-import { LogoProps } from "@/types/header.types"
+
+import type { LogoProps } from "@/types/header.types"
 import { motion } from "framer-motion"
 import Image from "next/image"
 
@@ -8,11 +9,11 @@ export default function Logo({ className = "", onClick }: LogoProps) {
     <motion.div
       className={`relative cursor-pointer ${className}`}
       whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}  
+      whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       onClick={onClick}
     >
-      <div className="uppercase flex items-center gap-2 text-2xl text-neutral-white font-bold relative z-10">
+      <div className="uppercase flex items-center gap-2 text-2xl text-white font-bold relative z-10">
         <Image alt="logo" src="/logo.png" width={108} height={28} />
       </div>
     </motion.div>
