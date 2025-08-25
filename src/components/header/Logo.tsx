@@ -15,12 +15,12 @@ export default function Logo({ className = "", onClick }: LogoProps) {
     >
       <div className="uppercase flex items-center gap-2 text-2xl text-white font-bold relative z-10">
         <Image
+          alt="Logo"
           src="/logo.png"
-          alt="logo"
           width={108}
           height={28}
           priority
-          unoptimized 
+          className="w-[108px] h-auto"
         />
       </div>
     </motion.div>
