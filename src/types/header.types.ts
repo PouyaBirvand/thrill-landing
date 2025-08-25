@@ -32,11 +32,3 @@ export interface LogoProps {
     logoProps?: Partial<LogoProps>
     showSignIn?: boolean
   }
-  
-  export interface AnimationVariants {
-    hidden: any
-    visible: any
-    closed?: any
-    open?: any
-  }
-  

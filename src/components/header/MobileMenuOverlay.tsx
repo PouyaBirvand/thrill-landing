@@ -90,7 +90,7 @@ export default function MobileMenuOverlay({ isOpen, onClose, menuItems = default
             <div className="pt-24 px-6 space-y-6 relative z-10">
               {/* Mobile Navigation Items */}
               <motion.div className="space-y-4" variants={mobileMenuItemVariants}>
-                {menuItems.map((item, index) => (
+                {menuItems.map((item) => (
                   <motion.div
                     key={item.label}
                     variants={mobileMenuItemVariants}

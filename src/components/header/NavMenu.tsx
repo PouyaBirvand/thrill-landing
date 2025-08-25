@@ -47,23 +47,21 @@ export default function NavMenu() {
   }
 
   return (
-    <nav ref={navRef} className="flex gap-1 relative z-[99]">
-      <motion.div
-        className="absolute top-0 bg-accent-green/10 rounded-2xl backdrop-blur-sm"
+    <motion.nav 
+      ref={navRef} 
+      className="flex gap-1 relative z-[99]"
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+    >
+      {/* Simple indicator */}
+      <div
+        className="absolute top-0 bg-accent-green/10 rounded-2xl transition-all duration-300 ease-out"
         style={{
           height: "100%",
-        }}
-        animate={{
           width: indicatorStyle.width,
-          x: indicatorStyle.left,
+          transform: `translateX(${indicatorStyle.left}px)`,
         }}
-        transition={{
-          type: "spring",
-          stiffness: 300,
-          damping: 30,
-          mass: 0.8,
-        }}
-        initial={false}
       />
 
       {navigationItems.map((item) => (
@@ -80,6 +78,6 @@ export default function NavMenu() {
           {item.label}
         </Button>
       ))}
-    </nav>
+    </motion.nav>
   )
 }
