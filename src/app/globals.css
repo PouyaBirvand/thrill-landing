@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #314054 #141923;
+}
+
+html::-webkit-scrollbar {
+  width: 14px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #141923;
+  border-radius: 9999px;
+  margin: 4px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #83FFDA, #314054);
+  border-radius: 9999px;
+  border: 3px solid #141923;
+  min-height: 40px;
+  transition: all 0.3s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5CFFC1, #46546E);
+  box-shadow: 0 0 12px rgba(131, 255, 218, 0.6);
+  transform: scaleX(1.1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-oxanium);
+}
+
+@layer components {
+  .border-custom-gradient {
+    border: 20px solid transparent;
+    /* ضروری */
+    border-image-source: linear-gradient(158.39deg,
+        rgba(255, 255, 255, 0.06) 14.19%,
+        rgba(255, 255, 255, 0) 50.59%,
+        rgba(255, 255, 255, 0) 68.79%,
+        rgba(255, 255, 255, 0.015) 105.18%);
+    border-image-slice: 1;
+  }
+
+  .detail-custom-gradient {
+    background: linear-gradient(0deg, rgba(248, 248, 248, 0.02), rgba(248, 248, 248, 0.02)),
+      radial-gradient(152.94% 72.41% at 72.83% 132.39%, #5DFFC2 0%, rgba(27, 29, 41, 0) 100%)
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+    ;
+
+  }
+}
