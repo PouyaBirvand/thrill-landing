@@ -28,11 +28,6 @@ export default function FeatureSlider() {
           modules={[Navigation, Autoplay]}
           spaceBetween={10}
           slidesPerView={1.2}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
           onSwiper={(swiper) => {
             swiperRef.current = swiper
           }}
