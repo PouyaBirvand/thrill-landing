@@ -39,25 +39,10 @@ html::-webkit-scrollbar-thumb:hover {
 
 body {
   font-family: var(--font-oxanium);
+  overflow-x: hidden;
 }
 
 @layer components {
-  .border-custom-gradient {
-    border: 20px solid transparent;
-    /* ضروری */
-    border-image-source: linear-gradient(158.39deg,
-        rgba(255, 255, 255, 0.06) 14.19%,
-        rgba(255, 255, 255, 0) 50.59%,
-        rgba(255, 255, 255, 0) 68.79%,
-        rgba(255, 255, 255, 0.015) 105.18%);
-    border-image-slice: 1;
-  }
 
-  .detail-custom-gradient {
-    background: linear-gradient(0deg, rgba(248, 248, 248, 0.02), rgba(248, 248, 248, 0.02)),
-      radial-gradient(152.94% 72.41% at 72.83% 132.39%, #5DFFC2 0%, rgba(27, 29, 41, 0) 100%)
-      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-    ;
 
-  }
 }
