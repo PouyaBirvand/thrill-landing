@@ -127,7 +127,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
       </svg>
 
       {/* Content */}
-      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-6 flex-col justify-between overflow-hidden min-h-[0px] sm:min-h-[400px]">
+      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-6 flex-col justify-between overflow-hidden">
         {/* Image */}
         <div className="flex-1 flex mt-4 justify-center">
           <div className="w-full max-w-[369px] h-[200px] sm:h-[263px] rounded-xl flex items-center justify-center relative overflow-hidden">
@@ -158,7 +158,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
         {/* Expandable Content */}
         <div
           className={`overflow-hidden transition-all duration-500 ease-out ${
-            isExpanded ? "max-h-96 opacity-100 mt-4 sm:mt-6" : "max-h-0 opacity-0 mt-0"
+            isExpanded ? "max-h-[30rem] opacity-100 mt-4 sm:mt-6" : "max-h-0 opacity-0 mt-0"
           }`}
         >
           <div className="space-y-4 sm:space-y-6">

@@ -207,6 +207,7 @@ module.exports = {
         // Custom shadows
         'primary-glow': '0px 0px 27.6px 0px rgba(92, 255, 193, 0.42)',
         'signin-glow': '0px 0px 20px 0px rgba(92, 255, 193, 0.2)',
+        'step-glow': '0px 0px 12.3px 2px #5CFFC166'
       },
 
       // Border Radius System
@@ -299,8 +300,9 @@ module.exports = {
 
       fontWeight: {
         740: "740",
-        600: "600",
         700: "700",
+        600: "600",
+        400: "400",
       },
     },
   },

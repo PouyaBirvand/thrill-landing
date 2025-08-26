@@ -7,8 +7,7 @@ export default function FeaturesSection() {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section className="gap-10 overflow-hidden pt-16" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section className="overflow-hidden pt-16" ref={ref}>
         <div className="flex flex-col items-center justify-center gap-2">
           {/* Block 1: Subtitle */}
           <motion.h3
@@ -48,7 +47,6 @@ export default function FeaturesSection() {
             </p>
           </motion.div>
         </div>
-      </div>
     </section>
   )
 }

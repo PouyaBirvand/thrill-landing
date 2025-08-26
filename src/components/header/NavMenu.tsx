@@ -1,12 +1,11 @@
-"use client"
-import { useState, useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { navigationItems } from "@/constants/navigation"
 import { Button } from "@/components/ui/Button"
-import type { NavigationItem } from "@/types/navigation.types"
 import { motion } from "framer-motion"
+import { useNavigate } from "@/hooks/useNavigate"
 
 export default function NavMenu() {
-  const [activeItem, setActiveItem] = useState(navigationItems[0].label)
+  const { activeItem, navigate } = useNavigate(navigationItems)
   const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 })
   const navRef = useRef<HTMLDivElement>(null)
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
@@ -14,11 +13,9 @@ export default function NavMenu() {
   const updateIndicator = (activeLabel: string) => {
     const activeButton = buttonRefs.current[activeLabel]
     const navContainer = navRef.current
-
     if (activeButton && navContainer) {
       const navRect = navContainer.getBoundingClientRect()
       const buttonRect = activeButton.getBoundingClientRect()
-
       setIndicatorStyle({
         width: buttonRect.width,
         left: buttonRect.left - navRect.left,
@@ -36,25 +33,14 @@ export default function NavMenu() {
     return () => window.removeEventListener("resize", handleResize)
   }, [activeItem])
 
-  const handleNavigate = (item: NavigationItem) => {
-    setActiveItem(item.label)
-
-    const sectionId = item.url.replace("#", "")
-    const sectionElement = document.getElementById(sectionId)
-    if (sectionElement) {
-      sectionElement.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
   return (
-    <motion.nav 
-      ref={navRef} 
+    <motion.nav
+      ref={navRef}
       className="flex gap-1 relative z-[99]"
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
     >
-      {/* Simple indicator */}
       <div
         className="absolute top-0 bg-accent-green/10 rounded-2xl transition-all duration-300 ease-out"
         style={{
@@ -72,8 +58,8 @@ export default function NavMenu() {
           size="sm"
           key={item.label}
           variant={activeItem === item.label ? "select" : "ghost"}
-          onClick={() => handleNavigate(item)}
-          className="relative z-10"
+          onClick={() => navigate(item)}
+          className="relative z-10 hover:bg-primary-300 rounded-2xl"
         >
           {item.label}
         </Button>

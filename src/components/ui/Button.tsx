@@ -15,7 +15,7 @@ const buttonVariants = cva(
         secondary: "bg-accent-social text-neutral-white font-semibold rounded-2xl",
         select: "bg-accent-green/10 text-accent-green_light font-740 rounded-2xl leading-tight",
         ghost:
-          "bg-transparent text-neutral-white font-medium hover:bg-primary-300 rounded-2xl transition-colors duration-500",
+          "bg-transparent text-neutral-white font-medium transition-colors duration-500",
         link: "text-neutral-lightGray underline underline-offset-3 p-0 h-auto font-normal normal-case tracking-normal",
       },
       size: {

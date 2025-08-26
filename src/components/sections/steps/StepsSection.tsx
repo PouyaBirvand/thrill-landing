@@ -1,99 +1,172 @@
-'use client'
-import React from 'react';
-import { motion } from 'framer-motion';
+"use client";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const StepsSection = () => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.3 });
+
     const steps = [
-        { number: "01", title: "SIGN UP INSTANTLY", description: "Register in seconds with our lightning-fast onboarding process." },
-        { number: "02", title: "MEET YOUR MANAGER", description: "Get direct access to your manager right away, no waiting around." },
-        { number: "03", title: "SET DEAL & ASSETS", description: "We customize your deal fast and give you everything you need to launch." },
-        { number: "04", title: "START SENDING TRAFFIC", description: "Begin promoting immediately with high-converting links and creatives." },
-        { number: "05", title: "GET PAID - FAST!", description: "Enjoy rapid payouts with no delays, weekly and monthly options available." }
+        {
+            number: "01",
+            title: "SIGN UP INSTANTLY",
+            description:
+                "Register in seconds with our lightning-fast onboarding process.",
+        },
+        {
+            number: "02",
+            title: "MEET YOUR MANAGER",
+            description:
+                "Get direct access to your manager right away, no waiting around.",
+        },
+        {
+            number: "03",
+            title: "SET DEAL & ASSETS",
+            description:
+                "We customize your deal fast and give you everything you need to launch.",
+        },
+        {
+            number: "04",
+            title: "START SENDING TRAFFIC",
+            description:
+                "Begin promoting immediately with high-converting links and creatives.",
+        },
+        {
+            number: "05",
+            title: "GET PAID - FAST!",
+            description:
+                "Enjoy rapid payouts with no delays, weekly and monthly options available.",
+        },
     ];
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-        }
-    };
-
-    const stepVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-    };
-
     return (
-        <section className="py-20 relative">
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-            >
-                {/* Header */}
-                <div className="text-center mb-20">
-                    <motion.p className="text-[#00ff7f] text-xs font-semibold tracking-[0.3em] uppercase mb-4" variants={stepVariants}>
-                        JOIN, PROMOTE AND EARN
-                    </motion.p>
-                    <motion.h2 className="text-white text-4xl md:text-5xl font-bold leading-tight mb-6" variants={stepVariants}>
-                        5 FAST STEPS TO<br />BECOME AN AFFILIATE
-                    </motion.h2>
-                    <motion.p className="text-[#a1a5b0] text-lg max-w-3xl mx-auto leading-relaxed" variants={stepVariants}>
+        <section className="overflow-hidden pt-48 relative" ref={ref}>
+            <div className="flex flex-col items-center justify-center gap-2 relative">
+                {/* Block 1: Subtitle */}
+                <motion.h3
+                    className="uppercase text-accent-green_light font-semibold text-sm sm:text-base mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                >
+                    JOIN, PROMOTE AND EARN
+                </motion.h3>
+
+                {/* Block 2: Main Title */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                >
+                    <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase">
+                        5 fast steps to
+                    </h1>
+                    <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase">
+                        become an affiliate
+                    </h1>
+                </motion.div>
+
+                {/* Block 3: Description */}
+                <motion.div
+                    className="text-center space-y-1 mt-2 px-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                >
+                    <p className="text-neutral-lightGray max-w-[50rem] text-sm sm:text-base">
                         Getting started is fast and frictionless. Sign up, connect with your
                         manager, grab your assets, and start earning with real-time tracking
                         and fast payouts.
-                    </motion.p>
-                </div>
-
-                {/* Steps Timeline */}
-                <div className="relative">
-
-                    {/* خط تایم‌لاین بالا */}
-                    <div className="hidden md:block absolute top-[5.9rem] left-1/2 right-1/2 w-[calc(100%-8rem)] mx-auto h-[0.1rem] bg-neutral-lightGray/30 z-0" />
-
-                    {/* Steps بالا */}
- {/* Steps بالا */}
-<div className="grid md:grid-cols-3 gap-12 mb-32 relative">
-    {/* خط تایم‌لاین */}
-    <div className="hidden md:block absolute top-[5.9rem] left-[10%] right-[10%] h-[0.1rem] bg-neutral-lightGray/30 z-0" />
-
-    {steps.slice(0, 3).map((step) => (
-        <motion.div key={step.number} className="text-center relative z-10" variants={stepVariants}>
-            <div className="relative mb-8">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto bg-black relative z-10">
-                    <span className="text-white text-6xl font-bold">{step.number}</span>
-                </div>
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#00ff7f] rounded-full z-20" />
+                    </p>
+                </motion.div>
             </div>
-            <h3 className="text-white text-base font-bold mb-4 tracking-wide">{step.title}</h3>
-            <p className="text-[#a1a5b0] text-sm leading-relaxed max-w-xs mx-auto">{step.description}</p>
-        </motion.div>
-    ))}
-</div>
+
+            <div
+                ref={ref}
+                className="min-[467px]:mt-28 flex items-center justify-center w-full transition-all duration-100"
+            >
+                {/* Steps Timeline */}
+                <div className="relative flex-col items-end justify-end w-full max-[467px]:scale-[0.8] transition-all duration-100">
+                    {/* Top Stepper */}
+                    <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 gap-y-32 relative">
+                        <div className="block absolute top-[5.9rem] 
+                                  w-[0.06rem] h-[620px] 
+                                  md:w-[560px] md:h-[0.06rem] 
+                                  lg:w-[720px]
+                                  2xl:w-[890px]
+                                  xl:w-[870px] 
+                                  bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
 
 
-                    {/* خط تایم‌لاین پایین */}
-                    <div className="hidden md:block absolute top-[calc(50%+140px)] left-1/4 w-1/2 h-[0.1rem] bg-neutral-lightGray/30 z-0" />
+                        <div className="block md:hidden absolute top-[26rem] h-[620px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
 
-                    {/* Steps پایین */}
-                    <div className="grid md:grid-cols-2 gap-32 relative z-10 justify-center w-3/4 mx-auto">
-                        {steps.slice(3, 5).map((step) => (
-                            <motion.div key={step.number} className="text-center relative" variants={stepVariants}>
+                        {steps.slice(0, 3).map((step, index) => (
+                            <motion.div
+                                key={step.number}
+                                className="text-center relative z-10 max-md:left-[200px] transition-all duration-100"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: 0.8 + index * 0.2,
+                                    ease: "easeOut",
+                                }}
+                            >
                                 <div className="relative mb-8">
-                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto relative z-10 bg-black">
-                                        <span className="text-white text-6xl font-bold">{step.number}</span>
+                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto relative z-10">
+                                        <span className="text-white text-[64px] font-medium">{step.number}</span>
                                     </div>
-                                    <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#00ff7f] rounded-full z-20" />
+                                    <div className="absolute transition-all duration-100 -bottom-[19px] 
+                                              left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
+                                              w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20" />
                                 </div>
-                                <h3 className="text-white text-base font-bold mb-4 tracking-wide">{step.title}</h3>
-                                <p className="text-[#a1a5b0] text-sm leading-relaxed max-w-xs mx-auto">{step.description}</p>
+                                <h3 className="text-white font-740 mb-2 tracking-wide uppercase">{step.title}</h3>
+                                <p className="text-[#FFFFFF80] font-400 leading-5 max-w-xs mx-auto">{step.description}</p>
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* Under Stepper */}
+                    <div className="mt-32 md:flex-row flex flex-col md:flex items-center justify-center gap-32 mb-32 relative">
+                        {/* TimeLine */}
+                        <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 gap-y-32 relative">
+                            <div className="absolute top-[5.9rem] 
+                                      w-[0.06rem] h-[310px]
+                                      sm:w-[350px] sm:h-[0.06rem]
+                                      md:w-[420px] 
+                                      lg:w-[450px]
+                                      xl:w-[450px]
+                                      2xl:w-[450px]
+                                      bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
+
+                            {steps.slice(3, 5).map((step, index) => (
+                                <motion.div
+                                    key={step.number}
+                                    className="text-center relative z-10 max-md:left-[200px] transition-all duration-100"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: 0.8 + index * 0.2,
+                                        ease: "easeOut",
+                                    }}
+                                >
+                                    <div className="relative mb-8">
+                                        <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto relative z-10">
+                                            <span className="text-white text-[64px] font-medium">{step.number}</span>
+                                        </div>
+                                        <div className="absolute transition-all duration-100 -bottom-[19px] 
+                                                  left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
+                                                  w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20" />
+                                    </div>
+                                    <h3 className="text-white font-740 mb-2 tracking-wide uppercase">{step.title}</h3>
+                                    <p className="text-[#FFFFFF80] font-400 leading-5 max-w-xs mx-auto">{step.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            </motion.div>
+            </div>
         </section>
     );
 };
