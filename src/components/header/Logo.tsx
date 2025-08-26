@@ -2,6 +2,7 @@
 
 import type { LogoProps } from "@/types/header.types"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function Logo({ className = "", onClick }: LogoProps) {
   return (
@@ -13,9 +14,12 @@ export default function Logo({ className = "", onClick }: LogoProps) {
       onClick={onClick}
     >
       <div className="uppercase flex items-center gap-2 text-2xl text-white font-bold relative z-10">
-        <img
+        <Image
           alt="Logo"
-          src="/logo.png"
+          src="/Logo.png"
+          width={108}
+          height={28}
+          priority
           className="w-[108px] h-auto"
         />
       </div>
