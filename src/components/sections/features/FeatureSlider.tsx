@@ -49,7 +49,7 @@ export default function FeatureSlider() {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 3.4,
+              slidesPerView: 3,
               spaceBetween: 15,
             },
           }}

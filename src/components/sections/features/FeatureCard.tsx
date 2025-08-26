@@ -127,7 +127,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
       </svg>
 
       {/* Content */}
-      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-14 flex-col justify-between overflow-hidden min-h-[400px]">
+      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-6 flex-col justify-between overflow-hidden min-h-[0px] sm:min-h-[400px]">
         {/* Image */}
         <div className="flex-1 flex mt-4 justify-center">
           <div className="w-full max-w-[369px] h-[200px] sm:h-[263px] rounded-xl flex items-center justify-center relative overflow-hidden">
@@ -139,7 +139,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
 
         {/* Header with Button */}
         <div className="flex items-center justify-between mt-4 sm:mt-6">
-          <h2 className="text-neutral-white text-lg sm:text-xl lg:text-2xl xl:text-[28px] font-semibold uppercase leading-tight flex-1 pr-4">
+          <h2 className="text-neutral-white text-lg text-nowrap sm:text-xl lg:text-2xl xl:text-[28px] font-semibold uppercase leading-tight flex-1 pr-4">
             {title}
           </h2>
           <button
