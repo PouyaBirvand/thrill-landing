@@ -28,7 +28,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
   }
   
   return (
-    <div className={`relative w-full h-full max-w-[490px] transition-all duration-500 ease-out`}>
+    <div className={`relative w-full ${isExpanded? "h-[600px] sm:h-[750px] md:h-[750px] lg:h-[880px] xl:h-[800px]": "h-full"} max-w-[490px] transition-all duration-500 ease-out`}>
       {/* Simple Border */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -127,9 +127,9 @@ export default function FeatureCard({ title, description, image, stats }: Featur
       </svg>
 
       {/* Content */}
-      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-6 flex-col justify-between overflow-hidden">
+      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-6 flex-col overflow-hidden">
         {/* Image */}
-        <div className="flex-1 flex mt-4 justify-center">
+        <div className="justify-center">
           <div className="w-full max-w-[369px] h-[200px] sm:h-[263px] rounded-xl flex items-center justify-center relative overflow-hidden">
             <div className="w-full h-full rounded-xl flex items-center justify-center relative">
               <Image alt="feat" src={image || "/placeholder.svg"} fill className="object-cover rounded-xl" />
@@ -158,10 +158,10 @@ export default function FeatureCard({ title, description, image, stats }: Featur
         {/* Expandable Content */}
         <div
           className={`overflow-hidden transition-all duration-500 ease-out ${
-            isExpanded ? "max-h-[30rem] opacity-100 mt-4 sm:mt-6" : "max-h-0 opacity-0 mt-0"
+            isExpanded ? "opacity-100 mt-4 sm:mt-6" : "max-h-0 opacity-0 mt-0"
           }`}
         >
-          <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col justify-between items-center h-[300px] sm:h-[350px] md:h-[330px] lg:h-[450px] xl:h-[400px]">
             <p className="text-neutral-lightGray text-sm sm:text-base lg:text-lg text-left leading-relaxed">
               {description}
             </p>

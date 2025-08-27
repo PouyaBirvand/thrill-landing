@@ -1,19 +1,25 @@
-"use client"
-import { useRef } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { motion, useInView } from "framer-motion"
-import FeatureCard from "./FeatureCard"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation, Autoplay } from "swiper/modules"
-import type { Swiper as SwiperType } from "swiper"
-import "swiper/css"
-import "swiper/css/navigation"
-import { features } from "@/constants/data/features"
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import FeatureCard from "./FeatureCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { features } from "@/constants/data/features";
 
 export default function FeatureSlider() {
-  const swiperRef = useRef<SwiperType>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-150px" })
+  const swiperRef = useRef<SwiperType>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-150px" });
+  const [featureMinList, setFeatureMinList] = useState<number>(0);
+
+  // useEffect(() => {
+  //   const featuresList = features.map((feature) => feature.description.length);
+  //   setFeatureMinList(featuresList.length > 0 ? Math.min(...featuresList) : 0);
+  // }, [features]);
 
   return (
     <motion.div
@@ -29,7 +35,7 @@ export default function FeatureSlider() {
           spaceBetween={10}
           slidesPerView={1.2}
           onSwiper={(swiper) => {
-            swiperRef.current = swiper
+            swiperRef.current = swiper;
           }}
           breakpoints={{
             480: {
@@ -86,5 +92,5 @@ export default function FeatureSlider() {
         </button>
       </div>
     </motion.div>
-  )
+  );
 }
