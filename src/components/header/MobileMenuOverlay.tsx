@@ -2,6 +2,7 @@
 import { motion, AnimatePresence, easeOut, easeInOut } from "framer-motion"
 import SignInButton from "./SignInButton"
 import { MenuItem, MobileMenuOverlayProps } from "@/types/header.types"
+import { useNavigate } from "@/hooks/useNavigate"
 
 const mobileMenuVariants = {
   closed: {
@@ -36,20 +37,26 @@ const mobileMenuItemVariants = {
 }
 
 const defaultMenuItems: MenuItem[] = [
-  { label: "Home" },
-  { label: "About" },
-  { label: "Services" },
-  { label: "Contact" },
+  { label: "Home", url: "#home" },
+  { label: "About", url: "#about" },
+  { label: "Services", url: "#services" },
+  { label: "Contact", url: "#contact" },
 ]
 
-export default function MobileMenuOverlay({ isOpen, onClose, menuItems = defaultMenuItems }: MobileMenuOverlayProps) {
+export default function MobileMenuOverlay({
+  isOpen,
+  onClose,
+  menuItems = defaultMenuItems,
+}: MobileMenuOverlayProps) {
+  const { navigate } = useNavigate(menuItems)
+
   return (
     <AnimatePresence>
       {isOpen && (
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -59,13 +66,12 @@ export default function MobileMenuOverlay({ isOpen, onClose, menuItems = default
 
           {/* Mobile Menu Panel */}
           <motion.div
-            className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-black/95 to-black/90 backdrop-blur-xl z-40 md:hidden"
+            className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-black/95 z-[9998] to-black/90 backdrop-blur-xl md:hidden"
             variants={mobileMenuVariants}
             initial="closed"
             animate="open"
             exit="closed"
           >
-
             <div className="pt-24 px-6 space-y-6 relative z-10">
               {/* Mobile Navigation Items */}
               <motion.div className="space-y-4" variants={mobileMenuItemVariants}>
@@ -79,7 +85,7 @@ export default function MobileMenuOverlay({ isOpen, onClose, menuItems = default
                     <button
                       className="w-full text-left py-3 px-4 text-neutral-white font-semibold text-lg rounded-2xl hover:bg-accent-green/10 transition-all duration-300 relative overflow-hidden group"
                       onClick={() => {
-                        item.onClick?.()
+                        navigate(item)
                         onClose()
                       }}
                     >
@@ -97,7 +103,8 @@ export default function MobileMenuOverlay({ isOpen, onClose, menuItems = default
 
               {/* Mobile Sign In Button */}
               <motion.div variants={mobileMenuItemVariants} className="pt-6 border-t border-accent-green/20">
-                <SignInButton />
+                <SignInButton onClick={onClose} size="full" />
+
               </motion.div>
             </div>
 

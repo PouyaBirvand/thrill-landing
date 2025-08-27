@@ -19,7 +19,7 @@ export default function Footer() {
 
 
     return (
-        <footer className="text-white py-16 md:pt-[18rem] pt-[15rem] bg-body relative -z-50">
+        <footer className="text-white py-16 md:pt-[18rem] pt-[15rem] bg-body relative">
             <div className="absolute inset-0 flex justify-center items-end">
                 <img
                     src="/footershape.png"
