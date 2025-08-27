@@ -28,8 +28,12 @@ export default function FeatureCard({ title, description, image, stats }: Featur
   }
   
   return (
-    <div className={`relative w-full h-full max-w-[490px] transition-all duration-500 ease-out`}>
-      {/* Simple Border */}
+    <div className={`relative w-full max-w-[490px] transition-all duration-500 ease-out ${
+      isExpanded 
+        ? "h-[600px] sm:h-[650px] md:h-[720px] lg:h-[760px] xl:h-[800px]" 
+        : ""
+    }`}>
+      {/* Border SVG - Preserved exactly as original */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         viewBox="0 0 490 490"
@@ -126,71 +130,83 @@ export default function FeatureCard({ title, description, image, stats }: Featur
         />
       </svg>
 
-      {/* Content */}
-      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] p-4 sm:p-6 md:py-xl flex pb-6 flex-col justify-between overflow-hidden">
-        {/* Image */}
-        <div className="flex-1 flex mt-4 justify-center">
-          <div className="w-full max-w-[369px] h-[200px] sm:h-[263px] rounded-xl flex items-center justify-center relative overflow-hidden">
-            <div className="w-full h-full rounded-xl flex items-center justify-center relative">
-              <Image alt="feat" src={image || "/placeholder.svg"} fill className="object-cover rounded-xl" />
-            </div>
-          </div>
-        </div>
-
-        {/* Header with Button */}
-        <div className="flex items-center justify-between mt-4 sm:mt-6">
-          <h2 className="text-neutral-white text-lg text-nowrap sm:text-xl lg:text-2xl xl:text-[28px] font-semibold uppercase leading-tight flex-1 pr-4">
-            {title}
-          </h2>
-          <button
-            onClick={toggleExpanded}
-            className={`flex-shrink-0 relative bg-[#858FA640] hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1 rounded-full border border-[#858FA640] transition-all duration-200 hover:scale-105 ${isExpanded ? "rotate-45" : "rotate-0"}`}
-            aria-label={`Toggle ${title} details`}
-          >
-            <Plus
-              size={16}
-              className="sm:w-5 sm:h-5 transition-colors duration-200"
-              color={isExpanded ? "#83FFDA" : "#858FA660"}
+      {/* Content Container */}
+      <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] flex flex-col overflow-hidden ">
+        
+        {/* Image Section - Responsive heights with proper aspect ratio */}
+        <div className="flex-shrink-0 px-4 pt-4 sm:px-6 sm:pt-6">
+          <div className="w-full h-[240px] sm:h-[180px] md:h-[200px] lg:h-[220px] xl:h-[240px] rounded-xl relative overflow-hidden">
+            <Image 
+              alt="feat" 
+              src={image || "/placeholder.svg"} 
+              fill 
+              className="object-cover rounded-xl" 
             />
-          </button>
+          </div>
         </div>
 
-        {/* Expandable Content */}
-        <div
-          className={`overflow-hidden transition-all duration-500 ease-out ${
-            isExpanded ? "max-h-[30rem] opacity-100 mt-4 sm:mt-6" : "max-h-0 opacity-0 mt-0"
-          }`}
-        >
-          <div className="space-y-4 sm:space-y-6">
-            <p className="text-neutral-lightGray text-sm sm:text-base lg:text-lg text-left leading-relaxed">
-              {description}
-            </p>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-4 xs:pb-5 sm:pb-6">
+          
+          {/* Header Section - Title + Button */}
+          <div className="flex items-center justify-between mt-3 xs:mt-4 sm:mt-5 md:mt-6 flex-shrink-0">
+            <h2 className="text-neutral-white font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
+              {title}
+            </h2>
+            <button
+              onClick={toggleExpanded}
+              className={`flex-shrink-0 relative bg-[#858FA640] hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-[#858FA640] transition-all duration-200 hover:scale-105 ${isExpanded ? "rotate-45" : "rotate-0"}`}
+              aria-label={`Toggle ${title} details`}
+            >
+              <Plus
+                size={14}
+                className="xs:w-4 xs:h-4 sm:w-5 sm:h-5 transition-colors duration-200"
+                color={isExpanded ? "#83FFDA" : "#858FA660"}
+              />
+            </button>
+          </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 relative pt-8 sm:pt-16">
-              <div className="flex flex-col items-start">
-                <span className="text-white/70 text-xl sm:text-2xl lg:text-3xl xl:text-[36px] font-bold">
-                  {stats.primary.value}
-                </span>
-                <span className="text-neutral-lightGray text-xs sm:text-sm lg:text-base leading-relaxed">
-                  {stats.primary.label}
-                </span>
+          {/* Expandable Content Area */}
+          <div className={`flex-1 overflow-hidden transition-all duration-500 ease-out ${
+            isExpanded 
+              ? "opacity-100 mt-3 xs:mt-4 sm:mt-5 md:mt-4 mb-8" 
+              : "opacity-0 max-h-0"
+          }`}>
+            <div className="h-full flex flex-col justify-between min-h-[280px] xs:min-h-[300px] sm:min-h-[340px] md:min-h-[380px]">
+              
+              {/* Description */}
+              <div className="flex-1 mb-4 xs:mb-5 sm:mb-6 md:mb-8">
+                <p className="text-neutral-lightGray text-xs xs:text-sm sm:text-base md:text-lg leading-relaxed">
+                  {description}
+                </p>
               </div>
-              <div className="flex flex-col items-start">
-                <span className="text-white/70 text-xl sm:text-2xl lg:text-3xl xl:text-[36px] font-bold">
-                  {stats.secondary.value}
-                </span>
-                <span className="text-neutral-lightGray text-xs sm:text-sm lg:text-base leading-relaxed">
-                  {stats.secondary.label}
-                </span>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-3 xs:gap-4 sm:gap-5 md:gap-6 flex-shrink-0">
+                <div className="flex flex-col space-y-1 xs:space-y-1.5 sm:space-y-2">
+                  <span className="text-white/70 font-bold text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[36px] leading-tight">
+                    {stats.primary.value}
+                  </span>
+                  <span className="text-neutral-lightGray text-[10px] xs:text-xs sm:text-sm md:text-base leading-relaxed">
+                    {stats.primary.label}
+                  </span>
+                </div>
+                <div className="flex flex-col space-y-1 xs:space-y-1.5 sm:space-y-2">
+                  <span className="text-white/70 font-bold text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[36px] leading-tight">
+                    {stats.secondary.value}
+                  </span>
+                  <span className="text-neutral-lightGray text-[10px] xs:text-xs sm:text-sm md:text-base leading-relaxed">
+                    {stats.secondary.label}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Glow Effect when expanded */}
+        {/* Glow Effect - Preserved exactly as original */}
         <div
-          className="absolute -bottom-[10rem] left-1/2 transform -translate-x-1/2 
-                     w-[700px] h-[400px] transition-opacity duration-500 pointer-events-none"
+          className="absolute -bottom-[10rem] left-1/2 transform -translate-x-1/2 w-[700px] h-[400px] transition-opacity duration-500 pointer-events-none"
           style={{
             background: `
               linear-gradient(0deg, rgba(248,248,248,0.02), rgba(248,248,248,0.02)),
