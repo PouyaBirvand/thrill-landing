@@ -96,7 +96,7 @@ export default function Footer() {
                     {/* Bottom Section */}
                     <div className="flex flex-col md:flex-row justify-between items-center mt-12 pt-6">
                         <div className="flex items-center gap-3 mb-4 md:mb-0">
-                            <Image alt="footer_logo" width={32} height={32} src="/footerlogo.png" className='mr-4' />
+                            <Image alt="footer_logo" width={32} height={32} src="/Footerlogo.png" className='mr-4' />
                             <div className="text-[#A0ACC7] flex items-center gap-3">
                                 © 2024 Thrill.com
                                 <Dot color='#A0ACC7' />
