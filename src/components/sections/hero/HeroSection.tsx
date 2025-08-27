@@ -53,7 +53,7 @@ export default function HeroSection() {
         >
           grow with thrill
         </motion.h3>
-
+        <div className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute"/>
         {/* Block 2: Main Title */}
         <motion.h1 
           className="text-white text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
