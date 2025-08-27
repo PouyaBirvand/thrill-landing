@@ -6,9 +6,9 @@ import { motion } from "framer-motion"
 export default function HeroSection() {
   return (
     <section id="hero" className="pt-[15rem] relative overflow-hidden min-h-screen bg-[#1B1D29]">
-      
+
       {/* Right image - Simple entrance */}
-      <motion.div 
+      <motion.div
         className="absolute right-0 top-0 z-[5] pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -25,14 +25,14 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Left image - Simple entrance with slight delay */}
-      <motion.div 
+      <motion.div
         className="absolute left-0 top-0 z-[5] pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
       >
         <Image
-          src="/right.png" 
+          src="/right.png"
           alt="left"
           width={500}
           height={900}
@@ -43,9 +43,9 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="flex flex-col items-center justify-center gap-3 relative z-10 px-4 sm:px-6 md:px-8">
-        
+
         {/* Block 1: Subtitle */}
-        <motion.h3 
+        <motion.h3
           className="uppercase text-[#83FFDA] font-semibold text-sm sm:text-base"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,9 +53,11 @@ export default function HeroSection() {
         >
           grow with thrill
         </motion.h3>
-        <div className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute"/>
+        <motion.div className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }} />
         {/* Block 2: Main Title */}
-        <motion.h1 
+        <motion.h1
           className="text-white text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,7 +67,7 @@ export default function HeroSection() {
         </motion.h1>
 
         {/* Block 3: Description + Button */}
-        <motion.div 
+        <motion.div
           className="flex flex-col items-center gap-6 mt-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
