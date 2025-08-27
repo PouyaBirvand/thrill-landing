@@ -23,6 +23,7 @@ const eslintConfig = [
   {
     rules: {
       "react/no-unescaped-entities": "off",
+      'next/image-no-img-element': 'off',
     },
   },
 ];

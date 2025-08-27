@@ -4,7 +4,7 @@ import { NavigationItem } from "@/types/navigation.types";
 export const navigationItems: NavigationItem[] = [
   {
     label: "Home",
-    url: "#home",
+    url: "#hero",
   },
   {
     label: "Plan",

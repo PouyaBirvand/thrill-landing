@@ -65,27 +65,6 @@ export default function MobileMenuOverlay({ isOpen, onClose, menuItems = default
             animate="open"
             exit="closed"
           >
-            {/* Animated background pattern */}
-            <div className="absolute inset-0 opacity-10">
-              {[...Array(20)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-accent-green_light rounded-full"
-                  animate={{
-                    opacity: [0, 1, 0],
-                    scale: [0, 1, 0],
-                    x: Math.random() * 320,
-                    y: Math.random() * 100,
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: i * 0.2,
-                    ease: "easeInOut",
-                  }}
-                />
-              ))}
-            </div>
 
             <div className="pt-24 px-6 space-y-6 relative z-10">
               {/* Mobile Navigation Items */}

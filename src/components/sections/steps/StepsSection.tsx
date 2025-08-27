@@ -1,46 +1,14 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { steps } from "@/constants/data/steps";
 
 const StepsSection = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-    const steps = [
-        {
-            number: "01",
-            title: "SIGN UP INSTANTLY",
-            description:
-                "Register in seconds with our lightning-fast onboarding process.",
-        },
-        {
-            number: "02",
-            title: "MEET YOUR MANAGER",
-            description:
-                "Get direct access to your manager right away, no waiting around.",
-        },
-        {
-            number: "03",
-            title: "SET DEAL & ASSETS",
-            description:
-                "We customize your deal fast and give you everything you need to launch.",
-        },
-        {
-            number: "04",
-            title: "START SENDING TRAFFIC",
-            description:
-                "Begin promoting immediately with high-converting links and creatives.",
-        },
-        {
-            number: "05",
-            title: "GET PAID - FAST!",
-            description:
-                "Enjoy rapid payouts with no delays, weekly and monthly options available.",
-        },
-    ];
-
     return (
-        <section className="overflow-hidden pt-48 relative" ref={ref}>
+        <section id="guide" className="overflow-hidden pt-48 relative" ref={ref}>
             <div className="flex flex-col items-center justify-center gap-2 relative">
                 {/* Block 1: Subtitle */}
                 <motion.h3

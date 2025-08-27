@@ -1,5 +1,6 @@
 import Container from "@/components/common/Container"
 import Header from "@/components/header/Header"
+import CommissionPlanSection from "@/components/sections/commission/CommissionPlanSection"
 import FeatureSlider from "@/components/sections/features/FeatureSlider"
 import FeaturesSection from "@/components/sections/features/FeaturesSection"
 import HeroSection from "@/components/sections/hero/HeroSection"
@@ -18,6 +19,7 @@ export default function Home() {
         <FeatureSlider />
         <StepsSection/>
         <AffiliateSignupForm/>
+        <CommissionPlanSection/>
       </Container>
     </div>
   )

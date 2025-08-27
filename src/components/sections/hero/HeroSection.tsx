@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 export default function HeroSection() {
   return (
-    <section className="pt-[15rem] relative overflow-hidden min-h-screen bg-[#1B1D29]">
+    <section id="hero" className="pt-[15rem] relative overflow-hidden min-h-screen bg-[#1B1D29]">
       
       {/* Right image - Simple entrance */}
       <motion.div 

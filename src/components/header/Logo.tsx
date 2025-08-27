@@ -25,7 +25,6 @@ export default function Logo({ className = "", onClick }: LogoProps) {
           width={108}
           height={28}
           priority
-          className="w-[108px] h-auto"
         />
       </div>
     </motion.div>

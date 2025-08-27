@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Oxanium } from "next/font/google"; 
+import { Oxanium } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/footer/Footer";
 
 const oxanium = Oxanium({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], 
-  variable: "--font-oxanium", 
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-oxanium",
 });
 
 export const metadata: Metadata = {
@@ -66,8 +67,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" >
-      <body className={` ${oxanium.className} overflow-x-hidden`}>
+      <body className={` ${oxanium.className} overflow-x-hidden bg-body`}>
         {children}
+       <Footer />
       </body>
     </html>
   );

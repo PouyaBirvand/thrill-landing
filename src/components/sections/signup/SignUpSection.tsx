@@ -49,7 +49,7 @@ const AffiliateSignupForm = () => {
     }
 
     return (
-        <section id="signin" className="min-h-screen flex items-center justify-center pt-48">
+        <section id="signin" className="min-h-screen flex items-center justify-center pt-32">
             <div className="w-full mx-auto">
                 {/* Feature Card Style Border - Now wrapping entire section */}
                 <div className="relative w-full h-full">

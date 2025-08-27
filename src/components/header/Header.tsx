@@ -7,8 +7,9 @@ import SignInButton from "./SignInButton"
 import NavMenu from "./NavMenu"
 import Logo from "./Logo"
 import { HeaderProps } from "@/types/header.types"
+import { navigationItems } from "@/constants/navigation"
 
-export default function Header({ className = "", menuItems, logoProps, showSignIn = true }: HeaderProps) {
+export default function Header({ className = "", logoProps, showSignIn = true }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -21,7 +22,7 @@ export default function Header({ className = "", menuItems, logoProps, showSignI
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 w-full z-50 ${className}`}
+        className={`fixed top-0 left-0 w-full z-[9999] ${className}`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -31,9 +32,9 @@ export default function Header({ className = "", menuItems, logoProps, showSignI
           className="absolute inset-0 transition-all duration-500"
           style={{
             background: isScrolled
-              ? "rgba(0, 0, 0, 0.8)"
+              ? "rgba(0, 0, 0, 0.2)"
               : "linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent)",
-            backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
+            backdropFilter: isScrolled ? "blur(10px)" : "blur(0px)",
           }}
         />
 
@@ -60,7 +61,7 @@ export default function Header({ className = "", menuItems, logoProps, showSignI
       <MobileMenuOverlay 
         isOpen={isMobileMenuOpen} 
         onClose={() => setIsMobileMenuOpen(false)} 
-        menuItems={menuItems} 
+        menuItems={navigationItems} 
       />
     </>
   )
