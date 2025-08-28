@@ -84,7 +84,7 @@ export default function HeroSection() {
           </div>
 
           {/* CTA Button */}
-          <div className="mt-8">
+          <div className="mt-8 pb-16">
             <HeroCTAButton />
           </div>
         </motion.div>
