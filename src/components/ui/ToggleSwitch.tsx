@@ -1,11 +1,17 @@
 "use client"
 import { useState } from "react"
 
-export default function AccurateToggleSwitch() {
+interface AccurateToggleSwitchProps {
+  onToggle?: (isOn: boolean) => void
+}
+
+export default function AccurateToggleSwitch({ onToggle }: AccurateToggleSwitchProps) {
   const [isOn, setIsOn] = useState(false)
 
   const toggleSwitch = () => {
-    setIsOn(!isOn)
+    const newState = !isOn
+    setIsOn(newState)
+    onToggle?.(newState)
   }
 
   return (

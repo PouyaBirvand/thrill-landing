@@ -34,7 +34,7 @@ export default function Header({ className = "", logoProps, showSignIn = true }:
             background: isScrolled
               ? "rgba(0, 0, 0, 0.2)"
               : "linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent)",
-            backdropFilter: isScrolled ? "blur(10px)" : "blur(0px)",
+            backdropFilter: isScrolled ? "blur(2px)" : "blur(0px)",
           }}
         />
 
@@ -43,7 +43,7 @@ export default function Header({ className = "", logoProps, showSignIn = true }:
           <div className="absolute bottom-0 left-0 w-full h-px bg-accent-green/50" />
         )}
 
-        <div className="mx-auto container pt-9 pb-4 flex items-center justify-between relative z-10">
+        <div className="mx-auto container py-5 flex items-center justify-between relative z-10">
           <Logo {...logoProps} />
 
           <div className="hidden md:flex items-center gap-14">

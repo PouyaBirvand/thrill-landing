@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { ChevronRight, Eye, EyeOff, Plus } from "lucide-react"
 import AccurateToggleSwitch from "@/components/ui/ToggleSwitch"
 import { FigmaInput } from "@/components/form/Input"
@@ -21,7 +22,7 @@ interface FormData {
 const AffiliateSignupForm = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-    const [activeTab, setActiveTab] = useState("signup")
+    const [activeTab, setActiveTab] = useState("signup") // "signup" یا "login"
     const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
@@ -48,13 +49,24 @@ const AffiliateSignupForm = () => {
         console.log("Form submitted:", formData)
     }
 
+    const handleToggleChange = (isOn: boolean) => {
+        setActiveTab(isOn ? "login" : "signup")
+    }
+
     return (
-        <section id="signin" className="min-h-screen flex items-center justify-center pt-32">
+        <motion.section
+            id="signin"
+            className="min-h-screen flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
             <div className="w-full mx-auto">
                 {/* Feature Card Style Border - Now wrapping entire section */}
                 <div className="relative w-full h-full">
                     <svg
-                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
                         viewBox="0 0 490 490"
                         preserveAspectRatio="none"
                         aria-hidden="true"
@@ -174,7 +186,6 @@ const AffiliateSignupForm = () => {
                                 </p>
                             </div>
 
-
                             {/* Right Section - Form */}
                             <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-0">
                                 <div className="w-full max-w-lg px-4 py-8 sm:py-12 lg:py-24">
@@ -183,216 +194,300 @@ const AffiliateSignupForm = () => {
                                         <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
                                         <div className="flex items-center justify-center gap-3 sm:gap-4">
                                             <p className="text-sm sm:text-base">Sign Up</p>
-                                            <AccurateToggleSwitch />
+                                            <AccurateToggleSwitch onToggle={handleToggleChange} />
                                             <p className="text-sm sm:text-base">Log In</p>
                                         </div>
                                         <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
                                     </div>
 
-                                    {/* Form */}
-                                    <form onSubmit={handleSubmit} className="space-y-2">
-                                        {/* Email */}
-                                        <div>
-                                            <FigmaInput
-                                                type="email"
-                                                name="email"
-                                                placeholder="Email"
-                                                value={formData.email}
-                                                onChange={handleInputChange}
-                                                required
-                                            />
-                                        </div>
-
-                                        {/* Password */}
-                                        <div>
-                                            <FigmaInput
-                                                type={showPassword ? "text" : "password"}
-                                                name="password"
-                                                placeholder="Password"
-                                                value={formData.password}
-                                                onChange={handleInputChange}
-                                                rightIcon={
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setShowPassword(!showPassword)}
-                                                        className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
-                                                    >
-                                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                                    </button>
-                                                }
-                                                required
-                                            />
-                                        </div>
-
-                                        {/* Password Confirmation */}
-                                        <div>
-                                            <FigmaInput
-                                                type={showConfirmPassword ? "text" : "password"}
-                                                name="passwordConfirmation"
-                                                placeholder="Password confirmation"
-                                                value={formData.passwordConfirmation}
-                                                onChange={handleInputChange}
-                                                rightIcon={
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                        className="text-gray-400 hover:text-teal-400 mt-2 transition-colors duration-200"
-                                                    >
-                                                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                                    </button>
-                                                }
-                                                required
-                                            />
-                                        </div>
-
-                                        {/* Company Name */}
-                                        <div>
-                                            <FigmaInput
-                                                type="text"
-                                                name="companyName"
-                                                placeholder="Company name"
-                                                value={formData.companyName}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-
-                                        {/* Nickname */}
-                                        <div>
-                                            <FigmaInput
-                                                type="text"
-                                                name="nickname"
-                                                placeholder="Nickname"
-                                                value={formData.nickname}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-
-                                        {/* Full Name */}
-                                        <div>
-                                            <FigmaInput
-                                                type="text"
-                                                name="fullName"
-                                                placeholder="Full name"
-                                                value={formData.fullName}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-
-                                        {/* Address */}
-                                        <div>
-                                            <FigmaInput
-                                                type="text"
-                                                name="address"
-                                                placeholder="Address"
-                                                value={formData.address}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-
-                                        {/* Phone Number */}
-                                        <div>
-                                            <FigmaInput
-                                                type="tel"
-                                                name="phoneNumber"
-                                                placeholder="Phone number"
-                                                value={formData.phoneNumber}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-
-                                        {/* Checkboxes */}
-                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-5 ml-2 sm:ml-6">
-                                            <label className="flex items-center space-x-3 cursor-pointer">
-                                                <div className="relative">
-                                                    <input
-                                                        type="checkbox"
-                                                        name="receiveNewsletters"
-                                                        checked={formData.receiveNewsletters}
+                                    {/* Form Container with Animation */}
+                                    <motion.div
+                                        key={activeTab}
+                                        initial={{ opacity: 0, x: activeTab === "signup" ? -30 : 30 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: activeTab === "signup" ? 30 : -30 }}
+                                        transition={{
+                                            duration: 0.5,
+                                            ease: [0.25, 0.46, 0.45, 0.94]
+                                        }}
+                                    >
+                                        {activeTab === "signup" ? (
+                                            /* Sign Up Form */
+                                            <form onSubmit={handleSubmit} className="space-y-2">
+                                                {/* Email */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="email"
+                                                        name="email"
+                                                        placeholder="Email"
+                                                        value={formData.email}
                                                         onChange={handleInputChange}
-                                                        className="sr-only"
-                                                    />
-                                                    <div
-                                                        className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${formData.receiveNewsletters
-                                                            ? "border-[#5CFFC1] bg-transparent"
-                                                            : "border-white/50 bg-transparent"
-                                                            }`}
-                                                    >
-                                                        {formData.receiveNewsletters && (
-                                                            <div className="w-1 h-1 bg-[#5CFFC1] rounded-full m-auto mt-0.5"></div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <span className="text-xs text-white/50">Receive newsletters</span>
-                                            </label>
-
-                                            <label className="flex items-center space-x-3 cursor-pointer">
-                                                <div className="relative">
-                                                    <input
-                                                        type="checkbox"
-                                                        name="acceptTerms"
-                                                        checked={formData.acceptTerms}
-                                                        onChange={handleInputChange}
-                                                        className="sr-only"
                                                         required
                                                     />
-                                                    <div
-                                                        className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${formData.acceptTerms
-                                                            ? "border-[#5CFFC1] bg-transparent"
-                                                            : "border-white/50 bg-transparent"
-                                                            }`}
+                                                </div>
+
+                                                {/* Password */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type={showPassword ? "text" : "password"}
+                                                        name="password"
+                                                        placeholder="Password"
+                                                        value={formData.password}
+                                                        onChange={handleInputChange}
+                                                        rightIcon={
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => setShowPassword(!showPassword)}
+                                                                className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                            >
+                                                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                            </button>
+                                                        }
+                                                        required
+                                                    />
+                                                </div>
+
+                                                {/* Password Confirmation */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type={showConfirmPassword ? "text" : "password"}
+                                                        name="passwordConfirmation"
+                                                        placeholder="Password confirmation"
+                                                        value={formData.passwordConfirmation}
+                                                        onChange={handleInputChange}
+                                                        rightIcon={
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                                className="text-gray-400 hover:text-teal-400 mt-2 transition-colors duration-200"
+                                                            >
+                                                                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                            </button>
+                                                        }
+                                                        required
+                                                    />
+                                                </div>
+
+                                                {/* Company Name */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="text"
+                                                        name="companyName"
+                                                        placeholder="Company name"
+                                                        value={formData.companyName}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+
+                                                {/* Nickname */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="text"
+                                                        name="nickname"
+                                                        placeholder="Nickname"
+                                                        value={formData.nickname}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+
+                                                {/* Full Name */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="text"
+                                                        name="fullName"
+                                                        placeholder="Full name"
+                                                        value={formData.fullName}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+
+                                                {/* Address */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="text"
+                                                        name="address"
+                                                        placeholder="Address"
+                                                        value={formData.address}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+
+                                                {/* Phone Number */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="tel"
+                                                        name="phoneNumber"
+                                                        placeholder="Phone number"
+                                                        value={formData.phoneNumber}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+
+                                                {/* Checkboxes */}
+                                                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-5 ml-2 sm:ml-6">
+                                                    <label className="flex items-center space-x-3 cursor-pointer">
+                                                        <div className="relative">
+                                                            <input
+                                                                type="checkbox"
+                                                                name="receiveNewsletters"
+                                                                checked={formData.receiveNewsletters}
+                                                                onChange={handleInputChange}
+                                                                className="sr-only"
+                                                            />
+                                                            <div
+                                                                className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${formData.receiveNewsletters
+                                                                    ? "border-[#5CFFC1] bg-transparent"
+                                                                    : "border-white/50 bg-transparent"
+                                                                    }`}
+                                                            >
+                                                                {formData.receiveNewsletters && (
+                                                                    <div className="w-1 h-1 bg-[#5CFFC1] rounded-full m-auto mt-0.5"></div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-xs text-white/50">Receive newsletters</span>
+                                                    </label>
+
+                                                    <label className="flex items-center space-x-3 cursor-pointer">
+                                                        <div className="relative">
+                                                            <input
+                                                                type="checkbox"
+                                                                name="acceptTerms"
+                                                                checked={formData.acceptTerms}
+                                                                onChange={handleInputChange}
+                                                                className="sr-only"
+                                                                required
+                                                            />
+                                                            <div
+                                                                className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${formData.acceptTerms
+                                                                    ? "border-[#5CFFC1] bg-transparent"
+                                                                    : "border-white/50 bg-transparent"
+                                                                    }`}
+                                                            >
+                                                                {formData.acceptTerms && (
+                                                                    <div className="w-1 h-1 bg-[#5CFFC1] rounded-full m-auto mt-0.5"></div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-xs text-white/50">
+                                                            I accept the Terms and Conditions
+                                                        </span>
+                                                    </label>
+                                                </div>
+
+                                                {/* Submit Button */}
+                                                <div className="pt-6 flex items-center justify-center group">
+                                                    <Button
+                                                        variant="ghost"
+                                                        type="submit"
+                                                        className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60"
+                                                        rightIcon={
+                                                            <ChevronRight
+                                                                className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
+                                                                strokeWidth="2.5"
+                                                            />
+                                                        }
                                                     >
-                                                        {formData.acceptTerms && (
-                                                            <div className="w-1 h-1 bg-[#5CFFC1] rounded-full m-auto mt-0.5"></div>
-                                                        )}
+                                                        Sign Up
+                                                    </Button>
+                                                </div>
+
+                                                {/* Login Link */}
+                                                <div className="text-center pt-4">
+                                                    <div className="justify-center flex items-center">
+                                                        <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
+                                                        <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4 w-full">
+                                                            <span className="text-gray-400 text-sm sm:text-base">Already have an account? </span>
+                                                            <span
+                                                                onClick={() => setActiveTab("login")}
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm sm:text-base"
+                                                            >
+                                                                Log in
+                                                            </span>
+                                                        </div>
+                                                        <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
                                                     </div>
                                                 </div>
-                                                <span className="text-xs text-white/50">
-                                                    I accept the Terms and Conditions
-                                                </span>
-                                            </label>
-                                        </div>
-
-                                        {/* Submit Button */}
-                                        <div className="pt-6 flex items-center justify-center group">
-                                            <Button
-                                                variant="ghost"
-                                                type="submit"
-                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60"
-                                                rightIcon={
-                                                    <ChevronRight
-                                                        className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
-                                                        strokeWidth="2.5"
+                                            </form>
+                                        ) : (
+                                            /* Login Form */
+                                            <form onSubmit={handleSubmit} className="space-y-2">
+                                                {/* Email */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type="email"
+                                                        name="email"
+                                                        placeholder="Email"
+                                                        value={formData.email}
+                                                        onChange={handleInputChange}
+                                                        required
                                                     />
-                                                }
-                                            >
-                                                Sign Up
-                                            </Button>
-                                        </div>
-
-                                        {/* Login Link */}
-                                        <div className="text-center pt-4">
-                                            <div className="justify-center flex items-center">
-                                                <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
-                                                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4 w-full">
-                                                    <span className="text-gray-400 text-sm sm:text-base">Already have an account? </span>
-                                                    <span
-                                                        onClick={() => setActiveTab("login")}
-                                                        className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm sm:text-base"
-                                                    >
-                                                        Log in
-                                                    </span>
                                                 </div>
-                                                <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
-                                            </div>
-                                        </div>
-                                    </form>
+
+                                                {/* Password */}
+                                                <div>
+                                                    <FigmaInput
+                                                        type={showPassword ? "text" : "password"}
+                                                        name="password"
+                                                        placeholder="Password"
+                                                        value={formData.password}
+                                                        onChange={handleInputChange}
+                                                        rightIcon={
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => setShowPassword(!showPassword)}
+                                                                className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                            >
+                                                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                            </button>
+                                                        }
+                                                        required
+                                                    />
+                                                </div>
+
+                                                {/* Submit Button */}
+                                                <div className="pt-6 flex items-center justify-center group">
+                                                    <Button
+                                                        variant="ghost"
+                                                        type="submit"
+                                                        className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60"
+                                                        rightIcon={
+                                                            <ChevronRight
+                                                                className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
+                                                                strokeWidth="2.5"
+                                                            />
+                                                        }
+                                                    >
+                                                        Log In
+                                                    </Button>
+                                                </div>
+
+                                                {/* Signup Link */}
+                                                <div className="text-center pt-4">
+                                                    <div className="justify-center flex items-center">
+                                                        <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
+                                                        <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4 w-full">
+                                                            <span className="text-gray-400 text-sm sm:text-base">Don't have an account? </span>
+                                                            <span
+                                                                onClick={() => setActiveTab("signup")}
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm sm:text-base"
+                                                            >
+                                                                Sign up
+                                                            </span>
+                                                        </div>
+                                                        <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        )}
+                                    </motion.div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     )
 }
 

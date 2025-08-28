@@ -56,7 +56,7 @@ export default function MobileMenuOverlay({
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 bg-black/50 w-full backdrop-blur-sm md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -66,7 +66,7 @@ export default function MobileMenuOverlay({
 
           {/* Mobile Menu Panel */}
           <motion.div
-            className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-black/95 z-[9998] to-black/90 backdrop-blur-xl md:hidden"
+            className="fixed top-0 right-0 h-full w-full bg-gradient-to-b from-black/95 z-[9998] to-black/90 backdrop-blur-xl md:hidden"
             variants={mobileMenuVariants}
             initial="closed"
             animate="open"

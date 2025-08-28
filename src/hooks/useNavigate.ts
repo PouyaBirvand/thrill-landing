@@ -2,7 +2,7 @@
 import { useState } from "react"
 import type { NavigationItem } from "@/types/navigation.types"
 
-export function useNavigate(items: NavigationItem[], offset: number = -60) {
+export function useNavigate(items: NavigationItem[], offset: number = 0) {
   const [activeItem, setActiveItem] = useState(items[0]?.label ?? "")
 
   const navigate = (item: NavigationItem) => {

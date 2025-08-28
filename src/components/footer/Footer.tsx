@@ -94,18 +94,29 @@ export default function Footer() {
                     </motion.div>
 
                     {/* Bottom Section */}
-                    <div className="flex flex-col md:flex-row justify-between items-center mt-12 pt-6">
-                        <div className="flex items-center gap-3 mb-4 md:mb-0">
-                            <Image alt="footer_logo" width={32} height={32} src="/Footerlogo.png" className='mr-4' />
-                            <div className="text-[#A0ACC7] flex items-center gap-3">
-                                © 2024 Thrill.com
-                                <Dot color='#A0ACC7' />
-                                <div className='flex items-center gap-4'>
-                                    <a href="#" className="underline text-[#A0ACC7]">Terms</a>
-                                    <a href="#" className="underline text-[#A0ACC7]">Privacy</a>
+                    <div className="flex flex-col md:flex-row justify-between items-center mt-12 pt-6 gap-6">
+                        {/* Logo + Text + Links */}
+                        <div className="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
+                            {/* لوگو */}
+
+                            {/* متن + لینک‌ها */}
+                            <div className="text-[#A0ACC7] flex flex-row items-center gap-3">
+                            <Image
+                                alt="footer_logo"
+                                width={32}
+                                height={32}
+                                src="/Footerlogo.png"
+                                className="mb-3 md:mb-0 md:mr-4"
+                            />
+                                <span>© 2024 Thrill.com</span>
+                                <div className="flex items-center gap-4">
+                                    <Dot className="hidden md:block" color="#A0ACC7" />
+                                    <a href="#" className="underline">Terms</a>
+                                    <a href="#" className="underline">Privacy</a>
                                 </div>
                             </div>
                         </div>
+
                         <div className="flex space-x-4">
                             <button className="w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300 bg-[#858FA61A]/10 hover:bg-white/20">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
