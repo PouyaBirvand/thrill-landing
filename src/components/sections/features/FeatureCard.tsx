@@ -31,7 +31,7 @@ export default function FeatureCard({ title, description, image, stats , more_de
   return (
     <div className={`relative w-full max-w-[490px] transition-all duration-500 ease-out ${
       isExpanded 
-        ? "h-[600px] sm:h-[660px] md:h-[720px] lg:h-[780px] xl:h-[800px]" 
+        ? "h-[570px] sm:h-[660px] md:h-[720px] lg:h-[780px] xl:h-[800px]" 
         : ""
     }`}>
       {/* Border SVG - Preserved exactly as original */}
@@ -135,8 +135,8 @@ export default function FeatureCard({ title, description, image, stats , more_de
       <div className="relative w-full h-full rounded-3xl bg-[#F8F8F805] flex flex-col overflow-hidden ">
         
         {/* Image Section - Responsive heights with proper aspect ratio */}
-        <div className="flex-shrink-0  pt-4">
-          <div className="w-full h-[240px] sm:h-[200px] md:h-[200px] lg:h-[230px] xl:h-[260px] rounded-xl relative overflow-hidden">
+        <div className="flex-shrink-0 pt-0 sm:pt-4">
+          <div className="w-full mx-auto h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[260px] rounded-xl relative overflow-hidden">
             <Image 
               alt="feat" 
               src={image || "/placeholder.svg"} 
