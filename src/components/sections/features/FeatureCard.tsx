@@ -150,7 +150,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
           
           {/* Header Section - Title + Button */}
           <div className="flex items-center justify-between mt-3 xs:mt-4 sm:mt-5 md:mt-6 flex-shrink-0">
-            <h2 className="text-neutral-white font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
+            <h2 className="text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
               {title}
             </h2>
             <button
