@@ -154,26 +154,26 @@ export default function FeatureCard({
       <div className={`relative w-full h-full rounded-[20px] ${isExpanded && 'rounded-[34px]'} bg-[#F8F8F805] flex flex-col overflow-hidden`}>
         
         {/* Image Section */}
-        <div className="flex-shrink-0 pt-0 sm:pt-8">
+        <div className="flex-shrink-0 pt-0 sm:pt-3">
           <div className={`w-full mx-auto rounded-xl relative overflow-hidden ${
             isModal 
               ? "h-[260px] sm:h-[260px] md:h-[260px] lg:h-[260px] xl:h-[260px]" 
-              : "h-[356px]"
+              : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[330px]"
           }`}>
             <Image 
               alt="feat" 
               src={image || "/placeholder.svg"} 
               fill 
-              className={`object-cover ${isExpanded && "object-contain"} rounded-xl`}
+              className="object-cover rounded-xl" 
             />
           </div>
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-8 sm:pt-9 pt-8">
+        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-6 sm:pt-5 pt-8">
           
           {/* Header Section - Title + Button */}
-          <div className="flex items-center justify-between  flex-shrink-0">
+          <div className="flex items-center justify-between mt-2 xs:mt-3 sm:mt-4 md:mt-18 flex-shrink-0">
             <h2 className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 ${
               isModal 
                 ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl" 
