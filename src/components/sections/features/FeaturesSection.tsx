@@ -11,7 +11,7 @@ export default function FeaturesSection() {
         <div className="flex flex-col items-center justify-center gap-2">
           {/* Block 1: Subtitle */}
           <motion.h3
-            className="uppercase text-[#83FFDA] font-semibold text-sm sm:text-base mb-2"
+            className="uppercase text-accent-green_light font-semibold text-sm sm:text-base mb-2"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
@@ -25,10 +25,10 @@ export default function FeaturesSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           >
-            <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase">
+            <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-semibold text-center uppercase">
               built for performance.
             </h1>
-            <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase">
+            <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-semibold text-center uppercase">
               backed by experience.
             </h1>
           </motion.div>

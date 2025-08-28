@@ -50,7 +50,7 @@ export default function FeatureCard({
   return (
     <div className={`relative w-full max-w-[490px] transition-all duration-500 ease-out ${
       isExpanded 
-        ? "h-auto mt-24"
+        ? "h-auto scale-100 md:scale-[0.85] xl:scale-[0.9] !overflow-y-hidden"
         : ""
     }`}>
       {/* SVG Border */}
@@ -154,54 +154,54 @@ export default function FeatureCard({
       <div className={`relative w-full h-full rounded-[20px] ${isExpanded && 'rounded-[34px]'} bg-[#F8F8F805] flex flex-col overflow-hidden`}>
         
         {/* Image Section */}
-        <div className="flex-shrink-0 pt-0 sm:pt-3">
+        <div className="flex-shrink-0 md:mt-8 mt-6">
           <div className={`w-full mx-auto rounded-xl relative overflow-hidden ${
             isModal 
               ? "h-[260px] sm:h-[260px] md:h-[260px] lg:h-[260px] xl:h-[260px]" 
-              : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[330px]"
+              : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[356px]"
           }`}>
             <Image 
               alt="feat" 
               src={image || "/placeholder.svg"} 
               fill 
-              className="object-cover rounded-xl" 
+              className="object-contain rounded-xl" 
             />
           </div>
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-6 sm:pt-5 pt-8">
+        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-7 sm:pt-0 pt-3">
           
           {/* Header Section - Title + Button */}
-          <div className="flex items-center justify-between mt-2 xs:mt-3 sm:mt-4 md:mt-18 flex-shrink-0">
+          <div className="flex items-center justify-between flex-shrink-0 pt-5">
             <h2 className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 ${
               isModal 
                 ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl" 
-                : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
+                : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[32px]"
             }`}>
               {title}
             </h2>
             {onClose ? (
               <button
                 onClick={onClose}
-                className="flex-shrink-0 relative bg-[#858FA640] hover:bg-[#FF838320] hover:border-[#FF838340] p-1.5 xs:p-2 sm:p-2 rounded-full border border-[#858FA640] transition-all duration-200 hover:scale-105"
+                className="flex-shrink-0 relative bg-white/10 hover:bg-[#FF838320] hover:border-[#FF838340] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-200 hover:scale-105"
                 aria-label={`Close ${title} details`}
               >
                 <X
                   size={14}
-                  className="xs:w-4 xs:h-4 sm:w-5 sm:h-5 transition-colors duration-200"
+                  className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-colors duration-200"
                   color="#FF8383"
                 />
               </button>
             ) : (
               <button
                 onClick={toggleExpanded}
-                className={`flex-shrink-0 relative bg-[#858FA640] hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-[#858FA640] transition-all duration-200 hover:scale-105 ${isExpanded ? "rotate-45" : "rotate-0"}`}
+                className={`flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-200 hover:scale-105 ${isExpanded ? "rotate-45" : "rotate-0"}`}
                 aria-label={`Toggle ${title} details`}
               >
                 <Plus
                   size={14}
-                  className="xs:w-4 xs:h-4 sm:w-5 sm:h-5 transition-colors duration-200"
+                  className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-colors duration-200"
                   color={isExpanded ? "#83FFDA" : "#858FA660"}
                 />
               </button>

@@ -30,31 +30,31 @@ export default function FeatureSlider() {
 
   // Animation variants for modal
   const modalVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.95,
       y: 50,
-      transition: { 
+      transition: {
         duration: 0.3,
         ease: easeOut
       }
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.3,
         ease: easeOut,
         when: "beforeChildren",
         staggerChildren: 0.1
       }
     },
-    exit: { 
-      opacity: 0, 
+    exit: {
+      opacity: 0,
       scale: 0.95,
       y: 50,
-      transition: { 
+      transition: {
         duration: 0.25,
         ease: easeIn
       }
@@ -64,10 +64,10 @@ export default function FeatureSlider() {
   // Animation variants for modal card content
   const cardContentVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.3,
         ease: easeOut
       }
@@ -91,10 +91,10 @@ export default function FeatureSlider() {
   // Animation variants for navigation buttons
   const buttonVariants = {
     rest: { scale: 1, opacity: 0.8 },
-    hover: { 
-      scale: 1.1, 
+    hover: {
+      scale: 1.1,
       opacity: 1,
-      transition: { 
+      transition: {
         duration: 0.2,
         ease: easeOut
       }
@@ -127,7 +127,7 @@ export default function FeatureSlider() {
             768: { slidesPerView: 1.69, spaceBetween: 15 },
             1024: { slidesPerView: 2.1, spaceBetween: 22 },
             1280: { slidesPerView: 2.6, spaceBetween: 24 },
-            1440: { slidesPerView: 2.7, spaceBetween: 26 },
+            1440: { slidesPerView: 2.3, spaceBetween: 0 },
             1600: { slidesPerView: 3.2, spaceBetween: 28 },
             1920: { slidesPerView: 3.2, spaceBetween: 30 },
           }}
@@ -150,9 +150,9 @@ export default function FeatureSlider() {
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
               >
-                <FeatureCard 
-                  {...feature} 
-                  onExpand={() => setSelectedFeature(feature)} 
+                <FeatureCard
+                  {...feature}
+                  onExpand={() => setSelectedFeature(feature)}
                 />
               </motion.div>
             </SwiperSlide>
@@ -164,29 +164,31 @@ export default function FeatureSlider() {
       <div className="flex justify-center items-center mt-12 sm:mt-14 md:mt-16 space-x-3 mb-5">
         <motion.button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="bg-[#858FA640] hover:bg-[#858FA680] p-2 sm:p-2.5 md:p-3 rounded-full border border-[#858FA640] transition-all duration-200 backdrop-blur-sm group"
+          className={`flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 hover:scale-105`}
           variants={buttonVariants}
           initial="rest"
           whileHover="hover"
           aria-label="Previous feature"
         >
-          <ChevronLeft 
-            size={18} 
-            className="sm:w-5 sm:h-5 md:w-5 md:h-5 text-[#858FA660] group-hover:text-[#858FA680] transition-colors duration-200" 
+          <ChevronLeft
+            size={14}
+            color="#858FA660"
+            className="xs:w-4 xs:h-4 sm:w-4 sm:h-4"
           />
         </motion.button>
 
         <motion.button
           onClick={() => swiperRef.current?.slideNext()}
-          className="bg-[#858FA640] hover:bg-[#858FA680] p-2 sm:p-2.5 md:p-3 rounded-full border border-[#858FA640] transition-all duration-200 backdrop-blur-sm group"
+          className={`flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 hover:scale-105`}
           variants={buttonVariants}
           initial="rest"
           whileHover="hover"
           aria-label="Next feature"
         >
-          <ChevronRight 
-            size={18} 
-            className="sm:w-5 sm:h-5 md:w-5 md:h-5 text-[#858FA660] group-hover:text-[#858FA680] transition-colors duration-200" 
+          <ChevronRight
+            size={14}
+            color="#858FA660"
+            className="xs:w-4 xs:h-4 sm:w-4 sm:h-4"
           />
         </motion.button>
       </div>
@@ -194,15 +196,15 @@ export default function FeatureSlider() {
       {/* Modal Overlay */}
       <AnimatePresence>
         {selectedFeature && (
-          <motion.div 
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center overflow-y-auto"
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[10000] flex items-center justify-center overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: easeOut }}
             onClick={() => setSelectedFeature(null)}
           >
-            <motion.div 
+            <motion.div
               className="relative max-w-[490px] w-full m-4 sm:m-8"
               variants={modalVariants}
               initial="hidden"
@@ -211,8 +213,8 @@ export default function FeatureSlider() {
               onClick={(e) => e.stopPropagation()}
             >
               <motion.div variants={cardContentVariants}>
-                <FeatureCard 
-                  {...selectedFeature} 
+                <FeatureCard
+                  {...selectedFeature}
                   isExpanded={true}
                   onClose={() => setSelectedFeature(null)}
                   isModal={true}

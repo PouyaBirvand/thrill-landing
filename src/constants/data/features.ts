@@ -21,7 +21,7 @@ export const features = [
     title: "Custom Bonuses",
     description:
       "Tailored for performance — personalized offers from Thrill boost conversions, increase player retention, and drive stronger ROI for both affiliates and players. From high rakeback to time-based rewards and VIP perks, every bonus is aligned with player behavior to keep engagement at its peak.",
-    image: "/feature/feature2.png",
+    image: "/feature/feature5.png",
     stats: {
       primary: {
         value: "Up to 70%",
@@ -37,7 +37,7 @@ export const features = [
     title: "Creative Support",
     description:
       "Premier on-demand design tailored for campaigns — from attention-grabbing banners and immersive landing pages to targeted promos kits. Everything is crafted for conversion and brand alignment.",
-    image: "/feature/feature3.png",
+    image: "/feature/feature4.png",
     stats: {
       primary: {
         value: "24/7",
@@ -53,7 +53,7 @@ export const features = [
     title: "Fastest Payouts",
     description:
       "When you’re running traffic, every second counts. Thrill makes sure your earnings hit your account fast, so you can reinvest and scale without delays. From flexible deals to real-time tracking, we’re built to keep your momentum going. No waiting for end-of-month cycles — you get paid quickly, reliably, and with full transparency.",
-    image: "/feature/feature4.png",
+    image: "/feature/feature2.png",
     stats: {
       primary: {
         value: "Referrals",
@@ -69,7 +69,7 @@ export const features = [
     title: "No Red Tape",
     description:
       "Thrill cuts through the slow approval chains and corporate noise. You talk directly to the people who can say “yes” and make things happen, without endless forms or delays. The result — faster launches, smoother campaigns, and support that actually understands your goals.",
-    image: "/feature/feature5.png",
+    image: "/feature/feature3.png",
     stats: {
       primary: {
         value: "Direct",
