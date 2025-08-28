@@ -154,7 +154,7 @@ export default function FeatureCard({
       <div className={`relative w-full h-full rounded-[20px] ${isExpanded && 'rounded-[34px]'} bg-[#F8F8F805] flex flex-col overflow-hidden`}>
         
         {/* Image Section */}
-        <div className="flex-shrink-0 md:mt-8 mt-6">
+        <div className="flex-shrink-0 mt-2">
           <div className={`w-full mx-auto rounded-xl relative overflow-hidden ${
             isModal 
               ? "h-[260px] sm:h-[260px] md:h-[260px] lg:h-[260px] xl:h-[260px]" 
