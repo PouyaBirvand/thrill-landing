@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { easeIn, motion, useReducedMotion } from "framer-motion"
+import { easeIn, motion } from "framer-motion"
 import { ChevronRight, Eye, EyeOff, Plus } from "lucide-react"
 import AccurateToggleSwitch from "@/components/ui/ToggleSwitch"
 import { FigmaInput } from "@/components/form/Input"
@@ -22,7 +22,8 @@ interface FormData {
 const AffiliateSignupForm = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-    const [activeTab, setActiveTab] = useState("signup") // "signup" یا "login"
+    const [activeTab, setActiveTab] = useState("signup")
+
     const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
@@ -35,8 +36,6 @@ const AffiliateSignupForm = () => {
         receiveNewsletters: false,
         acceptTerms: false,
     })
-
-    const shouldReduceMotion = useReducedMotion()
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target
@@ -59,9 +58,8 @@ const AffiliateSignupForm = () => {
         <motion.section
             id="signin"
             className="min-h-screen flex items-center justify-center px-4 py-12 pt-[12rem] sm:px-6 lg:px-8"
-            style={{ willChange: "opacity" }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.9, ease: easeIn }}
         >
@@ -88,12 +86,6 @@ const AffiliateSignupForm = () => {
                                 <stop offset="68.79%" stopColor="#ffffff" stopOpacity="0.000015" />
                                 <stop offset="100%" stopColor="#ffffff" stopOpacity="0.015" />
                             </linearGradient>
-                            <radialGradient id="glowGradient" cx="50%" cy="100%" r="60%" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.08" />
-                                <stop offset="30%" stopColor="#ffffff" stopOpacity="0.04" />
-                                <stop offset="60%" stopColor="#ffffff" stopOpacity="0.01" />
-                                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                            </radialGradient>
                         </defs>
                         <rect
                             x="0.75"
@@ -108,59 +100,43 @@ const AffiliateSignupForm = () => {
                             vectorEffect="non-scaling-stroke"
                             shapeRendering="geometricPrecision"
                         />
-                        <rect
-                            x="0.75"
-                            y="0.75"
-                            width="488.5"
-                            height="488.5"
-                            rx="12"
-                            ry="12"
-                            fill="none"
-                            stroke="url(#borderGradient)"
-                            strokeWidth="1"
-                            strokeLinecap="round"
-                            pathLength="100"
-                            strokeDasharray="10 90"
-                            strokeDashoffset="6"
-                            vectorEffect="non-scaling-stroke"
-                        />
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
                         <div className="grid lg:grid-cols-2 gap-0 lg:gap-8 items-center min-h-[600px]">
                             <div
-                                className="text-white space-y-4 sm:space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] flex flex-col justify-center px-6 sm:px-8 lg:px-0 py-8 sm:py-12 lg:py-0"
+                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] flex flex-col justify-center px-6 sm:px-8 lg:px-0 py-8 sm:py-12 lg:py-0"
                                 style={{ backgroundImage: "url(/right.png)" }}
                             >
                                 <div className="absolute inset-0 bg-black/20"></div>
-                                <div className="relative z-10 space-y-4 sm:space-y-6 text-center lg:text-left">
+                                <div className="relative z-10 space-y-6 text-center lg:text-left">
                                     <motion.p
                                         className="text-accent-green_light font-medium tracking-wide uppercase text-sm sm:text-base lg:text-sm xl:text-base px-8"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0, duration: 0.5, ease: easeIn }}
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        transition={{ duration: 0.5 }}
                                     >
                                         YOUR AUDIENCE. YOUR PROFIT.
                                     </motion.p>
                                     <motion.h1
                                         className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-8"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.15, duration: 0.5, ease: easeIn }}
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        transition={{ duration: 0.5, delay: 0.2 }}
                                     >
                                         DARE TO EARN.
                                         <br />
                                         GET AFFILIATE ACCESS.
                                     </motion.h1>
+                                    <motion.p
+                                        className="text-lg sm:text-xl lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-xl text-center lg:text-left px-4 sm:px-8"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        transition={{ duration: 0.5, delay: 0.4 }}
+                                    >
+                                        It's time to make your streams Thrilling - join the best casino affiliate program built around
+                                        creators.
+                                    </motion.p>
                                 </div>
-                                <motion.p
-                                    className="relative z-10 text-lg sm:text-xl lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-xl text-center lg:text-left px-4 sm:px-8"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.3, duration: 0.5, ease: easeIn }}
-                                >
-                                    It's time to make your streams Thrilling - join the best casino affiliate program built around
-                                    creators.
-                                </motion.p>
                             </div>
                             <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-0">
                                 <div className="w-full max-w-lg px-4 py-8 sm:py-12 lg:py-24">
@@ -175,15 +151,9 @@ const AffiliateSignupForm = () => {
                                     </div>
                                     <motion.div
                                         key={activeTab}
-                                        layout
-                                        initial={{ opacity: 0, x: activeTab === "signup" ? -30 : 30 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: activeTab === "signup" ? 30 : -30 }}
-                                        transition={{
-                                            duration: 0.5,
-                                            ease: easeIn,
-                                            layout: { duration: 0.3 }
-                                        }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.3 }}
                                         className="min-h-[600px]"
                                     >
                                         {activeTab === "signup" ? (
