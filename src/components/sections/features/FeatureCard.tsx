@@ -8,6 +8,7 @@ interface FeatureCardProps {
   title: string
   description: string
   image: string
+  more_detail?: string
   stats: {
     primary: {
       value: string
@@ -20,7 +21,7 @@ interface FeatureCardProps {
   }
 }
 
-export default function FeatureCard({ title, description, image, stats }: FeatureCardProps) {
+export default function FeatureCard({ title, description, image, stats , more_detail }: FeatureCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpanded = () => {
@@ -30,7 +31,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
   return (
     <div className={`relative w-full max-w-[490px] transition-all duration-500 ease-out ${
       isExpanded 
-        ? "h-[600px] sm:h-[650px] md:h-[720px] lg:h-[760px] xl:h-[800px]" 
+        ? "h-[600px] sm:h-[650px] md:h-[720px] lg:h-[780px] xl:h-[800px]" 
         : ""
     }`}>
       {/* Border SVG - Preserved exactly as original */}
@@ -150,7 +151,7 @@ export default function FeatureCard({ title, description, image, stats }: Featur
           
           {/* Header Section - Title + Button */}
           <div className="flex items-center justify-between mt-3 xs:mt-4 sm:mt-5 md:mt-6 flex-shrink-0">
-            <h2 className="text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
+            <h2 className="text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 text-lg  sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
               {title}
             </h2>
             <button
@@ -178,6 +179,9 @@ export default function FeatureCard({ title, description, image, stats }: Featur
               <div className="flex-1 mb-4 xs:mb-5 sm:mb-6 md:mb-8">
                 <p className="text-neutral-lightGray text-xs xs:text-sm sm:text-base md:text-lg leading-relaxed">
                   {description}
+                </p>
+                <p className="text-neutral-lightGray text-xs xs:text-sm sm:text-base md:text-lg mt-3">
+                  {more_detail}
                 </p>
               </div>
 

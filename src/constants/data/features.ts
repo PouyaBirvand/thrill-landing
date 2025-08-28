@@ -3,7 +3,8 @@ export const features = [
     title: "Built for affiliates",
     description:
       "We’ve run affiliate programs. We know what you need – real payouts, fast tracking, and support that actually helps. That’s why everything at Thrill is built to boost your earnings and cut the noise. From custom CPA deals to weekly payments and dedicated reports – we’ve got your back.",
-    more_detail: "At Thrill, you’re not just another signup - you’re a partner.",
+    more_detail:
+      "At Thrill, you’re not just another signup - you’re a partner.",
     image: "/feature/feature1.png",
     stats: {
       primary: {
