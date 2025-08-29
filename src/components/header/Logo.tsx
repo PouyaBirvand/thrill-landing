@@ -2,7 +2,6 @@
 
 import type { LogoProps } from "@/types/header.types"
 import { motion } from "framer-motion"
-import Image from "next/image"
 
 export default function Logo({ className = "", onClick }: LogoProps) {
   const handleClick = () => {
