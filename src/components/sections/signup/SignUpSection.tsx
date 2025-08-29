@@ -22,7 +22,7 @@ interface FormData {
 
 const AffiliateSignupForm = () => {
     const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, amount: 0.3 }) // تشخیص ورود به viewport
+    const isInView = useInView(ref, { once: true, amount: 0.3 })
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [showAuthCode, setShowAuthCode] = useState(false)
@@ -68,11 +68,11 @@ const AffiliateSignupForm = () => {
     return (
         <section
             id="signin"
-            className="min-h-screen flex items-center justify-center px-4 py-12 pt-[8rem] sm:px-6 lg:px-8"
+            className="min-h-[600px] sm:min-h-[700px] lg:min-h-screen flex items-center justify-center px-4 py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
             ref={ref}
         >
             <motion.div
-                className="w-full mx-auto"
+                className="w-full max-w-[1440px] mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
@@ -115,18 +115,18 @@ const AffiliateSignupForm = () => {
                         />
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
-                        <div className="grid lg:grid-cols-2 items-center lg:min-h-[886px]">
+                        <div className="grid lg:grid-cols-2 items-stretch min-h-[600px] sm:min-h-[700px] lg:min-h-[886px]">
                             <motion.div
-                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[886px] flex flex-col justify-center px-6 sm:px-8 lg:px-0 py-8 sm:py-12 lg:py-0"
+                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[886px] flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12"
                                 style={{ backgroundImage: "url(/formbg.png)" }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                             >
-                                <div className="absolute inset-0 bg-black/0"></div>
-                                <div className="relative z-10 space-y-6 text-center lg:text-left">
+                                <div className="absolute inset-0 bg-black/10"></div>
+                                <div className="relative z-10 space-y-4 sm:space-y-6 text-center lg:text-left max-w-2xl mx-auto">
                                     <motion.p
-                                        className="text-accent-green_light font-medium tracking-wide uppercase text-sm sm:text-base lg:text-sm xl:text-base px-8"
+                                        className="text-accent-green_light font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-4 sm:px-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
@@ -134,7 +134,7 @@ const AffiliateSignupForm = () => {
                                         YOUR AUDIENCE. YOUR PROFIT.
                                     </motion.p>
                                     <motion.h1
-                                        className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-8"
+                                        className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-4 sm:px-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
@@ -144,7 +144,7 @@ const AffiliateSignupForm = () => {
                                         GET AFFILIATE ACCESS.
                                     </motion.h1>
                                     <motion.p
-                                        className="text-lg sm:text-xl lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-xl text-center lg:text-left px-4 sm:px-8"
+                                        className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-lg sm:max-w-xl mx-auto lg:mx-0 px-4 sm:px-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
@@ -153,32 +153,32 @@ const AffiliateSignupForm = () => {
                                     </motion.p>
                                 </div>
                             </motion.div>
-                            <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-0">
+                            <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
                                 <motion.div
-                                    className="w-full max-w-lg px-4 py-8 sm:py-12 lg:py-16"
+                                    className="w-full max-w-md sm:max-w-lg px-4 py-6 sm:py-8 lg:py-12"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                                 >
-                                    <div className="flex flex-col h-auto lg:h-[820px] justify-between">
+                                    <div className="flex flex-col h-auto lg:h-[856px] justify-between">
                                         <motion.div
-                                            className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-14 pt-2"
+                                            className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-8 sm:pb-10 lg:pb-14 pt-2"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                             transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
                                         >
-                                            <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
-                                            <div className="flex items-center justify-center gap-3 sm:gap-4">
-                                                <p className="text-sm sm:text-base">Sign Up</p>
+                                            <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
+                                            <div className="flex items-center justify-center gap-2 sm:gap-3">
+                                                <p className="text-xs sm:text-sm lg:text-base">Sign Up</p>
                                                 <AccurateToggleSwitch onToggle={handleToggleChange} />
-                                                <p className="text-sm sm:text-base">Log In</p>
+                                                <p className="text-xs sm:text-sm lg:text-base">Log In</p>
                                             </div>
-                                            <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
+                                            <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
                                         </motion.div>
                                         <div className="flex-1 flex items-start lg:items-center justify-center overflow-hidden">
                                             <motion.div
                                                 className="w-full h-auto lg:h-full flex items-start lg:items-center"
-                                                key={activeTab} // کلید برای تشخیص تغییر تب و اعمال انیمیشن
+                                                key={activeTab}
                                                 variants={formVariants}
                                                 initial="initial"
                                                 animate="animate"
@@ -186,7 +186,7 @@ const AffiliateSignupForm = () => {
                                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                                             >
                                                 {activeTab === "signup" ? (
-                                                    <form onSubmit={handleSubmit} className="space-y-2 w-full flex flex-col justify-center h-auto lg:h-full">
+                                                    <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
                                                             <FigmaInput
                                                                 type="email"
@@ -208,9 +208,9 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowPassword(!showPassword)}
-                                                                        className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                                                     </button>
                                                                 }
                                                                 required
@@ -227,9 +227,9 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                                        className="text-gray-400 hover:text-teal-400 mt-2 transition-colors duration-200"
+                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                                                     </button>
                                                                 }
                                                                 required
@@ -280,8 +280,8 @@ const AffiliateSignupForm = () => {
                                                                 onChange={handleInputChange}
                                                             />
                                                         </div>
-                                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-5 ml-2 sm:ml-6">
-                                                            <label className="flex items-center space-x-3 cursor-pointer">
+                                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pt-4 sm:pt-5 ml-2 sm:ml-4">
+                                                            <label className="flex items-center space-x-2 sm:space-x-3 cursor-pointer">
                                                                 <div className="relative">
                                                                     <input
                                                                         type="checkbox"
@@ -301,9 +301,9 @@ const AffiliateSignupForm = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <span className="text-xs text-white/50">Receive newsletters</span>
+                                                                <span className="text-xs sm:text-sm text-white/50">Receive newsletters</span>
                                                             </label>
-                                                            <label className="flex items-center space-x-3 cursor-pointer">
+                                                            <label className="flex items-center space-x-2 sm:space-x-3 cursor-pointer">
                                                                 <div className="relative">
                                                                     <input
                                                                         type="checkbox"
@@ -324,18 +324,19 @@ const AffiliateSignupForm = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <span className="text-xs text-white/50">I accept the Terms and Conditions</span>
+                                                                <span className="text-xs sm:text-sm text-white/50">I accept the Terms and Conditions</span>
                                                             </label>
                                                         </div>
-                                                        <div className="py-8 flex items-center justify-center group">
+                                                        <div className="py-6 sm:py-8 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[200px] text-center whitespace-nowrap"
+                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[180px] sm:min-w-[200px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
                                                                         strokeWidth="2.5"
+                                                                        size={20}
                                                                     />
                                                                 }
                                                             >
@@ -344,7 +345,7 @@ const AffiliateSignupForm = () => {
                                                         </div>
                                                     </form>
                                                 ) : (
-                                                    <form onSubmit={handleSubmit} className="space-y-2 w-full flex flex-col justify-center h-auto lg:h-full">
+                                                    <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
                                                             <FigmaInput
                                                                 type="email"
@@ -366,9 +367,9 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowPassword(!showPassword)}
-                                                                        className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                                                     </button>
                                                                 }
                                                                 required
@@ -385,23 +386,24 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowAuthCode(!showAuthCode)}
-                                                                        className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showAuthCode ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                                        {showAuthCode ? <EyeOff size={18} /> : <Eye size={18} />}
                                                                     </button>
                                                                 }
                                                                 required
                                                             />
                                                         </div>
-                                                        <div className="pt-10 flex items-center justify-center group">
+                                                        <div className="pt-6 sm:pt-8 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[240px] text-center whitespace-nowrap"
+                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[200px] sm:min-w-[240px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
                                                                         strokeWidth="2.5"
+                                                                        size={20}
                                                                     />
                                                                 }
                                                             >
@@ -413,41 +415,41 @@ const AffiliateSignupForm = () => {
                                             </motion.div>
                                         </div>
                                         <motion.div
-                                            className="text-center pt-2"
+                                            className="text-center pt-4 sm:pt-6"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                             transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
                                         >
                                             <div className="justify-center flex items-center">
-                                                <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
-                                                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4 w-full">
+                                                <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
+                                                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full">
                                                     {activeTab === "signup" ? (
                                                         <>
-                                                            <span className="text-gray-400 text-sm sm:text-base">
+                                                            <span className="text-gray-400 text-xs sm:text-sm">
                                                                 Already have an account?
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("login")}
-                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm sm:text-base"
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-xs sm:text-sm"
                                                             >
                                                                 Log in
                                                             </span>
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <span className="text-gray-400 text-sm sm:text-base">
+                                                            <span className="text-gray-400 text-xs sm:text-sm">
                                                                 Reset your password or
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("signup")}
-                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm sm:text-base"
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-xs sm:text-sm"
                                                             >
                                                                 Sign up
                                                             </span>
                                                         </>
                                                     )}
                                                 </div>
-                                                <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
+                                                <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
                                             </div>
                                         </motion.div>
                                     </div>
