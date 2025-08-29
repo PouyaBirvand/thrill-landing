@@ -1,5 +1,6 @@
 "use client"
-import { useState } from "react"
+import { motion, useInView } from "framer-motion"
+import { useState, useRef } from "react"
 import { ChevronRight, Eye, EyeOff, Plus } from "lucide-react"
 import AccurateToggleSwitch from "@/components/ui/ToggleSwitch"
 import { FigmaInput } from "@/components/form/Input"
@@ -9,6 +10,7 @@ interface FormData {
     email: string
     password: string
     passwordConfirmation: string
+    authCode: string
     companyName: string
     nickname: string
     fullName: string
@@ -19,14 +21,18 @@ interface FormData {
 }
 
 const AffiliateSignupForm = () => {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true, amount: 0.3 }) // تشخیص ورود به viewport
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [showAuthCode, setShowAuthCode] = useState(false)
     const [activeTab, setActiveTab] = useState("signup")
 
     const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
         passwordConfirmation: "",
+        authCode: "",
         companyName: "",
         nickname: "",
         fullName: "",
@@ -53,12 +59,24 @@ const AffiliateSignupForm = () => {
         setActiveTab(isOn ? "login" : "signup")
     }
 
+    const formVariants = {
+        initial: { opacity: 0, scale: 0.95 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.95 },
+    }
+
     return (
         <section
             id="signin"
             className="min-h-screen flex items-center justify-center px-4 py-12 pt-[12rem] sm:px-6 lg:px-8"
+            ref={ref}
         >
-            <div className="w-full mx-auto">
+            <motion.div
+                className="w-full mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
                 <div className="relative w-full h-full">
                     <svg
                         className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
@@ -97,32 +115,58 @@ const AffiliateSignupForm = () => {
                         />
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
-                        <div className="grid lg:grid-cols-2 gap-0 lg:gap-8 items-center min-h-[600px]">
-                            <div
-                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] flex flex-col justify-center px-6 sm:px-8 lg:px-0 py-8 sm:py-12 lg:py-0"
-                                style={{ backgroundImage: "url(/right.png)" }}
+                        <div className="grid lg:grid-cols-2 gap-0 lg:gap-8 items-center lg:min-h-[886px]">
+                            <motion.div
+                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[886px] flex flex-col justify-center px-6 sm:px-8 lg:px-0 py-8 sm:py-12 lg:py-0"
+                                style={{ backgroundImage: "url(/formbg.png)" }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                             >
-                                <div className="absolute inset-0 bg-black/20"></div>
+                                <div className="absolute inset-0 bg-black/0"></div>
                                 <div className="relative z-10 space-y-6 text-center lg:text-left">
-                                    <p className="text-accent-green_light font-medium tracking-wide uppercase text-sm sm:text-base lg:text-sm xl:text-base px-8">
+                                    <motion.p
+                                        className="text-accent-green_light font-medium tracking-wide uppercase text-sm sm:text-base lg:text-sm xl:text-base px-8"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                        transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                                    >
                                         YOUR AUDIENCE. YOUR PROFIT.
-                                    </p>
-                                    <h1 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-8">
+                                    </motion.p>
+                                    <motion.h1
+                                        className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-8"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                        transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                                    >
                                         DARE TO EARN.
                                         <br />
                                         GET AFFILIATE ACCESS.
-                                    </h1>
-                                    <p className="text-lg sm:text-xl lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-xl text-center lg:text-left px-4 sm:px-8">
+                                    </motion.h1>
+                                    <motion.p
+                                        className="text-lg sm:text-xl lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-xl text-center lg:text-left px-4 sm:px-8"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                        transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+                                    >
                                         It's time to make your streams Thrilling - join the best casino affiliate program built around creators.
-                                    </p>
+                                    </motion.p>
                                 </div>
-                            </div>
+                            </motion.div>
                             <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-0">
-                                <div className="w-full max-w-lg px-4 py-8 sm:py-12 lg:py-24">
-                                    {/* فرم با ارتفاع کاملاً ثابت */}
-                                    <div className="flex flex-col h-[600px] justify-between">
-                                        {/* بخش سوییچ در بالا */}
-                                        <div className="flex mb-6 items-center justify-between text-white/50 sticky top-0 z-10">
+                                <motion.div
+                                    className="w-full max-w-lg px-4 py-8 sm:py-12 lg:py-16"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                    transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                                >
+                                    <div className="flex flex-col h-auto lg:h-[886px] justify-between">
+                                        <motion.div
+                                            className="flex mb-6 items-center justify-between text-white/50 sticky top-0 z-10"
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                                        >
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
                                             <div className="flex items-center justify-center gap-3 sm:gap-4">
                                                 <p className="text-sm sm:text-base">Sign Up</p>
@@ -130,13 +174,19 @@ const AffiliateSignupForm = () => {
                                                 <p className="text-sm sm:text-base">Log In</p>
                                             </div>
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
-                                        </div>
-
-                                        {/* بخش اینپوت‌ها و دکمه در وسط */}
-                                        <div className="flex-1 flex items-center justify-center">
-                                            <div className="w-full h-full flex items-center">
+                                        </motion.div>
+                                        <div className="flex-1 flex items-start lg:items-center justify-center overflow-hidden">
+                                            <motion.div
+                                                className="w-full h-auto lg:h-full flex items-start lg:items-center"
+                                                key={activeTab} // کلید برای تشخیص تغییر تب و اعمال انیمیشن
+                                                variants={formVariants}
+                                                initial="initial"
+                                                animate="animate"
+                                                exit="exit"
+                                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            >
                                                 {activeTab === "signup" ? (
-                                                    <form onSubmit={handleSubmit} className="space-y-2 w-full">
+                                                    <form onSubmit={handleSubmit} className="space-y-2 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
                                                             <FigmaInput
                                                                 type="email"
@@ -241,11 +291,10 @@ const AffiliateSignupForm = () => {
                                                                         className="sr-only"
                                                                     />
                                                                     <div
-                                                                        className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${
-                                                                            formData.receiveNewsletters
-                                                                                ? "border-[#5CFFC1] bg-transparent"
-                                                                                : "border-white/50 bg-transparent"
-                                                                        }`}
+                                                                        className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${formData.receiveNewsletters
+                                                                            ? "border-[#5CFFC1] bg-transparent"
+                                                                            : "border-white/50 bg-transparent"
+                                                                            }`}
                                                                     >
                                                                         {formData.receiveNewsletters && (
                                                                             <div className="w-1 h-1 bg-[#5CFFC1] rounded-full m-auto mt-0.5"></div>
@@ -265,11 +314,10 @@ const AffiliateSignupForm = () => {
                                                                         required
                                                                     />
                                                                     <div
-                                                                        className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${
-                                                                            formData.acceptTerms
-                                                                                ? "border-[#5CFFC1] bg-transparent"
-                                                                                : "border-white/50 bg-transparent"
-                                                                        }`}
+                                                                        className={`w-3 h-3 rounded-full border-2 transition-all duration-200 ${formData.acceptTerms
+                                                                            ? "border-[#5CFFC1] bg-transparent"
+                                                                            : "border-white/50 bg-transparent"
+                                                                            }`}
                                                                     >
                                                                         {formData.acceptTerms && (
                                                                             <div className="w-1 h-1 bg-[#5CFFC1] rounded-full m-auto mt-0.5"></div>
@@ -283,7 +331,7 @@ const AffiliateSignupForm = () => {
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60"
+                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[200px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
@@ -296,7 +344,7 @@ const AffiliateSignupForm = () => {
                                                         </div>
                                                     </form>
                                                 ) : (
-                                                    <form onSubmit={handleSubmit} className="space-y-2 w-full flex flex-col justify-center h-full">
+                                                    <form onSubmit={handleSubmit} className="space-y-2 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
                                                             <FigmaInput
                                                                 type="email"
@@ -326,11 +374,30 @@ const AffiliateSignupForm = () => {
                                                                 required
                                                             />
                                                         </div>
-                                                        <div className="pt-6 flex items-center justify-center group">
+                                                        <div>
+                                                            <FigmaInput
+                                                                type={showAuthCode ? "text" : "password"}
+                                                                name="authCode"
+                                                                placeholder="Two-factor authentication code"
+                                                                value={formData.authCode}
+                                                                onChange={handleInputChange}
+                                                                rightIcon={
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => setShowAuthCode(!showAuthCode)}
+                                                                        className="text-gray-400 mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                    >
+                                                                        {showAuthCode ? <EyeOff size={20} /> : <Eye size={20} />}
+                                                                    </button>
+                                                                }
+                                                                required
+                                                            />
+                                                        </div>
+                                                        <div className="pt-10 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60"
+                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[240px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
@@ -338,16 +405,19 @@ const AffiliateSignupForm = () => {
                                                                     />
                                                                 }
                                                             >
-                                                                Log In
+                                                                Log in as affiliate
                                                             </Button>
                                                         </div>
                                                     </form>
                                                 )}
-                                            </div>
+                                            </motion.div>
                                         </div>
-
-                                        {/* بخش متن و Plus در پایین */}
-                                        <div className="text-center pt-4">
+                                        <motion.div
+                                            className="text-center pt-4"
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                            transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+                                        >
                                             <div className="justify-center flex items-center">
                                                 <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative right-4 sm:right-6 hidden xl:block" />
                                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4 w-full">
@@ -366,7 +436,7 @@ const AffiliateSignupForm = () => {
                                                     ) : (
                                                         <>
                                                             <span className="text-gray-400 text-sm sm:text-base">
-                                                                Forgot your password?
+                                                                Reset your password or
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("signup")}
@@ -379,14 +449,14 @@ const AffiliateSignupForm = () => {
                                                 </div>
                                                 <Plus color="rgba(255, 255, 255, 0.15)" size="18" className="relative left-4 sm:left-6 hidden xl:block" />
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     )
 }

@@ -41,7 +41,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
             isFocused ? "opacity-100 " : "opacity-0"
           }`}
           style={{
-            background: "linear-gradient(277.31deg, rgba(50, 50, 122, 0.21) 10.26%, #5CFFC1 43.19%)",
+            background: "linear-gradient(277.31deg, rgba(50, 50, 122, 0.21) 10.26%, white 43.19%)",
             padding: "3px",
             borderRadius: "9999px",
           }}
@@ -54,7 +54,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
             isFocused ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            background: "linear-gradient(277.31deg, rgba(50, 50, 122, 0.21) 10.26%, #5CFFC1 43.19%)",
+            background: "linear-gradient(277.31deg, rgba(50, 50, 122, 0.21) 10.26%, white 43.19%)",
             padding: "3px",
             borderRadius: "9999px",
             zIndex: 5,
