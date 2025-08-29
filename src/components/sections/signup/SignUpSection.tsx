@@ -68,7 +68,7 @@ const AffiliateSignupForm = () => {
     return (
         <section
             id="signin"
-            className="min-h-screen flex items-center justify-center px-4 py-12 pt-[12rem] sm:px-6 lg:px-8"
+            className="min-h-screen flex items-center justify-center px-4 py-12 pt-[8rem] sm:px-6 lg:px-8"
             ref={ref}
         >
             <motion.div
@@ -115,7 +115,7 @@ const AffiliateSignupForm = () => {
                         />
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
-                        <div className="grid lg:grid-cols-2 gap-0 lg:gap-8 items-center lg:min-h-[886px]">
+                        <div className="grid lg:grid-cols-2 items-center lg:min-h-[886px]">
                             <motion.div
                                 className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[886px] flex flex-col justify-center px-6 sm:px-8 lg:px-0 py-8 sm:py-12 lg:py-0"
                                 style={{ backgroundImage: "url(/formbg.png)" }}
@@ -160,9 +160,9 @@ const AffiliateSignupForm = () => {
                                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                                 >
-                                    <div className="flex flex-col h-auto lg:h-[886px] justify-between">
+                                    <div className="flex flex-col h-auto lg:h-[760px] justify-between">
                                         <motion.div
-                                            className="flex mb-6 items-center justify-between text-white/50 sticky top-0 z-10"
+                                            className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-14 pt-2"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                             transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
@@ -413,7 +413,7 @@ const AffiliateSignupForm = () => {
                                             </motion.div>
                                         </div>
                                         <motion.div
-                                            className="text-center pt-4"
+                                            className="text-center"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                             transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
