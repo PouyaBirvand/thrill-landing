@@ -68,7 +68,7 @@ const AffiliateSignupForm = () => {
     return (
         <section
             id="signin"
-            className="min-h-[600px] sm:min-h-[700px] lg:min-h-screen flex items-center justify-center px-4 py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
+            className="min-h-[600px] sm:min-h-[700px] lg:min-h-screen flex items-center justify-center  py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
             ref={ref}
         >
             <motion.div
