@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     nocache: false,
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/thrill.ico",
   },
 };
 
