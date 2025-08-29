@@ -163,7 +163,8 @@ export default function FeatureCard({
             <Image 
               alt="feat" 
               src={image || "/placeholder.svg"} 
-              fill 
+              fill
+              priority
               className="object-contain rounded-xl" 
             />
           </div>
