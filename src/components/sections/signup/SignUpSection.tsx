@@ -160,7 +160,7 @@ const AffiliateSignupForm = () => {
                                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                                 >
-                                    <div className="flex flex-col h-auto lg:h-[760px] justify-between">
+                                    <div className="flex flex-col h-auto lg:h-[820px] justify-between">
                                         <motion.div
                                             className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-14 pt-2"
                                             initial={{ opacity: 0, y: 20 }}
@@ -327,7 +327,7 @@ const AffiliateSignupForm = () => {
                                                                 <span className="text-xs text-white/50">I accept the Terms and Conditions</span>
                                                             </label>
                                                         </div>
-                                                        <div className="pt-6 flex items-center justify-center group">
+                                                        <div className="py-8 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
@@ -413,7 +413,7 @@ const AffiliateSignupForm = () => {
                                             </motion.div>
                                         </div>
                                         <motion.div
-                                            className="text-center"
+                                            className="text-center pt-2"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                             transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
