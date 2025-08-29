@@ -65,7 +65,6 @@ const StepsSection = () => {
                                   xl:w-[870px] 
                                   bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
 
-
                         <div className="block md:hidden absolute top-[45rem] h-[310px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
 
                         {steps.slice(0, 3).map((step, index) => (
@@ -100,8 +99,8 @@ const StepsSection = () => {
                         <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 gap-y-32 relative">
                             <div className="absolute top-[5.9rem] 
                                       w-[0.06rem] h-[310px]
-                                      sm:w-[350px] sm:h-[0.06rem]
-                                      md:w-[420px] 
+                                      sm:w-[0.06rem] sm:h-[310px]
+                                      md:w-[420px] md:h-[0.06rem] 
                                       lg:w-[450px]
                                       xl:w-[450px]
                                       2xl:w-[450px]

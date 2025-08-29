@@ -75,7 +75,7 @@ const AffiliateSignupForm = () => {
                 className="w-full max-w-[1440px] mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
             >
                 <div className="relative w-full h-full">
                     <svg
@@ -117,7 +117,7 @@ const AffiliateSignupForm = () => {
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
                         <div className="grid lg:grid-cols-2 items-stretch min-h-[600px] sm:min-h-[700px] lg:min-h-[886px]">
                             <motion.div
-                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[886px] flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12"
+                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[430px] lg:min-h-[886px] flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12"
                                 style={{ backgroundImage: "url(/formbg.png)" }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -160,7 +160,7 @@ const AffiliateSignupForm = () => {
                                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                                 >
-                                    <div className="flex flex-col h-auto lg:h-[856px] justify-between">
+                                    <div className="flex flex-col h-auto lg:h-[880px] justify-between">
                                         <motion.div
                                             className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-8 sm:pb-10 lg:pb-14 pt-2"
                                             initial={{ opacity: 0, y: 20 }}
@@ -168,7 +168,7 @@ const AffiliateSignupForm = () => {
                                             transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
                                         >
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
-                                            <div className="flex items-center justify-center gap-2 sm:gap-3">
+                                            <div className="flex items-ce\nter justify-center sm:mx-auto gap-2 sm:gap-3">
                                                 <p className="text-xs sm:text-sm lg:text-base">Sign Up</p>
                                                 <AccurateToggleSwitch onToggle={handleToggleChange} />
                                                 <p className="text-xs sm:text-sm lg:text-base">Log In</p>
