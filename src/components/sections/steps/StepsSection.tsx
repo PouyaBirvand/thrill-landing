@@ -66,7 +66,7 @@ const StepsSection = () => {
                                   bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
 
 
-                        <div className="block md:hidden absolute top-[26rem] h-[620px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
+                        <div className="block md:hidden absolute top-[45rem] h-[310px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
 
                         {steps.slice(0, 3).map((step, index) => (
                             <motion.div
