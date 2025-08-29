@@ -88,6 +88,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
             className={cn(inputVariants({ variant, size, className }))}
             style={{
               fontFamily: "inherit",
+              backgroundColor: "transparent"
             }}
             autoComplete="off"
             autoCorrect="off"
