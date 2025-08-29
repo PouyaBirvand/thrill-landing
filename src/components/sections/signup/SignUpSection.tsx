@@ -378,6 +378,7 @@ const AffiliateSignupForm = () => {
                                                         <div>
                                                             <FigmaInput
                                                                 type={showAuthCode ? "text" : "password"}
+                                                                inputMode="numeric"
                                                                 name="authCode"
                                                                 placeholder="Two-factor authentication code"
                                                                 value={formData.authCode}
