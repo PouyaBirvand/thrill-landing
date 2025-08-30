@@ -7,7 +7,7 @@ import { useNavigate } from "@/hooks/useNavigate"
 const mobileMenuVariants = {
   closed: {
     opacity: 0,
-    x: "100%",
+    y: "-100%",
     transition: {
       duration: 0.3,
       ease: easeInOut,
@@ -15,7 +15,7 @@ const mobileMenuVariants = {
   },
   open: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
       duration: 0.4,
       ease: easeOut,
@@ -25,9 +25,9 @@ const mobileMenuVariants = {
 }
 
 const mobileMenuItemVariants = {
-  closed: { x: 50, opacity: 0 },
+  closed: { y: -50, opacity: 0 },
   open: {
-    x: 0,
+    y: 0,
     opacity: 1,
     transition: {
       duration: 0.3,
@@ -79,7 +79,7 @@ export default function MobileMenuOverlay({
                   <motion.div
                     key={item.label}
                     variants={mobileMenuItemVariants}
-                    whileHover={{ x: 10, scale: 1.05 }}
+                    whileHover={{ y: -5, scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <button

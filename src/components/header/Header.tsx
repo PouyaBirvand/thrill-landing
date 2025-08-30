@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, CSSProperties } from "react"
 import { motion } from "framer-motion"
 import MobileMenuButton from "./MobileMenuButton"
 import MobileMenuOverlay from "./MobileMenuOverlay"
@@ -19,6 +19,20 @@ export default function Header({ className = "", logoProps, showSignIn = true }:
     return () => window.removeEventListener("scroll", updateScrolled)
   }, [])
 
+  const bgStyle: CSSProperties = {
+    background: isScrolled
+      ? "linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent)"
+      : "linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent)",
+    backdropFilter: isScrolled ? "blur(4px)" : "blur(0px)",
+    transition: "all 500ms",
+  }
+  
+
+  if (isScrolled) {
+    bgStyle.maskImage = "linear-gradient(to bottom, black, transparent)"
+    bgStyle.WebkitMaskImage = "linear-gradient(to bottom, black, transparent)"
+  }
+
   return (
     <>
       <motion.header
@@ -30,18 +44,8 @@ export default function Header({ className = "", logoProps, showSignIn = true }:
         {/* Simple background with scroll effect */}
         <div
           className="absolute inset-0 transition-all duration-500"
-          style={{
-            background: isScrolled
-              ? "rgba(0, 0, 0, 0.2)"
-              : "linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent)",
-            backdropFilter: isScrolled ? "blur(2px)" : "blur(0px)",
-          }}
+          style={bgStyle}
         />
-
-        {/* Simple border */}
-        {isScrolled && (
-          <div className="absolute bottom-0 left-0 w-full h-px bg-accent-green/50" />
-        )}
 
         <div className="mx-auto container py-5 flex items-center justify-between relative z-10">
           <Logo {...logoProps} />

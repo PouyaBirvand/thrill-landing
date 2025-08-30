@@ -50,46 +50,67 @@ const StepsSection = () => {
             </div>
 
             <div
-                ref={ref}
                 className="min-[467px]:mt-28 flex items-center justify-center w-full transition-all duration-100"
             >
                 {/* Steps Timeline */}
                 <div className="relative flex-col items-end justify-end w-full max-[467px]:scale-[0.8] transition-all duration-100">
                     {/* Top Stepper */}
-                    <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 gap-y-32 relative">
-                        <div className="block absolute top-[5.9rem] 
-                                  w-[0.06rem] h-[620px] 
-                                  md:w-[560px] md:h-[0.06rem] 
-                                  lg:w-[720px]
-                                  2xl:w-[890px]
-                                  xl:w-[870px] 
-                                  bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
+                    <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 relative">
+                        {/* Top Line - appears with delay */}
+                        <motion.div
+                            className="block absolute top-[7.6rem] md:top-[5.9rem] 
+                                      w-[0.06rem] h-[620px] 
+                                      md:w-[554px] md:h-[0.06rem] 
+                                      lg:w-[720px]
+                                      2xl:w-[890px]
+                                      xl:w-[870px] 
+                                      bg-[#9FABC780] z-0 ml-2 lg:ml-0"
+                            initial={{ opacity: 0, scaleX: 0 }}
+                            animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                            transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
+                        />
 
-                        <div className="block md:hidden absolute top-[45rem] h-[310px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
+                        <motion.div
+                            className="block md:hidden absolute top-[46.6rem] h-[310px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0"
+                            initial={{ opacity: 0, scaleY: 0 }}
+                            animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                            transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
+                        />
 
                         {steps.slice(0, 3).map((step, index) => (
-                            <motion.div
-                                key={step.number}
-                                className="text-center relative z-10 max-md:left-[200px] transition-all duration-100"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                transition={{
-                                    duration: 0.6,
-                                    delay: 0.8 + index * 0.2,
-                                    ease: "easeOut",
-                                }}
-                            >
-                                <div className="relative mb-8">
-                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto relative z-10">
+                            <div key={step.number} className="text-center relative z-10 max-md:left-[200px] transition-all duration-100">
+                                {/* Numbers */}
+                                <motion.div
+                                    className="relative mb-8"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                    transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
+                                >
+                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto realtive z-10">
                                         <span className="text-white text-[64px] font-medium">{step.number}</span>
                                     </div>
-                                    <div className="absolute transition-all duration-100 -bottom-[19px] 
+                                </motion.div>
+
+                                {/* Descriptions */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                    transition={{ duration: 0.5, delay: 0.9, ease: "easeOut" }}
+                                >
+                                    <h3 className="text-white font-740 mb-2 tracking-wide uppercase">{step.title}</h3>
+                                    <p className="text-[#FFFFFF80] font-400 leading-5 max-w-xs mx-auto">{step.description}</p>
+                                </motion.div>
+
+                                {/* Colored Circle */}
+                                <motion.div
+                                    className="absolute transition-all duration-100 bottom-[58px] md:bottom-[148px] lg:bottom-[105px] xl:bottom-[85px] 
                                               left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
-                                              w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20" />
-                                </div>
-                                <h3 className="text-white font-740 mb-2 tracking-wide uppercase">{step.title}</h3>
-                                <p className="text-[#FFFFFF80] font-400 leading-5 max-w-xs mx-auto">{step.description}</p>
-                            </motion.div>
+                                              w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20"
+                                    initial={{ opacity: 0 }}
+                                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                                    transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
+                                />
+                            </div>
                         ))}
                     </div>
 
@@ -97,38 +118,55 @@ const StepsSection = () => {
                     <div className="mt-32 md:flex-row flex flex-col md:flex items-center justify-center gap-32 mb-32 relative">
                         {/* TimeLine */}
                         <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 gap-y-32 relative">
-                            <div className="absolute top-[5.9rem] 
-                                      w-[0.06rem] h-[310px]
-                                      sm:w-[0.06rem] sm:h-[310px]
-                                      md:w-[420px] md:h-[0.06rem] 
-                                      lg:w-[450px]
-                                      xl:w-[450px]
-                                      2xl:w-[450px]
-                                      bg-[#9FABC780] z-0 ml-2 lg:ml-0" />
+                            {/* Bottom Line - appears with delay */}
+                            <motion.div
+                                className="absolute top-[7.6rem] md:top-[5.9rem]
+                                          w-[0.06rem] h-[310px]
+                                          sm:w-[0.06rem] sm:h-[310px]
+                                          md:w-[415px] md:h-[0.06rem] 
+                                          lg:w-[450px]
+                                          xl:w-[450px]
+                                          2xl:w-[450px]
+                                          bg-[#9FABC780] z-0 ml-2 lg:ml-0"
+                                initial={{ opacity: 0, scaleX: 0 }}
+                                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                                transition={{ duration: 0.8, delay: 1.8, ease: "easeOut" }}
+                            />
 
                             {steps.slice(3, 5).map((step, index) => (
-                                <motion.div
-                                    key={step.number}
-                                    className="text-center relative z-10 max-md:left-[200px] transition-all duration-100"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                    transition={{
-                                        duration: 0.6,
-                                        delay: 0.8 + index * 0.2,
-                                        ease: "easeOut",
-                                    }}
-                                >
-                                    <div className="relative mb-8">
+                                <div key={step.number} className="text-center relative z-10 max-md:left-[200px] transition-all duration-100">
+                                    {/* Numbers */}
+                                    <motion.div
+                                        className="relative mb-8"
+                                        initial={{ opacity: 0, y: 30 }}
+                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                        transition={{ duration: 0.5, delay: 1.1, ease: "easeOut" }}
+                                    >
                                         <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto relative z-10">
                                             <span className="text-white text-[64px] font-medium">{step.number}</span>
                                         </div>
-                                        <div className="absolute transition-all duration-100 -bottom-[19px] 
-                                                  left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
-                                                  w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20" />
-                                    </div>
-                                    <h3 className="text-white font-740 mb-2 tracking-wide uppercase">{step.title}</h3>
-                                    <p className="text-[#FFFFFF80] font-400 leading-5 max-w-xs mx-auto">{step.description}</p>
-                                </motion.div>
+                                    </motion.div>
+
+                                    {/* Descriptions */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 30 }}
+                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                        transition={{ duration: 0.5, delay: 1.2, ease: "easeOut" }}
+                                    >
+                                        <h3 className="text-white font-740 mb-2 tracking-wide uppercase">{step.title}</h3>
+                                        <p className="text-[#FFFFFF80] font-400 leading-5 max-w-xs mx-auto">{step.description}</p>
+                                    </motion.div>
+
+                                    {/* Colored Circle */}
+                                    <motion.div
+                                        className="absolute transition-all duration-100 bottom-[58px] md:bottom-[85px] lg:bottom-[86px] xl:bottom-[85px] 
+                                    left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
+                                    w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20"
+                                        initial={{ opacity: 0 }}
+                                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                                        transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
+                                    />
+                                </div>
                             ))}
                         </div>
                     </div>

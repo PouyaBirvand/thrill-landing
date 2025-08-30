@@ -1,25 +1,33 @@
 'use client'
 
-import { motion, easeOut } from 'framer-motion'
+import { motion, easeOut, useInView } from 'framer-motion'
 import { Dot } from 'lucide-react'
 import { Button } from '../ui/Button'
 import Image from 'next/image'
 import Container from '../common/Container'
+import { useRef } from 'react'
 
 export default function Footer() {
-    const containerVariants = {
-        hidden: {},
-        show: { transition: { staggerChildren: 0.08 } }
-    }
+    const ref = useRef<HTMLElement | null>(null)
+    const isInView = useInView(ref, { once: true, amount: 0.5 })
 
-    const itemVariants = {
+    const mainVariants = {
         hidden: { opacity: 0, y: 18 },
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } }
     }
 
+    const buttonVariants = {
+        hidden: { opacity: 0, y: 18 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut, delay: 0.3 } }
+    }
+
+    const bottomVariants = {
+        hidden: { opacity: 0, y: 18 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut, delay: 0.6 } }
+    }
 
     return (
-        <footer className="text-white py-16 md:pt-[18rem] pt-[15rem] bg-body relative">
+        <footer ref={ref} className="text-white py-16 md:pt-[18rem] pt-[15rem] bg-body relative">
             <div className="absolute inset-0 flex justify-center items-end">
                 <img
                     src="/footershape.png"
@@ -30,15 +38,14 @@ export default function Footer() {
             <Container className='z-[999] relative'>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Top Section */}
-                    <motion.div
-                        className="flex flex-col lg:flex-row justify-between gap-16"
-                        initial="hidden"
-                        whileInView="show"
-                        variants={containerVariants}
-                        viewport={{ once: true, amount: 0.25 }}
-                    >
+                    <div className="flex flex-col lg:flex-row justify-between gap-16">
                         {/* Left Section */}
-                        <motion.div className="max-w-xl" variants={itemVariants}>
+                        <motion.div 
+                            className="max-w-xl"
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                            variants={mainVariants}
+                        >
                             <h2 className="text-[36px] md:text-[45px] font-semibold mb-3">
                                 STREAM, EARN, GROW
                             </h2>
@@ -48,58 +55,71 @@ export default function Footer() {
                                 <br />
                                 With casino and sportsbook expertise, it offers bold design, smooth UX, and transparent terms to maximize value for players and partners.
                             </p>
-                            <Button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                transition={{ duration: 0.001, ease: 'easeOut' }}
-                                className="!shadow-signin-glow !p-0 w-[258px]"
-                                size="lg"
-                            >
-                                BECOME AN AFFILIATE
-                            </Button>
                         </motion.div>
 
-                        {/* Links */}
+                        {/* Links (right section) */}
                         <motion.div
-                            className="flex flex-col sm:flex-row gap-12 sm:gap-10"
-                            variants={containerVariants}
+                            className="flex flex-col md:flex-row gap-12 sm:gap-10"
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                            variants={mainVariants}
                         >
                             {/* Explore */}
-                            <motion.div variants={itemVariants}>
+                            <div>
                                 <h3 className="font-semibold mb-3">Explore</h3>
                                 <ul className="space-y-2 text-white/70">
                                     <li><a href="#">Casino</a></li>
                                     <li><a href="#">Sports</a></li>
                                 </ul>
-                            </motion.div>
+                            </div>
 
                             {/* Connect */}
-                            <motion.div variants={itemVariants}>
+                            <div>
                                 <h3 className="font-semibold mb-3">Connect</h3>
                                 <ul className="space-y-2 text-white/70">
                                     <li><a href="#">E-mail us</a></li>
                                 </ul>
-                            </motion.div>
+                            </div>
 
                             {/* Partner */}
-                            <motion.div variants={itemVariants}>
+                            <div>
                                 <h3 className="font-semibold mb-3">Partner</h3>
                                 <ul className="space-y-2 text-white/70">
                                     <li><a href="#">Program Overview</a></li>
                                     <li><a href="#">Reviews & Commission Details</a></li>
                                     <li><a href="#">Brand Assets & Promo Materials</a></li>
                                 </ul>
-                            </motion.div>
+                            </div>
                         </motion.div>
+                    </div>
+
+                    {/* Button */}
+                    <motion.div
+                        initial="hidden"
+                        className='lg:mt-0 mt-12'
+                        animate={isInView ? "show" : "hidden"}
+                        variants={buttonVariants}
+                    >
+                        <Button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                            transition={{ duration: 0.001, ease: 'easeOut' }}
+                            className="!shadow-signin-glow !p-0 w-[258px]"
+                            size="lg"
+                        >
+                            BECOME AN AFFILIATE
+                        </Button>
                     </motion.div>
 
                     {/* Bottom Section */}
-                    <div className="flex flex-col md:flex-row justify-between items-center mt-12 pt-6 gap-6">
+                    <motion.div
+                        className="flex flex-col md:flex-row justify-between items-center mt-12 pt-2 gap-6"
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        variants={bottomVariants}
+                    >
                         {/* Logo + Text + Links */}
                         <div className="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
-                            {/* لوگو */}
-
-                            {/* متن + لینک‌ها */}
                             <div className="text-[#A0ACC7] flex flex-row items-center gap-3">
                             <Image
                                 alt="footer_logo"
@@ -143,7 +163,7 @@ export default function Footer() {
 
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </Container>
         </footer>

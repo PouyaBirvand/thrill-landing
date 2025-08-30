@@ -68,16 +68,25 @@ const AffiliateSignupForm = () => {
     return (
         <section
             id="signin"
-            className="min-h-[600px] sm:min-h-[700px] lg:min-h-screen flex items-center justify-center  py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
+            className="min-h-[600px] sm:min-h-[700px] lg:min-h-screen flex items-center justify-center py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
             ref={ref}
         >
+            {/* Single animation block for entire registration section */}
             <motion.div
                 className="w-full max-w-[1440px] mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
                 <div className="relative w-full h-full">
+                    {/* Subtle background glow with delay */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-radial from-accent-green_light/5 via-transparent to-transparent opacity-0 rounded-3xl"
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+                    />
+                    
                     <svg
                         className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
                         viewBox="0 0 490 490"
@@ -116,65 +125,43 @@ const AffiliateSignupForm = () => {
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
                         <div className="grid lg:grid-cols-2 items-stretch min-h-[600px] sm:min-h-[700px] lg:min-h-[886px]">
-                            <motion.div
+                            {/* Left side - Text content without individual animations */}
+                            <div
                                 className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[430px] lg:min-h-[886px] flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12"
                                 style={{ backgroundImage: "url(/formbg.png)" }}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                             >
                                 <div className="absolute inset-0 bg-black/10"></div>
                                 <div className="relative z-10 space-y-4 sm:space-y-6 text-center lg:text-left max-w-2xl mx-auto">
-                                    <motion.p
-                                        className="text-accent-green_light font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-4 sm:px-6"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                        transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-                                    >
+                                    <p className="text-accent-green_light font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-4 sm:px-6">
                                         YOUR AUDIENCE. YOUR PROFIT.
-                                    </motion.p>
-                                    <motion.h1
-                                        className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-4 sm:px-6"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                        transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-                                    >
+                                    </p>
+                                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-4 sm:px-6">
                                         DARE TO EARN.
                                         <br />
                                         GET AFFILIATE ACCESS.
-                                    </motion.h1>
-                                    <motion.p
-                                        className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-lg sm:max-w-xl mx-auto lg:mx-0 px-4 sm:px-6"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                        transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
-                                    >
+                                    </h1>
+                                    <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-lg sm:max-w-xl mx-auto lg:mx-0 px-4 sm:px-6">
                                         It's time to make your streams Thrilling - join the best casino affiliate program built around creators.
-                                    </motion.p>
+                                    </p>
                                 </div>
-                            </motion.div>
+                            </div>
+                            
+                            {/* Right side - Form content */}
                             <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
-                                <motion.div
-                                    className="w-full max-w-md sm:max-w-lg px-4 py-6 sm:py-8 lg:py-12"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                    transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-                                >
+                                <div className="w-full max-w-md sm:max-w-lg px-4 py-6 sm:py-8 lg:py-12">
                                     <div className="flex flex-col h-auto lg:h-[880px] justify-between">
-                                        <motion.div
-                                            className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-8 sm:pb-10 lg:pb-14 pt-2"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-                                        >
+                                        {/* Toggle section */}
+                                        <div className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-8 sm:pb-10 lg:pb-14 pt-2">
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
-                                            <div className="flex items-ce\nter justify-center sm:mx-auto gap-2 sm:gap-3">
+                                            <div className="flex items-center justify-center sm:mx-auto gap-2 sm:gap-3">
                                                 <p className="text-xs sm:text-sm lg:text-base">Sign Up</p>
                                                 <AccurateToggleSwitch onToggle={handleToggleChange} />
                                                 <p className="text-xs sm:text-sm lg:text-base">Log In</p>
                                             </div>
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
-                                        </motion.div>
+                                        </div>
+                                        
+                                        {/* Form section */}
                                         <div className="flex-1 flex items-start lg:items-center justify-center overflow-hidden">
                                             <motion.div
                                                 className="w-full h-auto lg:h-full flex items-start lg:items-center"
@@ -186,7 +173,7 @@ const AffiliateSignupForm = () => {
                                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                                             >
                                                 {activeTab === "signup" ? (
-                                                    <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
+                                                    <div className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
                                                             <FigmaInput
                                                                 type="email"
@@ -343,9 +330,9 @@ const AffiliateSignupForm = () => {
                                                                 Sign Up
                                                             </Button>
                                                         </div>
-                                                    </form>
+                                                        </div>
                                                 ) : (
-                                                    <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
+                                                    <div className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
                                                             <FigmaInput
                                                                 type="email"
@@ -411,16 +398,13 @@ const AffiliateSignupForm = () => {
                                                                 Log in as affiliate
                                                             </Button>
                                                         </div>
-                                                    </form>
+                                                        </div>
                                                 )}
                                             </motion.div>
                                         </div>
-                                        <motion.div
-                                            className="text-center pt-4 sm:pt-6"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                            transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
-                                        >
+                                        
+                                        {/* Footer section */}
+                                        <div className="text-center pt-4 sm:pt-6">
                                             <div className="justify-center flex items-center">
                                                 <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
                                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full">
@@ -452,9 +436,9 @@ const AffiliateSignupForm = () => {
                                                 </div>
                                                 <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
                                             </div>
-                                        </motion.div>
+                                        </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             </div>
                         </div>
                     </div>

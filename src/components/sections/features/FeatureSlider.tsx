@@ -74,18 +74,17 @@ export default function FeatureSlider() {
     }
   }
 
-  // Animation variants for swiper slides
-  const slideVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: (i: number) => ({
+  // Uniform animation for all cards - appear as one block
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
-        delay: i * 0.1,
-        duration: 0.4,
+        duration: 0.6,
         ease: easeOut
       }
-    })
+    }
   }
 
   // Animation variants for navigation buttons
@@ -105,9 +104,9 @@ export default function FeatureSlider() {
     <motion.div
       ref={ref}
       className="relative w-full pt-20"
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, ease: easeOut }}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
     >
       <div className="!overflow-visible">
         <Swiper
@@ -144,17 +143,10 @@ export default function FeatureSlider() {
         >
           {features.map((feature, index) => (
             <SwiperSlide key={index} className="h-auto">
-              <motion.div
-                custom={index}
-                variants={slideVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-              >
-                <FeatureCard
-                  {...feature}
-                  onExpand={() => setSelectedFeature(feature)}
-                />
-              </motion.div>
+              <FeatureCard
+                {...feature}
+                onExpand={() => setSelectedFeature(feature)}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -227,4 +219,3 @@ export default function FeatureSlider() {
     </motion.div>
   )
 }
-

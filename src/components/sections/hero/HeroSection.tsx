@@ -53,9 +53,14 @@ export default function HeroSection() {
         >
           grow with thrill
         </motion.h3>
-        <motion.div className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" initial={{ opacity: 0, y: 20 }}
+        
+        <motion.div 
+          className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" 
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }} />
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }} 
+        />
+        
         {/* Block 2: Main Title */}
         <motion.h1
           className="text-white text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
@@ -66,27 +71,29 @@ export default function HeroSection() {
           streaming partnership you've Been waiting For
         </motion.h1>
 
-        {/* Block 3: Description + Button */}
+        {/* Block 3: Description */}
         <motion.div
-          className="flex flex-col items-center gap-6 mt-2"
+          className="text-center space-y-1 px-4 mt-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
         >
-          {/* Description */}
-          <div className="text-center space-y-1 px-4">
-            <p className="text-neutral-lightGray text-lg sm:text-xl">
-              It's time to make your streams Thrilling.
-            </p>
-            <p className="text-neutral-lightGray text-lg sm:text-xl">
-              Join the best casino affiliate program built around creators.
-            </p>
-          </div>
+          <p className="text-neutral-lightGray text-lg sm:text-xl">
+            It's time to make your streams Thrilling.
+          </p>
+          <p className="text-neutral-lightGray text-lg sm:text-xl">
+            Join the best casino affiliate program built around creators.
+          </p>
+        </motion.div>
 
-          {/* CTA Button */}
-          <div className="mt-8 pb-16">
-            <HeroCTAButton />
-          </div>
+        {/* Block 4: CTA Button - appears AFTER description with delay */}
+        <motion.div
+          className="mt-8 pb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+        >
+          <HeroCTAButton />
         </motion.div>
       </div>
     </section>

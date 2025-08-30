@@ -27,4 +27,3 @@ export default function SignInButton({ onClick, size = "normal" }: SignInButtonP
     </motion.div>
   )
 }
-
