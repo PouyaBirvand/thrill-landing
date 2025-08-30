@@ -14,7 +14,9 @@ export default function FeatureSlider() {
   const swiperRef = useRef<SwiperType>(null)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-150px" })
-  const [selectedFeature, setSelectedFeature] = useState<typeof features[0] | null>(null)
+  const [selectedFeature, setSelectedFeature] = useState<typeof features[0] | null>(null);
+  const [isPrevHovered, setIsPrevHovered] = useState(false);
+  const [isNextHovered, setIsNextHovered] = useState(false);
 
   // Disable body scroll when modal is open
   useEffect(() => {
@@ -154,9 +156,12 @@ export default function FeatureSlider() {
 
       {/* Navigation buttons */}
       <div className="flex justify-center items-center mt-12 sm:mt-14 md:mt-16 space-x-3 mb-5">
+        {/* Prev Button */}
         <motion.button
           onClick={() => swiperRef.current?.slidePrev()}
-          className={`flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 hover:scale-105`}
+          onMouseEnter={() => setIsPrevHovered(true)}
+          onMouseLeave={() => setIsPrevHovered(false)}
+          className="flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110"
           variants={buttonVariants}
           initial="rest"
           whileHover="hover"
@@ -164,14 +169,22 @@ export default function FeatureSlider() {
         >
           <ChevronLeft
             size={14}
-            color="#858FA660"
-            className="xs:w-4 xs:h-4 sm:w-4 sm:h-4"
+            className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-all duration-300"
+            color={isPrevHovered ? "#83FFDA" : "#858FA660"}
+            style={{
+              filter: isPrevHovered
+                ? "drop-shadow(0 0 8px rgba(131, 255, 218, 0.6))"
+                : "none"
+            }}
           />
         </motion.button>
 
+        {/* Next Button */}
         <motion.button
           onClick={() => swiperRef.current?.slideNext()}
-          className={`flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 hover:scale-105`}
+          onMouseEnter={() => setIsNextHovered(true)}
+          onMouseLeave={() => setIsNextHovered(false)}
+          className="flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110"
           variants={buttonVariants}
           initial="rest"
           whileHover="hover"
@@ -179,11 +192,17 @@ export default function FeatureSlider() {
         >
           <ChevronRight
             size={14}
-            color="#858FA660"
-            className="xs:w-4 xs:h-4 sm:w-4 sm:h-4"
+            className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-all duration-300"
+            color={isNextHovered ? "#83FFDA" : "#858FA660"}
+            style={{
+              filter: isNextHovered
+                ? "drop-shadow(0 0 8px rgba(131, 255, 218, 0.6))"
+                : "none"
+            }}
           />
         </motion.button>
       </div>
+
 
       {/* Modal Overlay */}
       <AnimatePresence>
