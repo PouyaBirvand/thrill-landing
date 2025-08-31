@@ -13,8 +13,8 @@ export default function CommissionPlanSection() {
                 {/* Block 1: Subtitle */}
                 <motion.h3
                     className="uppercase text-[#83FFDA] font-semibold text-sm sm:text-base mb-2"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 >
                     Flexible Payout Options
@@ -23,8 +23,8 @@ export default function CommissionPlanSection() {
                 {/* Block 2: Main Title */}
                 <motion.h1
                     className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                 >
                     Commission plan
@@ -33,8 +33,8 @@ export default function CommissionPlanSection() {
                 {/* Block 3: Description */}
                 <motion.p
                     className="text-neutral-lightGray max-w-[50rem] text-center text-sm sm:text-base mt-2 px-4"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                 >
                     All commissions are tracked via SoftSwiss and paid during the first week of each month.

@@ -14,27 +14,17 @@ export default function CommissionCard() {
   }
 
   const getCardVariants = (idx: number) => ({
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 30 },
     show: { 
       opacity: 1, 
       y: 0, 
       transition: { 
-        duration: 0.6, 
+        duration: 0.5, 
         ease: easeOut,
-        delay: idx < 3 ? 0 : 0.1 
+        delay: 0.8 + (idx * 0.1)
       } 
     },
   })
-
-  const bgLineVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { duration: 0.5, ease: easeOut, delay: 0.3 } },
-  }
-
-  const dotVariants = {
-    hidden: { opacity: 0, scale: 0.6 },
-    show: { opacity: 1, scale: 1, transition: { duration: 0.45, delay: 0.9 } },
-  }
 
   return (
     <section
@@ -46,51 +36,51 @@ export default function CommissionCard() {
         <div className="relative">
           {/* Decorative lines & blobs */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
-            {/* Vertical lines */}
+            {/* Vertical lines with sliding animation */}
             <motion.div
               className="absolute top-0 bottom-0 w-px left-1/3 bg-[rgba(255,255,255,0.15)]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={bgLineVariants}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+              transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
             />
             <motion.div
               className="absolute top-0 bottom-0 w-px left-2/3 bg-[rgba(255,255,255,0.15)]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={bgLineVariants}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+              transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
             />
-            {/* Horizontal line */}
+            {/* Horizontal line with sliding animation */}
             <motion.div
               className="absolute left-0 right-0 h-px top-1/2 bg-[rgba(255,255,255,0.15)]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={bgLineVariants}
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
             />
 
-            {/* Dots & Blobs */}
+            {/* Dots & Blobs with same timing as steps */}
             <motion.div
-              className="absolute w-2 h-2 rounded-full -translate-y-1/2 shadow-step-glow bg-accent-green_light left-[33.1%] top-[49.5%]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={dotVariants}
+              className="absolute w-2 h-2 rounded-full -translate-y-1/2 shadow-step-glow bg-accent-green_light left-[33.01%] top-[50%]"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
             />
             <motion.div
-              className="absolute w-2 h-2 z-[999] rounded-full -translate-y-1/2 shadow-step-glow bg-accent-green_light left-[66.39%] top-[49.5%]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={dotVariants}
+              className="absolute w-2 h-2 z-[999] rounded-full -translate-y-1/2 shadow-step-glow bg-accent-green_light left-[66.39%] top-[50%]"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
             />
             <motion.div
               className="absolute w-[20rem] h-[10rem] blur-3xl rounded-full -translate-y-1/2 bg-gray-600/5 left-[22.1%] top-[40.5%]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={dotVariants}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
             />
             <motion.div
               className="absolute w-[20rem] h-[10rem] blur-3xl z-[999] rounded-full -translate-y-1/2 bg-gray-600/5 left-[55.39%] top-[40.5%]"
-              initial="hidden"
-              animate={isInView ? 'show' : 'hidden'}
-              variants={dotVariants}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
             />
           </div>
 

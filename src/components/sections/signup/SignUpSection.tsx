@@ -68,9 +68,23 @@ const AffiliateSignupForm = () => {
     return (
         <section
             id="signin"
-            className="min-h-[600px] sm:min-h-[700px] lg:min-h-screen flex items-center justify-center py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
+            className="min-h-[600px] relative sm:min-h-[700px] lg:min-h-screen flex items-center justify-center py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
             ref={ref}
         >
+
+            <motion.div
+                className="h-[20rem] w-[20rem] sm:h-[25rem] sm:w-[25rem] lg:h-[30rem] lg:w-[30rem] left-[-5%] sm:left-[-10%] lg:left-1 top-[20%] sm:top-[25%] lg:top-[30%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            />
+
+            <motion.div
+                className="h-[20rem] w-[20rem] sm:h-[25rem] sm:w-[25rem] lg:h-[30rem] lg:w-[30rem] right-[-5%] sm:right-[-10%] lg:right-1 top-[20%] sm:top-[25%] lg:top-[30%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            />
             {/* Single animation block for entire registration section */}
             <motion.div
                 className="w-full max-w-[1440px] mx-auto"

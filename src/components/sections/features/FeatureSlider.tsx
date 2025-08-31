@@ -105,7 +105,7 @@ export default function FeatureSlider() {
   return (
     <motion.div
       ref={ref}
-      className="relative w-full pt-20"
+      className="relative w-full pt-18"
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
