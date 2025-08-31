@@ -71,13 +71,13 @@ export default function CommissionCard() {
               transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
             />
             <motion.div
-              className="absolute w-[20rem] h-[10rem] blur-3xl rounded-full -translate-y-1/2 bg-gray-600/5 left-[22.1%] top-[40.5%]"
+              className="absolute w-[20rem] h-[10rem] blur-3xl rounded-full -translate-y-1/2 bg-gray-600/5 left-[22.1%] top-[50%]"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
             />
             <motion.div
-              className="absolute w-[20rem] h-[10rem] blur-3xl z-[999] rounded-full -translate-y-1/2 bg-gray-600/5 left-[55.39%] top-[40.5%]"
+              className="absolute w-[20rem] h-[10rem] blur-3xl z-[999] rounded-full -translate-y-1/2 bg-gray-600/5 left-[50.39%] top-[50%]"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
