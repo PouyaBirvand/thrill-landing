@@ -13,7 +13,9 @@ export default function Home() {
       <Container>
         <Header />
       </Container>
+      
       <HeroSection />
+      
       <Container>
         <FeaturesSection />
         <FeatureSlider />

@@ -59,7 +59,7 @@ export default function NavMenu() {
           key={item.label}
           variant={activeItem === item.label ? "select" : "ghost"}
           onClick={() => navigate(item)}
-          className="relative z-10 hover:bg-primary-300 rounded-2xl"
+          className="relative z-10 hover:bg-transparent rounded-2xl"
         >
           {item.label}
         </Button>

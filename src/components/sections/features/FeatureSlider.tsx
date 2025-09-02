@@ -170,7 +170,7 @@ export default function FeatureSlider() {
           <ChevronLeft
             size={14}
             className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-all duration-300"
-            color={isPrevHovered ? "#83FFDA" : "#858FA660"}
+            color={isPrevHovered ? "#83FFDA" : "#A0A9B0"}
             style={{
               filter: isPrevHovered
                 ? "drop-shadow(0 0 8px rgba(131, 255, 218, 0.6))"
@@ -193,7 +193,7 @@ export default function FeatureSlider() {
           <ChevronRight
             size={14}
             className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-all duration-300"
-            color={isNextHovered ? "#83FFDA" : "#858FA660"}
+            color={isNextHovered ? "#83FFDA" : "#A0A9B0"}
             style={{
               filter: isNextHovered
                 ? "drop-shadow(0 0 8px rgba(131, 255, 218, 0.6))"

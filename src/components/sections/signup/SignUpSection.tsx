@@ -76,14 +76,14 @@ const AffiliateSignupForm = () => {
                 className="h-[20rem] w-[20rem] sm:h-[25rem] sm:w-[25rem] lg:h-[30rem] lg:w-[30rem] left-[-5%] sm:left-[-10%] lg:left-1 top-[20%] sm:top-[25%] lg:top-[30%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                transition={{ duration: 0.6, delay: 1.1, ease: "easeOut" }}
             />
 
             <motion.div
                 className="h-[20rem] w-[20rem] sm:h-[25rem] sm:w-[25rem] lg:h-[30rem] lg:w-[30rem] right-[-5%] sm:right-[-10%] lg:right-1 top-[20%] sm:top-[25%] lg:top-[30%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                transition={{ duration: 0.6, delay: 1.1, ease: "easeOut" }}
             />
             {/* Single animation block for entire registration section */}
             <motion.div
@@ -368,7 +368,7 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowPassword(!showPassword)}
-                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 mt-1 sm:mt-2 ml-2 hover:text-teal-400 transition-colors duration-200"
                                                                     >
                                                                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                                                     </button>

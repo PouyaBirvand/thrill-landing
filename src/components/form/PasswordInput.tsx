@@ -82,7 +82,7 @@ const FigmaPasswordInput = forwardRef<HTMLInputElement, FigmaPasswordInputProps>
           />
 
           {/* Input container */}
-          <div className="relative flex items-center h-full rounded-full z-20">
+          <div className="relative flex items-center h-full rounded-full z-2">
             <input
               type={showPassword ? "text" : "password"}
               ref={ref}
