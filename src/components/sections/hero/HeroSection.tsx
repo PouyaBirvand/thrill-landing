@@ -3,7 +3,6 @@ import Image from "next/image"
 import HeroCTAButton from "./HeroCTAButton"
 import { motion } from "framer-motion"
 
-// راه حل 1: استفاده از padding به جای min-height
 export default function HeroSection() {
   return (
     <section 
