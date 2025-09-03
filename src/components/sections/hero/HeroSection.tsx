@@ -14,8 +14,8 @@ export default function HeroSection() {
         className="absolute top-0 z-[5] pointer-events-none hidden sm:block
                    right-[-250px] h-full w-[85%]
                    md:right-[-270px] md:w-[70%]
-                   lg:right-[-220px] lg:w-[58%]
-                   xl:right-[-260px] xl:w-[60%]
+                   lg:right-[-260px] lg:w-[58%]
+                   xl:right-[-340px] xl:w-[60%]
                    2xl:right-[-400px] 2xl:w-[62%]"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -36,8 +36,8 @@ export default function HeroSection() {
         className="absolute top-0 z-[5] pointer-events-none hidden sm:block
                    left-[-250px] h-full w-[85%]
                    md:left-[-270px] md:w-[70%]
-                   lg:left-[-220px] lg:w-[58%]
-                   xl:left-[-260px] xl:w-[60%]
+                   lg:left-[-260px] lg:w-[58%]
+                   xl:left-[-340px] xl:w-[60%]
                    2xl:left-[-400px] 2xl:w-[62%]"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
