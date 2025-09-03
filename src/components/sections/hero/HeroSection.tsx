@@ -1,43 +1,36 @@
 "use client"
 import { motion } from "framer-motion"
 import HeroCTAButton from "./HeroCTAButton"
-import Lottie from "react-lottie"
-import animationData from "@/../public/animations/data.json"
-
-const lottieOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: animationData,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice"
-  }
-}
 
 export default function HeroSection() {
   return (
     <section id="hero" className="sm:pt-[15rem] pt-[10rem] relative overflow-hidden min-h-screen bg-[#1B1D29]">
-      {/* Right animation - Responsive positioning */}
+      {/* Right video - Responsive positioning */}
       <motion.div
-        className="absolute top-0 z-[5] pointer-events-none
+        className="absolute top-[-8rem] sm:top-0 z-[5] pointer-events-none
                    right-[-16rem] h-full w-full
                    sm:right-[-200px] sm:w-[80%]
                    md:right-[-270px] md:w-[70%]
                    lg:right-[-260px] lg:w-[58%]
                    xl:right-[-340px] xl:w-[60%]
-                   2xl:right-[-1000px] 2xl:w-[100%]"
+                   2xl:right-[-400px] 2xl:w-[62%]"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <Lottie
-          options={lottieOptions}
-          style={{ width: "100%", height: "100%", transform: "scaleX(-1)" }}
+        <video
+          src="/animations/header_left_side.webm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover scale-x-[-1] object-center pointer-events-none"
         />
       </motion.div>
 
-      {/* Left animation - Responsive positioning */}
+      {/* Left video - Responsive positioning */}
       <motion.div
-        className="absolute top-0 z-[5] pointer-events-none
+        className="absolute top-[-8rem] sm:top-0 z-[5] pointer-events-none
                    left-[-16rem] h-full w-full
                    sm:right-[-200px] sm:w-[80%]
                    md:left-[-270px] md:w-[70%]
@@ -48,9 +41,13 @@ export default function HeroSection() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
       >
-        <Lottie
-          options={lottieOptions}
-          style={{ width: "100%", height: "100%" }}
+        <video
+          src="/animations/header_left_side.webm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover object-center pointer-events-none"
         />
       </motion.div>
 
