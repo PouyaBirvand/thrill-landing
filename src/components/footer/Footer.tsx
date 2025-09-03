@@ -46,7 +46,7 @@ export default function Footer() {
                             animate={isInView ? "show" : "hidden"}
                             variants={mainVariants}
                         >
-                            <h2 className="text-[36px] md:text-[45px] font-semibold mb-3">
+                            <h2 className="text-[28px] md:text-[45px] font-semibold mb-3">
                                 STREAM, EARN, GROW
                             </h2>
                             <p className="text-white/70 mb-10 leading-relaxed">

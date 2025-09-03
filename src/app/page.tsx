@@ -9,7 +9,7 @@ import StepsSection from "@/components/sections/steps/StepsSection"
 
 export default function Home() {
   return (
-    <div className="bg-body min-h-screen overflow-x-hidden">
+    <div className="bg-body overflow-x-hidden">
       <Container>
         <Header />
       </Container>

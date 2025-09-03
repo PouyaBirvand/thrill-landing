@@ -1,18 +1,15 @@
-"use client";
-import { motion } from "framer-motion";
-import HeroCTAButton from "./HeroCTAButton";
+"use client"
+import { motion } from "framer-motion"
+import HeroCTAButton from "./HeroCTAButton"
 
 export default function HeroSection() {
   return (
-    <section
-      id="hero"
-      className="relative bg-[#1B1D29] overflow-hidden flex items-center justify-center
-                min-h-screen"
-    >
-      {/* Right video */}
+    <section id="hero" className="sm:pt-[15rem] pt-[10rem] relative overflow-hidden min-h-screen bg-[#1B1D29]">
+      {/* Right video - Responsive positioning */}
       <motion.div
-        className="absolute top-0 z-[5] pointer-events-none hidden sm:block
-                   right-[-250px] h-full w-[85%]
+        className="absolute top-0 z-[5] pointer-events-none
+                   right-[-16rem] h-full w-full
+                   sm:right-[-200px] sm:w-[80%]
                    md:right-[-270px] md:w-[70%]
                    lg:right-[-260px] lg:w-[58%]
                    xl:right-[-340px] xl:w-[60%]
@@ -27,14 +24,15 @@ export default function HeroSection() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover scale-x-[-1] object-center"
+          className="w-full h-full object-cover scale-x-[-1] object-center pointer-events-none"
         />
       </motion.div>
 
-      {/* Left video */}
+      {/* Left video - Responsive positioning */}
       <motion.div
-        className="absolute top-0 z-[5] pointer-events-none hidden sm:block
-                   left-[-250px] h-full w-[85%]
+        className="absolute top-0 z-[5] pointer-events-none
+                   left-[-16rem] h-full w-full
+                   sm:right-[-200px] sm:w-[80%]
                    md:left-[-270px] md:w-[70%]
                    lg:left-[-260px] lg:w-[58%]
                    xl:left-[-340px] xl:w-[60%]
@@ -49,80 +47,64 @@ export default function HeroSection() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center pointer-events-none"
         />
       </motion.div>
 
-<motion.div
-        className="absolute inset-0 z-[1] pointer-events-none sm:hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-      >
-        <div className="absolute top-1/4 right-[5vw] w-[25vw] h-[25vw] max-w-32 max-h-32 bg-sky-300 bg-opacity-5 rounded-full blur-xl"></div>
-        <div className="absolute top-1/3 left-[5vw] w-[22vw] h-[22vw] max-w-28 max-h-28 bg-accent-green_light bg-opacity-5 rounded-full blur-xl"></div>
-        <div className="absolute bottom-1/4 right-[8vw] w-[20vw] h-[20vw] max-w-24 max-h-24 bg-sky-300 bg-opacity-5 rounded-full blur-xl"></div>
-      </motion.div>
+      {/* Content */}
+      <div className="flex flex-col items-center justify-center gap-3 relative z-10 px-4 sm:px-6 md:px-8">
+        {/* Block 1: Subtitle */}
+        <motion.h3
+          className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+        >
+          grow with thrill
+        </motion.h3>
+        
+        <motion.div 
+          className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }} 
+        />
+        
+        {/* Block 2: Main Title */}
+        <motion.h1
+          className="text-white text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+        >
+          streaming partnership you've Been waiting For
+        </motion.h1>
 
-      <div className="flex flex-col items-center justify-center gap-3 relative z-10 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
-  {/* Block 1: Subtitle */}
-  <motion.h3
-    className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-  >
-    grow with thrill
-  </motion.h3>
+        {/* Block 3: Description */}
+        <motion.div
+          className="text-center space-y-1 px-4 mt-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+        >
+          <p className="text-neutral-lightGray text-lg sm:text-xl">
+            It's time to make your streams Thrilling.
+          </p>
+          <p className="text-neutral-lightGray text-lg sm:text-xl">
+            Join the best casino affiliate program built around creators.
+          </p>
+        </motion.div>
 
-  {/* Background blur effect */}
-  <motion.div
-    className="h-[6rem] sm:h-[8rem] md:h-[10rem] lg:h-[12rem] 
-               w-[20rem] sm:w-[25rem] md:w-[30rem] lg:w-[35rem] 
-               blur-3xl 
-               top-6 sm:top-8 md:top-10 lg:top-12 
-               bg-sky-300 bg-opacity-10 absolute"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-  />
-
-  {/* Block 2: Main Title */}
-  <motion.h1
-    className="text-white font-bold max-w-5xl text-center uppercase leading-tight px-2
-               text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px]"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-  >
-    streaming partnership you've Been waiting For
-  </motion.h1>
-
-  {/* Block 3: Description */}
-  <motion.div
-    className="text-center space-y-1 px-4 mt-2 max-w-3xl"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-  >
-    <p className="text-neutral-lightGray text-lg sm:text-xl">
-      It's time to make your streams Thrilling.
-    </p>
-    <p className="text-neutral-lightGray text-lg sm:text-xl">
-      Join the best casino affiliate program built around creators.
-    </p>
-  </motion.div>
-
-  {/* Block 4: CTA Button */}
-  <motion.div
-    className="mt-8"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
-  >
-    <HeroCTAButton />
-  </motion.div>
-</div>
+        {/* Block 4: CTA Button - appears AFTER description with delay */}
+        <motion.div
+          className="mt-8 pb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+        >
+          <HeroCTAButton />
+        </motion.div>
+      </div>
     </section>
-  );
+  )
 }

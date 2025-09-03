@@ -167,9 +167,9 @@ const AffiliateSignupForm = () => {
                                         <div className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-8 sm:pb-10 lg:pb-14 pt-2">
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
                                             <div className="flex items-center justify-center sm:mx-auto gap-2 sm:gap-3">
-                                                <p className="text-xs sm:text-sm lg:text-base">Sign Up</p>
+                                                <p className="text-sm lg:text-base">Sign Up</p>
                                                 <AccurateToggleSwitch onToggle={handleToggleChange} />
-                                                <p className="text-xs sm:text-sm lg:text-base">Log In</p>
+                                                <p className="text-sm lg:text-base">Log In</p>
                                             </div>
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
                                         </div>
@@ -301,7 +301,7 @@ const AffiliateSignupForm = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <span className="text-xs sm:text-sm text-white/50">Receive newsletters</span>
+                                                                <span className="text-sm text-white/50">Receive newsletters</span>
                                                             </label>
                                                             <label className="flex items-center space-x-2 sm:space-x-3 cursor-pointer">
                                                                 <div className="relative">
@@ -324,14 +324,14 @@ const AffiliateSignupForm = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <span className="text-xs sm:text-sm text-white/50">I accept the Terms and Conditions</span>
+                                                                <span className="text-sm text-white/50">I accept the Terms and Conditions</span>
                                                             </label>
                                                         </div>
                                                         <div className="py-6 sm:py-8 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[180px] sm:min-w-[200px] text-center whitespace-nowrap"
+                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[180px] sm:min-w-[200px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
@@ -423,12 +423,12 @@ const AffiliateSignupForm = () => {
                                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full">
                                                     {activeTab === "signup" ? (
                                                         <>
-                                                            <span className="text-gray-400 text-xs sm:text-sm">
+                                                            <span className="text-gray-400 text-sm">
                                                                 Already have an account?
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("login")}
-                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-xs sm:text-sm"
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm"
                                                             >
                                                                 Log in
                                                             </span>
@@ -440,7 +440,7 @@ const AffiliateSignupForm = () => {
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("signup")}
-                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-xs sm:text-sm"
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm"
                                                             >
                                                                 Sign up
                                                             </span>

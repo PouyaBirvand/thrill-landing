@@ -76,7 +76,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
         {/* Input Container */}
         <div className="relative flex items-center h-full px-6 rounded-full z-20 bg-[#F8F8F805]">
           <div
-            className={`absolute w-full right-0 bg-transparent h-6 top-0 -translate-y-1/2 backdrop-blur-sm transition-opacity duration-500 ease-in-out ${
+            className={`absolute w-full right-0 bg-transparent h-4 top-0 -translate-y-1/2 backdrop-blur-sm transition-opacity duration-500 ease-in-out ${
               isFocused ? "opacity-100" : "opacity-0"
             }`}
             style={{
