@@ -49,10 +49,8 @@ const StepsSection = () => {
                 </motion.div>
             </div>
 
-            <div
-                className="min-[467px]:mt-28 flex items-center justify-center w-full transition-all duration-100"
-            >
-                {/* Steps Timeline */}
+            {/* Desktop Version - Unchanged */}
+            <div className="hidden md:block min-[467px]:mt-28 flex items-center justify-center w-full transition-all duration-100">
                 <div className="relative flex-col items-end justify-end w-full max-[467px]:scale-[0.8] transition-all duration-100">
                     {/* Top Stepper */}
                     <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 relative">
@@ -68,13 +66,6 @@ const StepsSection = () => {
                             initial={{ opacity: 0, scaleX: 0 }}
                             animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                             transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
-                        />
-
-                        <motion.div
-                            className="block md:hidden absolute top-[46.6rem] h-[310px] w-[0.06rem] bg-[#9FABC780] z-0 ml-2 lg:ml-0"
-                            initial={{ opacity: 0, scaleY: 0 }}
-                            animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                            transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
                         />
 
                         {steps.slice(0, 3).map((step, index) => (
@@ -116,7 +107,6 @@ const StepsSection = () => {
 
                     {/* Under Stepper */}
                     <div className="mt-32 md:flex-row flex flex-col md:flex items-center justify-center gap-32 mb-32 relative">
-                        {/* TimeLine */}
                         <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 gap-y-32 relative">
                             {/* Bottom Line - appears with delay */}
                             <motion.div
@@ -160,8 +150,8 @@ const StepsSection = () => {
                                     {/* Colored Circle */}
                                     <motion.div
                                         className="absolute transition-all duration-100 bottom-[58px] md:bottom-[85px] lg:bottom-[86px] xl:bottom-[85px] 
-                                    left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
-                                    w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20"
+                                                  left-[-39.5px] md:left-1/2 md:-translate-x-1/2 
+                                                  w-2 h-2 bg-accent-green_light shadow-step-glow rounded-full z-20"
                                         initial={{ opacity: 0 }}
                                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                                         transition={{ duration: 0.6, delay: 2.0, ease: "easeOut" }}
@@ -170,6 +160,58 @@ const StepsSection = () => {
                             ))}
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* Mobile Version - Clean Minimal Timeline */}
+            <div className="md:hidden mt-20 px-8">
+                <div className="relative max-w-xs mx-auto">
+                    {steps.map((step, index) => {
+                        const isLast = index === steps.length - 1;
+                        return (
+                            <div key={step.number} className="relative pb-16 last:pb-0">
+                                {/* Connecting Line */}
+                                {!isLast && (
+                                    <motion.div
+                                        className="absolute left-8 top-16 w-[2px] h-full bg-gradient-to-b from-accent-green_light/60 to-accent-green_light/20"
+                                        initial={{ opacity: 0, scaleY: 0 }}
+                                        animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                                        transition={{ duration: 0.6, delay: 1.0 + index * 0.2, ease: "easeOut" }}
+                                    />
+                                )}
+
+                                <div className="flex items-start gap-6">
+                                    {/* Step Number */}
+                                    <motion.div
+                                        className="flex-shrink-0 w-16 h-16 bg-slate-900 border-2 border-accent-green_light/50 rounded-full flex items-center justify-center relative"
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                                        transition={{ duration: 0.5, delay: 0.8 + index * 0.15, ease: "easeOut" }}
+                                    >
+                                        <span className="text-accent-green_light text-xl font-semibold">{step.number}</span>
+                                        
+                                        {/* Small dot indicator */}
+       
+                                    </motion.div>
+
+                                    {/* Content */}
+                                    <motion.div
+                                        className="flex-1 pt-2"
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                                        transition={{ duration: 0.5, delay: 1.0 + index * 0.15, ease: "easeOut" }}
+                                    >
+                                        <h3 className="text-white font-semibold mb-2 uppercase tracking-wide text-sm">
+                                            {step.title}
+                                        </h3>
+                                        <p className="text-neutral-lightGray text-sm leading-relaxed">
+                                            {step.description}
+                                        </p>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
