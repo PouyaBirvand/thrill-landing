@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center
+      className="relative bg-[#1B1D29] overflow-hidden flex items-center justify-center
                 min-h-screen"
     >
       {/* Right video */}
@@ -53,7 +53,7 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      <motion.div
+<motion.div
         className="absolute inset-0 z-[1] pointer-events-none sm:hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -64,66 +64,65 @@ export default function HeroSection() {
         <div className="absolute bottom-1/4 right-[8vw] w-[20vw] h-[20vw] max-w-24 max-h-24 bg-sky-300 bg-opacity-5 rounded-full blur-xl"></div>
       </motion.div>
 
-      {/* Content - مرکز صفحه */}
       <div className="flex flex-col items-center justify-center gap-3 relative z-10 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
-        {/* Block 1: Subtitle */}
-        <motion.h3
-          className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-        >
-          grow with thrill
-        </motion.h3>
+  {/* Block 1: Subtitle */}
+  <motion.h3
+    className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+  >
+    grow with thrill
+  </motion.h3>
 
-        {/* Background blur effect */}
-        <motion.div
-          className="h-[6rem] sm:h-[8rem] md:h-[10rem] lg:h-[12rem] 
-                     w-[20rem] sm:w-[25rem] md:w-[30rem] lg:w-[35rem] 
-                     blur-3xl 
-                     top-6 sm:top-8 md:top-10 lg:top-12 
-                     bg-sky-300 bg-opacity-10 absolute"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-        />
+  {/* Background blur effect */}
+  <motion.div
+    className="h-[6rem] sm:h-[8rem] md:h-[10rem] lg:h-[12rem] 
+               w-[20rem] sm:w-[25rem] md:w-[30rem] lg:w-[35rem] 
+               blur-3xl 
+               top-6 sm:top-8 md:top-10 lg:top-12 
+               bg-sky-300 bg-opacity-10 absolute"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+  />
 
-        {/* Block 2: Main Title */}
-        <motion.h1
-          className="text-white font-bold max-w-5xl text-center uppercase leading-tight px-2
-                     text-[22px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[60px] 2xl:text-[64px]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-        >
-          streaming partnership you've Been waiting For
-        </motion.h1>
+  {/* Block 2: Main Title */}
+  <motion.h1
+    className="text-white font-bold max-w-5xl text-center uppercase leading-tight px-2
+               text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px]"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+  >
+    streaming partnership you've Been waiting For
+  </motion.h1>
 
-        {/* Block 3: Description */}
-        <motion.div
-          className="text-center space-y-1 px-4 mt-2 max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-        >
-          <p className="text-neutral-lightGray text-sm sm:text-base md:text-lg lg:text-xl">
-            It's time to make your streams Thrilling.
-          </p>
-          <p className="text-neutral-lightGray text-sm sm:text-base md:text-lg lg:text-xl">
-            Join the best casino affiliate program built around creators.
-          </p>
-        </motion.div>
+  {/* Block 3: Description */}
+  <motion.div
+    className="text-center space-y-1 px-4 mt-2 max-w-3xl"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+  >
+    <p className="text-neutral-lightGray text-lg sm:text-xl">
+      It's time to make your streams Thrilling.
+    </p>
+    <p className="text-neutral-lightGray text-lg sm:text-xl">
+      Join the best casino affiliate program built around creators.
+    </p>
+  </motion.div>
 
-        {/* Block 4: CTA Button */}
-        <motion.div
-          className="mt-6 sm:mt-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
-        >
-          <HeroCTAButton />
-        </motion.div>
-      </div>
+  {/* Block 4: CTA Button */}
+  <motion.div
+    className="mt-8"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+  >
+    <HeroCTAButton />
+  </motion.div>
+</div>
     </section>
   );
 }
