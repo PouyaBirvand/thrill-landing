@@ -11,7 +11,7 @@ export default function HeroCTAButton() {
             transition={{ duration: 0.2, ease: "easeOut" }}
         >
             <Button 
-                size="lg"
+                size="sm"
                 className="relative !shadow-primary-glow"
             >
                 become an affiliate

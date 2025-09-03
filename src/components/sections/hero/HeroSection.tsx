@@ -72,7 +72,7 @@ export default function HeroSection() {
         
         {/* Block 2: Main Title */}
         <motion.h1
-          className="text-white text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
+          className="text-white text-[28px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
@@ -87,10 +87,10 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
         >
-          <p className="text-neutral-lightGray text-lg sm:text-xl">
+          <p className="text-neutral-lightGray text-md sm:text-xl">
             It's time to make your streams Thrilling.
           </p>
-          <p className="text-neutral-lightGray text-lg sm:text-xl">
+          <p className="text-neutral-lightGray text-md sm:text-xl">
             Join the best casino affiliate program built around creators.
           </p>
         </motion.div>

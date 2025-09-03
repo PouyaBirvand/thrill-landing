@@ -22,7 +22,7 @@ export default function CommissionPlanSection() {
 
                 {/* Block 2: Main Title */}
                 <motion.h1
-                    className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase"
+                    className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}

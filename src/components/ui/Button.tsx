@@ -19,7 +19,7 @@ const buttonVariants = cva(
         link: "text-neutral-lightGray underline underline-offset-3 p-0 h-auto font-normal normal-case tracking-normal",
       },
       size: {
-        sm: "text-lg px-2 py-1 h-[30px] sm:text-md sm:px-3 sm:py-1 sm:h-[34px] leading-none",
+        sm: "text-lg px-6 scale-100 py-3 sm:text-md sm:px-3 sm:py-1 sm:h-[34px] leading-none",
         default: "text-xl h-[40px] font-740 sm:text-md sm:h-[50px] w-[113px] leading-none",
         lg: "text-md px-4 py-2.5 h-[44px] sm:text-xl font-740 sm:px-6 sm:py-3 sm:h-[52px] leading-none",
         xl: "text-md px-5 py-3 h-[50px] sm:text-lg sm:px-8 sm:py-4 sm:h-[60px] leading-none",

@@ -68,25 +68,25 @@ const AffiliateSignupForm = () => {
     return (
         <section
             id="signin"
-            className="min-h-[600px] relative pt-48 sm:min-h-[700px] lg:min-h-screen flex items-center justify-center py-8 sm:py-12 lg:pt-[8rem] lg:pb-12"
+            className="min-h-[500px] sm:min-h-[600px] lg:min-h-screen relative pt-32 sm:pt-48 flex items-center justify-center py-6 sm:py-8 lg:pt-[8rem] lg:pb-12"
             ref={ref}
         >
             <motion.div
-                className="h-[20rem] w-[20rem] sm:h-[25rem] sm:w-[25rem] lg:h-[30rem] lg:w-[30rem] left-[-8%] sm:left-[-12%] lg:left-[-2%] top-[25%] sm:top-[30%] lg:top-[35%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
+                className="h-[15rem] w-[15rem] sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[30rem] xl:w-[30rem] left-[-10%] sm:left-[-8%] lg:left-[-2%] top-[20%] sm:top-[25%] lg:top-[35%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
             />
 
             <motion.div
-                className="h-[20rem] w-[20rem] sm:h-[25rem] sm:w-[25rem] lg:h-[30rem] lg:w-[30rem] right-[-8%] sm:right-[-12%] lg:right-[-2%] top-[25%] sm:top-[30%] lg:top-[35%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
+                className="h-[15rem] w-[15rem] sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[30rem] xl:w-[30rem] right-[-10%] sm:right-[-8%] lg:right-[-2%] top-[20%] sm:top-[25%] lg:top-[35%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
             />
             {/* Single animation block for entire registration section */}
             <motion.div
-                className="w-full max-w-[1440px] mx-auto"
+                className="w-full max-w-[1440px] mx-auto px-2 sm:px-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
@@ -94,7 +94,7 @@ const AffiliateSignupForm = () => {
                 <div className="relative w-full h-full">
                     {/* Subtle background glow with delay */}
                     <motion.div
-                        className="absolute inset-0 bg-gradient-radial from-accent-green_light/5 via-transparent to-transparent opacity-0 rounded-3xl"
+                        className="absolute inset-0 bg-gradient-radial from-accent-green_light/5 via-transparent to-transparent opacity-0 rounded-2xl sm:rounded-3xl"
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
@@ -137,41 +137,41 @@ const AffiliateSignupForm = () => {
                         />
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
-                        <div className="grid lg:grid-cols-2 items-stretch min-h-[600px] sm:min-h-[700px] lg:min-h-[886px]">
-                            {/* Left side - Text content without individual animations */}
+                        <div className="grid lg:grid-cols-2 items-stretch min-h-[500px] sm:min-h-[600px] lg:min-h-[886px]">
+                            {/* Left side - Text content */}
                             <div
-                                className="text-white space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[300px] sm:min-h-[430px] lg:min-h-[886px] flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12"
+                                className="text-white space-y-4 sm:space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[200px] sm:min-h-[300px] lg:min-h-[886px] flex flex-col justify-center px-3 sm:px-6 lg:px-8 xl:px-12"
                                 style={{ backgroundImage: "url(/formbg.png)" }}
                             >
                                 <div className="absolute inset-0 bg-black/10"></div>
-                                <div className="relative z-10 space-y-4 sm:space-y-6 text-center lg:text-left max-w-2xl mx-auto">
-                                    <p className="text-accent-green_light font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-4 sm:px-6">
+                                <div className="relative z-10 space-y-3 sm:space-y-4 lg:space-y-6 text-center lg:text-left max-w-2xl mx-auto">
+                                    <p className="text-accent-green_light font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-2 sm:px-4 lg:px-6">
                                         YOUR AUDIENCE. YOUR PROFIT.
                                     </p>
-                                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight px-4 sm:px-6">
+                                    <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-semibold leading-tight px-2 sm:px-4 lg:px-6">
                                         DARE TO EARN.
                                         <br />
                                         GET AFFILIATE ACCESS.
                                     </h1>
-                                    <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-lg sm:max-w-xl mx-auto lg:mx-0 px-4 sm:px-6">
+                                    <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-300 leading-relaxed max-w-sm sm:max-w-lg xl:max-w-xl mx-auto lg:mx-0 px-2 sm:px-4 lg:px-6">
                                         It's time to make your streams Thrilling - join the best casino affiliate program built around creators.
                                     </p>
                                 </div>
                             </div>
                             
                             {/* Right side - Form content */}
-                            <div className="flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
-                                <div className="w-full max-w-md sm:max-w-lg px-4 py-6 sm:py-8 lg:py-12">
+                            <div className="flex items-center justify-center h-full px-3 sm:px-6 lg:px-8">
+                                <div className="w-full max-w-md sm:max-w-lg px-2 sm:px-4 py-4 sm:py-6 lg:py-8 xl:py-12">
                                     <div className="flex flex-col h-auto lg:h-[880px] justify-between">
                                         {/* Toggle section */}
-                                        <div className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-8 sm:pb-10 lg:pb-14 pt-2">
-                                            <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
-                                            <div className="flex items-center justify-center sm:mx-auto gap-2 sm:gap-3">
-                                                <p className="text-sm lg:text-base">Sign Up</p>
+                                        <div className="flex items-center justify-between text-white/50 sticky top-0 z-10 pb-6 sm:pb-8 lg:pb-10 xl:pb-14 pt-2">
+                                            <Plus color="rgba(255, 255, 255, 0.15)" size="14" className="hidden xl:block" />
+                                            <div className="flex items-center justify-center mx-auto gap-2 sm:gap-3">
+                                                <p className="text-xs sm:text-sm lg:text-base">Sign Up</p>
                                                 <AccurateToggleSwitch onToggle={handleToggleChange} />
-                                                <p className="text-sm lg:text-base">Log In</p>
+                                                <p className="text-xs sm:text-sm lg:text-base">Log In</p>
                                             </div>
-                                            <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
+                                            <Plus color="rgba(255, 255, 255, 0.15)" size="14" className="hidden xl:block" />
                                         </div>
                                         
                                         {/* Form section */}
@@ -208,9 +208,9 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowPassword(!showPassword)}
-                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                                                     </button>
                                                                 }
                                                                 required
@@ -227,9 +227,9 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                                        {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                                                     </button>
                                                                 }
                                                                 required
@@ -280,7 +280,7 @@ const AffiliateSignupForm = () => {
                                                                 onChange={handleInputChange}
                                                             />
                                                         </div>
-                                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pt-4 sm:pt-5 ml-2 sm:ml-4">
+                                                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4 lg:pt-5 ml-1 sm:ml-2 lg:ml-4">
                                                             <label className="flex items-center space-x-2 sm:space-x-3 cursor-pointer">
                                                                 <div className="relative">
                                                                     <input
@@ -301,7 +301,7 @@ const AffiliateSignupForm = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <span className="text-sm text-white/50">Receive newsletters</span>
+                                                                <span className="text-xs sm:text-sm text-white/50">Receive newsletters</span>
                                                             </label>
                                                             <label className="flex items-center space-x-2 sm:space-x-3 cursor-pointer">
                                                                 <div className="relative">
@@ -324,19 +324,19 @@ const AffiliateSignupForm = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <span className="text-sm text-white/50">I accept the Terms and Conditions</span>
+                                                                <span className="text-xs sm:text-sm text-white/50">I accept the Terms and Conditions</span>
                                                             </label>
                                                         </div>
-                                                        <div className="py-6 sm:py-8 flex items-center justify-center group">
+                                                        <div className="py-4 sm:py-6 lg:py-8 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[180px] sm:min-w-[200px] text-center whitespace-nowrap"
+                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-3 sm:px-4 py-2 min-w-[160px] sm:min-w-[180px] lg:min-w-[200px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
                                                                         strokeWidth="2.5"
-                                                                        size={20}
+                                                                        size={18}
                                                                     />
                                                                 }
                                                             >
@@ -367,9 +367,9 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowPassword(!showPassword)}
-                                                                        className="text-gray-400 mt-1 sm:mt-2 ml-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                                                     </button>
                                                                 }
                                                                 required
@@ -387,24 +387,24 @@ const AffiliateSignupForm = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setShowAuthCode(!showAuthCode)}
-                                                                        className="text-gray-400 mt-1 sm:mt-2 hover:text-teal-400 transition-colors duration-200"
+                                                                        className="text-gray-400 hover:text-teal-400 transition-colors duration-200"
                                                                     >
-                                                                        {showAuthCode ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                                        {showAuthCode ? <EyeOff size={16} /> : <Eye size={16} />}
                                                                     </button>
                                                                 }
                                                                 required
                                                             />
                                                         </div>
-                                                        <div className="pt-6 sm:pt-8 flex items-center justify-center group">
+                                                        <div className="pt-4 sm:pt-6 lg:pt-8 flex items-center justify-center group">
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-4 py-2 min-w-[200px] sm:min-w-[240px] text-center whitespace-nowrap"
+                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-3 sm:px-4 py-2 min-w-[180px] sm:min-w-[200px] lg:min-w-[240px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
                                                                         className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
                                                                         strokeWidth="2.5"
-                                                                        size={20}
+                                                                        size={18}
                                                                     />
                                                                 }
                                                             >
@@ -417,18 +417,18 @@ const AffiliateSignupForm = () => {
                                         </div>
                                         
                                         {/* Footer section */}
-                                        <div className="text-center pt-4 sm:pt-6">
+                                        <div className="text-center pt-3 sm:pt-4 lg:pt-6">
                                             <div className="justify-center flex items-center">
-                                                <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
+                                                <Plus color="rgba(255, 255, 255, 0.15)" size="14" className="hidden xl:block" />
                                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full">
                                                     {activeTab === "signup" ? (
                                                         <>
-                                                            <span className="text-gray-400 text-sm">
+                                                            <span className="text-gray-400 text-xs sm:text-sm">
                                                                 Already have an account?
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("login")}
-                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm"
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-xs sm:text-sm"
                                                             >
                                                                 Log in
                                                             </span>
@@ -440,14 +440,14 @@ const AffiliateSignupForm = () => {
                                                             </span>
                                                             <span
                                                                 onClick={() => setActiveTab("signup")}
-                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-sm"
+                                                                className="text-white cursor-pointer hover:text-teal-300 font-medium transition-colors text-nowrap duration-200 text-xs sm:text-sm"
                                                             >
                                                                 Sign up
                                                             </span>
                                                         </>
                                                     )}
                                                 </div>
-                                                <Plus color="rgba(255, 255, 255, 0.15)" size="16" className="hidden xl:block" />
+                                                <Plus color="rgba(255, 255, 255, 0.15)" size="14" className="hidden xl:block" />
                                             </div>
                                         </div>
                                     </div>

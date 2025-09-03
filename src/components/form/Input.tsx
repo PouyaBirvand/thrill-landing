@@ -5,16 +5,16 @@ import { useState, forwardRef } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-const inputVariants = cva("w-full bg-transparent outline-none border-none text-base font-400", {
+const inputVariants = cva("w-full bg-transparent outline-none border-none font-400", {
   variants: {
     variant: {
       default: "text-white placeholder-white/50 focus:placeholder-white ",
       light: "text-gray-900 placeholder-white/50",
     },
     size: {
-      default: "text-base font-400",
-      sm: "text-sm",
-      lg: "text-lg",
+      default: "text-sm sm:text-base font-400",
+      sm: "text-xs sm:text-sm",
+      lg: "text-base sm:text-lg",
     },
   },
   defaultVariants: {
@@ -34,7 +34,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
     const [isFocused, setIsFocused] = useState(false)
 
     return (
-      <div className="relative w-full h-14">
+      <div className="relative w-full h-12 sm:h-14">
         {/* Main gradient border */}
         <div
           className={`absolute inset-0 rounded-full transition-opacity duration-500 ease-in-out  ${
@@ -74,7 +74,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
         />
 
         {/* Input Container */}
-        <div className="relative flex items-center h-full px-6 rounded-full z-20 bg-[#F8F8F805]">
+        <div className="relative flex items-center h-full px-4 sm:px-6 rounded-full z-20 bg-[#F8F8F805]">
           <div
             className={`absolute w-full right-0 bg-transparent h-4 top-0 -translate-y-1/2 backdrop-blur-sm transition-opacity duration-500 ease-in-out ${
               isFocused ? "opacity-100" : "opacity-0"
@@ -98,7 +98,7 @@ const FigmaInput = forwardRef<HTMLInputElement, FigmaInputProps>(
             onBlur={() => setIsFocused(false)}
             {...props}
           />
-          {rightIcon && <div className="absolute right-5 top-1/2 transform -translate-y-1/2">{rightIcon}</div>}
+          {rightIcon && <div className="absolute right-3 sm:right-5 top-1/2 transform -translate-y-1/2">{rightIcon}</div>}
         </div>
       </div>
     )
