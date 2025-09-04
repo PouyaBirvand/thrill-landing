@@ -38,8 +38,6 @@ export default function FeatureCard({
   const [localExpanded, setLocalExpanded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const isExpanded = forcedExpanded !== undefined ? forcedExpanded : localExpanded;
-  const [isPrevHovered, setIsPrevHovered] = useState(false);
-  const [isNextHovered, setIsNextHovered] = useState(false);
 
   const toggleExpanded = () => {
     if (onExpand) {
@@ -54,7 +52,7 @@ export default function FeatureCard({
       className={`relative w-full max-w-[490px] transition-all duration-700 ease-out cursor-pointer ${isExpanded
         ? "h-auto scale-100 md:scale-[0.75] xl:scale-[0.9] !overflow-y-hidden"
         : ""
-        } ${isHovered ? "transform scale-[1.02] translate-y-[-4px]" : ""
+        } ${isHovered ? "" : ""
         }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -324,7 +322,7 @@ export default function FeatureCard({
               <div
                 className="flex-1 mb-3 xs:mb-4 sm:mb-5 md:mb-6"
                 style={{
-                  transform: isHovered ? "translateX(4px)" : "translateX(0)",
+                  transform: isHovered ? "translateX(2px)" : "translateX(0)",
                   transition: "transform 0.4s ease-out"
                 }}
               >

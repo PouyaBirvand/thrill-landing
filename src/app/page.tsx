@@ -13,15 +13,15 @@ export default function Home() {
       <Container>
         <Header />
       </Container>
-      
+
       <HeroSection />
-      
+
       <Container>
         <FeaturesSection />
         <FeatureSlider />
-        <StepsSection/>
-        <AffiliateSignupForm/>
-        <CommissionPlanSection/>
+        <StepsSection />
+        <AffiliateSignupForm />
+        <CommissionPlanSection />
       </Container>
     </div>
   )
