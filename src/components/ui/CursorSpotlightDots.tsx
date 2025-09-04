@@ -2,15 +2,15 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 
 const CursorSpotlight = ({ 
-  spacing = 40,                    // فاصله بین نقطه‌ها
-  maxDistance = 150,               // شعاع نور موس
-  dotSize = 2,                     // اندازه نقطه‌ها
-  rippleSpeed = 180,               // سرعت پخش موج
-  rippleDuration = 3000,           // مدت زمان کل موج
-  waveThickness = 3,               // ضخامت موج
-  dotColor = '#5CFFC1',           // رنگ نقطه‌ها
-  glowIntensity = 0,            // شدت نور
-  pulseStrength = 2             // قدرت تپش
+  spacing = 40,                    
+  maxDistance = 150,               
+  dotSize = 2,                    
+  rippleSpeed = 180,               
+  rippleDuration = 3000,          
+  waveThickness = 3,             
+  dotColor = '#5CFFC1',       
+  glowIntensity = 0,         
+  pulseStrength = 2        
 }) => {
   const canvasRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -19,7 +19,6 @@ const CursorSpotlight = ({
   const dotsGrid = useRef([]);
   const rippleId = useRef(0);
 
-  // رنگ hex به rgb
   const hexToRgb = useCallback((hex) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -31,14 +30,12 @@ const CursorSpotlight = ({
 
   const baseColor = hexToRgb(dotColor);
 
-  // محاسبه فاصله
   const calculateDistance = useCallback((x1, y1, x2, y2) => {
     const dx = x1 - x2;
     const dy = y1 - y2;
     return Math.sqrt(dx * dx + dy * dy);
   }, []);
 
-  // اضافه کردن ripple
   const addRipple = useCallback((x, y) => {
     const newRipple = {
       id: rippleId.current++,

@@ -1,44 +1,35 @@
-"use client"
-import { useRef, useState, useEffect } from "react"
-import { motion, AnimatePresence, easeOut, easeIn, useScroll, useTransform } from "framer-motion"
-import { features } from "@/constants/data/features"
-import FeatureCard from "./FeatureCard"
-import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/ui/ScrollVelocityRow"
-import GlareHover from "@/components/ui/GlareHover"
+"use client";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence, easeOut, easeIn, useScroll, useTransform } from "framer-motion";
+import { features } from "@/constants/data/features";
+import FeatureCard from "./FeatureCard";
+import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/ui/ScrollVelocityRow";
+import GlareHover from "@/components/ui/GlareHover";
 
 export default function FeatureSlider() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [selectedFeature, setSelectedFeature] = useState<typeof features[0] | null>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [selectedFeature, setSelectedFeature] = useState<typeof features[0] | null>(null);
 
-  // اسکرول پروگرس
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"], // از وقتی سکشن وارد میشه تا وقتی خارج بشه
-  })
+    offset: ["start end", "end start"],
+  });
 
-  // انیمیشن‌ها
-  const sectionOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1], // نقاط اسکرول: شروع، نزدیک مرکز، مرکز، آخر
-    [0, 1, 1, 0]      // مقادیر opacity: دور -> مرکز -> دور
-  )
-  const sectionY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [30, 0, 0, -50])
-  const sectionScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.9])
+  const sectionOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const sectionY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [30, 0, 0, -50]);
+  const sectionScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.9]);
 
-
-  // جلوگیری از اسکرول بادی وقتی مودال بازه
   useEffect(() => {
     if (selectedFeature) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [selectedFeature])
+      document.body.style.overflow = "";
+    };
+  }, [selectedFeature]);
 
-  // انیمیشن مودال
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.95, y: 50, transition: { duration: 0.3, ease: easeOut } },
     visible: {
@@ -48,29 +39,31 @@ export default function FeatureSlider() {
       transition: { duration: 0.3, ease: easeOut, when: "beforeChildren", staggerChildren: 0.1 },
     },
     exit: { opacity: 0, scale: 0.95, y: 50, transition: { duration: 0.25, ease: easeIn } },
-  }
+  };
 
   const cardContentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: easeOut } },
-  }
+  };
 
   return (
-    <section ref={sectionRef} className="relative w-full pt-18">
-      {/* ردیف کارت‌ها با اسکرول انیمیشن */}
+    <section ref={sectionRef} className="relative w-full z-10 bg-body">
       <motion.div
         style={{ opacity: sectionOpacity, y: sectionY, scale: sectionScale }}
-        className="w-full"
+        className="w-full bg-body"
       >
-        <ScrollVelocityContainer className="w-full">
-          <ScrollVelocityRow baseVelocity={8} direction={1}>
+        <ScrollVelocityContainer className="w-full bg-body">
+          <ScrollVelocityRow baseVelocity={8} direction={1} className="">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="mx-3 2xl:w-full xl:w-full lg:w-[24rem] md:w-[22rem] sm:w-[20rem] w-[22rem]"
+                className="mx-3 2xl:w-full xl:w-full lg:w-[24rem] md:w-[22rem] sm:w-[20rem] w-[22rem] bg-body"
               >
-                <GlareHover>
-                  <FeatureCard {...feature} onExpand={() => setSelectedFeature(feature)} />
+                <GlareHover className="bg-body">
+                  <FeatureCard
+                    {...feature}
+                    onExpand={() => setSelectedFeature(feature)}
+                  />
                 </GlareHover>
               </div>
             ))}
@@ -78,7 +71,6 @@ export default function FeatureSlider() {
         </ScrollVelocityContainer>
       </motion.div>
 
-      {/* مودال */}
       <AnimatePresence>
         {selectedFeature && (
           <motion.div
@@ -110,5 +102,5 @@ export default function FeatureSlider() {
         )}
       </AnimatePresence>
     </section>
-  )
+  );
 }
