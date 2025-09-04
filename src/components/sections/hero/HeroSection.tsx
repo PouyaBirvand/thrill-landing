@@ -31,7 +31,7 @@ export default function HeroSection() {
     <section 
       ref={sectionRef}
       id="hero" 
-      className="sm:pt-[15rem] pt-[10rem] relative min-h-screen bg-[#1B1D29] overflow-hidden"
+      className="sm:pt-[15rem] pt-[10rem] relative min-h-screen overflow-hidden"
     >
       {/* Right video - با scroll effects */}
       <motion.div

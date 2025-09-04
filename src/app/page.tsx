@@ -6,10 +6,14 @@ import FeaturesSection from "@/components/sections/features/FeaturesSection"
 import HeroSection from "@/components/sections/hero/HeroSection"
 import AffiliateSignupForm from "@/components/sections/signup/SignUpSection"
 import StepsSection from "@/components/sections/steps/StepsSection"
+import CursorSpotlight from "@/components/ui/CursorSpotlightDots"
 
 export default function Home() {
   return (
-    <div className="bg-body overflow-x-hidden">
+    <div className="overflow-x-hidden relative">
+      <CursorSpotlight
+       />
+      
       <Container>
         <Header />
       </Container>

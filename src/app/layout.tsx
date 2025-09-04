@@ -69,7 +69,7 @@ export default function RootLayout({
     <html lang="en" >
       <body className={` ${oxanium.className} overflow-x-hidden bg-body`}>
         {children}
-       <Footer />
+        <Footer />
       </body>
     </html>
   );
