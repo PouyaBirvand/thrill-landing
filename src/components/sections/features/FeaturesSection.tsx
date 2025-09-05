@@ -1,9 +1,13 @@
 "use client"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef } from "react"
 
 export default function FeaturesSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  // برای انیمیشن‌های لود شدن
+  const isInView = useInView(contentRef, { once: true, margin: "-100px" })
 
   // کنترل اسکرول
   const { scrollYProgress } = useScroll({
@@ -28,7 +32,7 @@ export default function FeaturesSection() {
   return (
     <section 
       ref={sectionRef}
-      className="pb-12 relative"
+      className="overflow-hidden pt-40 pb-12 relative"
     >
       <motion.div
         className="flex flex-col items-center justify-center gap-4 relative z-10 px-4 sm:px-6 md:px-8"
@@ -41,6 +45,9 @@ export default function FeaturesSection() {
         <motion.h3
           className="uppercase text-accent-green_light font-semibold text-sm sm:text-base mb-2"
           style={{ y: subtitleY }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
         >
           your growth partner
         </motion.h3>
@@ -49,6 +56,9 @@ export default function FeaturesSection() {
         <motion.div
           className="text-center"
           style={{ y: titleY }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
           <h1 className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold uppercase">
             built for performance.
@@ -62,6 +72,9 @@ export default function FeaturesSection() {
         <motion.div
           className="text-center space-y-1 mt-4 px-4"
           style={{ y: descriptionY }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
         >
           <p className="text-neutral-lightGray max-w-[50rem] text-sm sm:text-base">
             Work with a team that values speed, transparency, and real partnership. Whether you're scaling fast or

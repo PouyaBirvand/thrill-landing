@@ -31,7 +31,7 @@ export default function HeroSection() {
     <section 
       ref={sectionRef}
       id="hero" 
-      className="sm:pt-[15rem] pt-[10rem] relative min-h-screen overflow-hidden"
+      className="sm:pt-[15rem] pt-[10rem] relative overflow-hidden"
     >
       {/* Right video - با scroll effects */}
       <motion.div
@@ -43,8 +43,8 @@ export default function HeroSection() {
                    xl:right-[-340px] xl:w-[60%]
                    2xl:right-[-400px] 2xl:w-[62%]"
         style={{
-          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           x: rightVideoX,
           scale: videoScale,
           opacity: videoOpacity
@@ -73,8 +73,8 @@ export default function HeroSection() {
                    xl:left-[-340px] xl:w-[60%]
                    2xl:left-[-400px] 2xl:w-[62%]"
         style={{
-          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           x: leftVideoX,
           scale: videoScale,
           opacity: videoOpacity
@@ -105,8 +105,8 @@ export default function HeroSection() {
         <motion.h3
           className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
           style={{ y: subtitleY }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 20 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
         >
           grow with thrill
@@ -116,8 +116,8 @@ export default function HeroSection() {
         <motion.div 
           className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" 
           style={{ y: backgroundY }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }} 
         />
         
@@ -125,8 +125,8 @@ export default function HeroSection() {
         <motion.h1
           className="text-white text-[28px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
           style={{ y: titleY }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
           streaming partnership you've Been waiting For
@@ -136,8 +136,8 @@ export default function HeroSection() {
         <motion.div
           className="text-center space-y-1 px-4 mt-2"
           style={{ y: descriptionY }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 20 }}
           transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
         >
           <p className="text-neutral-lightGray text-md sm:text-xl">
@@ -152,8 +152,8 @@ export default function HeroSection() {
         <motion.div
           className="mt-8 pb-16"
           style={{ y: buttonY }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 20 }}
           transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
         >
           <HeroCTAButton />
