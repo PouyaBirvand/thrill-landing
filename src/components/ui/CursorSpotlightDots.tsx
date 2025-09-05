@@ -14,6 +14,7 @@ const CursorSpotlight = ({
 }) => {
   const canvasRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mouseInside, setMouseInside] = useState(false); // وضعیت حضور موس
   const [ripples, setRipples] = useState([]);
   const animationId = useRef(null);
   const dotsGrid = useRef([]);
@@ -35,6 +36,68 @@ const CursorSpotlight = ({
     const dy = y1 - y2;
     return Math.sqrt(dx * dx + dy * dy);
   }, []);
+
+  // چک کردن اینکه کلیک روی المان قابل تعامل است یا نه
+  const isInteractiveElement = useCallback((element) => {
+    if (!element) return false;
+    
+    const interactiveTags = ['BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'A', 'LABEL'];
+    const interactiveRoles = ['button', 'link', 'tab', 'option', 'menuitem'];
+    const interactiveTypes = ['button', 'submit', 'reset', 'checkbox', 'radio'];
+    
+    // بررسی تگ
+    if (interactiveTags.includes(element.tagName)) {
+      return true;
+    }
+    
+    // بررسی نوع input
+    if (element.type && interactiveTypes.includes(element.type)) {
+      return true;
+    }
+    
+    // بررسی role
+    if (element.getAttribute('role') && interactiveRoles.includes(element.getAttribute('role'))) {
+      return true;
+    }
+    
+    // بررسی کلاس‌ها یا صفات مربوط به المان‌های تعاملی
+    if (element.classList && (
+      element.classList.contains('btn') ||
+      element.classList.contains('button') ||
+      element.classList.contains('clickable') ||
+      element.classList.contains('interactive')
+    )) {
+      return true;
+    }
+    
+    // بررسی cursor pointer
+    const computedStyle = window.getComputedStyle(element);
+    if (computedStyle.cursor === 'pointer') {
+      return true;
+    }
+    
+    // بررسی onclick handler
+    if (element.onclick || element.getAttribute('onclick')) {
+      return true;
+    }
+    
+    return false;
+  }, []);
+
+  // بررسی اینکه آیا کلیک باید ripple ایجاد کند یا نه
+  const shouldCreateRipple = useCallback((e) => {
+    let element = e.target;
+    
+    // بررسی المان کلیک شده و والدین آن
+    while (element && element !== document.body) {
+      if (isInteractiveElement(element)) {
+        return false; // روی المان تعاملی کلیک شده، ripple نساز
+      }
+      element = element.parentElement;
+    }
+    
+    return true; // می‌توان ripple ساخت
+  }, [isInteractiveElement]);
 
   const addRipple = useCallback((x, y) => {
     const newRipple = {
@@ -113,11 +176,13 @@ const CursorSpotlight = ({
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     dotsGrid.current.forEach(dot => {
-      // شدت نور موس
-      const mouseDistance = calculateDistance(dot.x, dot.y, mousePos.x, mousePos.y);
-      const mouseOpacity = mouseDistance < maxDistance 
-        ? Math.max(0, (maxDistance - mouseDistance) / maxDistance)
-        : 0;
+      // اگر موس داخل صفحه نیست، فقط ripple را نشان بده
+      const mouseOpacity = mouseInside ? (() => {
+        const mouseDistance = calculateDistance(dot.x, dot.y, mousePos.x, mousePos.y);
+        return mouseDistance < maxDistance 
+          ? Math.max(0, (maxDistance - mouseDistance) / maxDistance)
+          : 0;
+      })() : 0;
 
       // شدت ripple
       const rippleIntensity = getRippleIntensity(dot.x, dot.y, currentTime);
@@ -158,7 +223,7 @@ const CursorSpotlight = ({
         ctx.fill();
       }
     });
-  }, [mousePos, calculateDistance, getRippleIntensity, maxDistance, dotSize, baseColor, glowIntensity]);
+  }, [mousePos, mouseInside, calculateDistance, getRippleIntensity, maxDistance, dotSize, baseColor, glowIntensity]);
 
   // انیمیشن لوپ
   const animate = useCallback(() => {
@@ -171,7 +236,6 @@ const CursorSpotlight = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const rect = canvas.getBoundingClientRect();
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
@@ -187,25 +251,50 @@ const CursorSpotlight = ({
       
       throttleId = setTimeout(() => {
         setMousePos({ x: e.clientX, y: e.clientY });
+        setMouseInside(true);
         throttleId = null;
       }, 16);
     };
 
-    const handleClick = (e) => {
-      addRipple(e.clientX, e.clientY);
+    const handleMouseLeave = () => {
+      setMouseInside(false);
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('click', handleClick, { passive: true });
+    const handleClick = (e) => {
+      // فقط اگر نباید روی المان تعاملی ripple ساخت
+      if (shouldCreateRipple(e)) {
+        addRipple(e.clientX, e.clientY);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setMouseInside(false);
+      }
+    };
+
+    const handleBlur = () => {
+      setMouseInside(false);
+    };
+
+    // Event listeners
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    document.addEventListener('click', handleClick, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('blur', handleBlur);
     window.addEventListener('resize', resizeCanvas, { passive: true });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('click', handleClick);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('click', handleClick);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('blur', handleBlur);
       window.removeEventListener('resize', resizeCanvas);
       if (throttleId) clearTimeout(throttleId);
     };
-  }, [addRipple, resizeCanvas]);
+  }, [addRipple, resizeCanvas, shouldCreateRipple]);
 
   // راه‌اندازی اولیه
   useEffect(() => {

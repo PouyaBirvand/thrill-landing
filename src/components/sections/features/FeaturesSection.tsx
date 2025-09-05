@@ -28,7 +28,7 @@ export default function FeaturesSection() {
   return (
     <section 
       ref={sectionRef}
-      className="overflow-hidden pt-[5rem] pb-12 relative"
+      className="pb-12 relative"
     >
       <motion.div
         className="flex flex-col items-center justify-center gap-4 relative z-10 px-4 sm:px-6 md:px-8"

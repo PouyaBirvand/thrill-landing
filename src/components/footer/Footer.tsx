@@ -131,7 +131,7 @@ export default function Footer() {
                                 <a href='https://www.thrill.com' target='_blank'>© 2024 Thrill.com</a>
                                 <div className="flex items-center gap-4">
                                     <Dot className="hidden md:block" color="#A0ACC7" />
-                                    <a href="pending" className="underline transition-colors hover:text-accent-green_light">Terms</a>
+                                    <a href="https://dashboard.thrillaffiliates.com/partner/terms_and_conditions" className="underline transition-colors hover:text-accent-green_light">Terms</a>
                                     <a href="https://thrill.com/en/policies/privacy-policy" className="underline transition-colors hover:text-accent-green_light">Privacy</a>
                                 </div>
                             </div>

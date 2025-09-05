@@ -11,7 +11,7 @@ import CursorSpotlight from "@/components/ui/CursorSpotlightDots";
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 hidden md:block">
         <CursorSpotlight />
       </div>
 
