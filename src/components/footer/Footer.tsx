@@ -6,10 +6,13 @@ import { Button } from '../ui/Button'
 import Image from 'next/image'
 import Container from '../common/Container'
 import { useRef } from 'react'
+import { useNavigate } from '@/hooks/useNavigate'
 
 export default function Footer() {
     const ref = useRef<HTMLElement | null>(null)
     const isInView = useInView(ref, { once: true, amount: 0.5 })
+
+    const { navigate } = useNavigate([], 0)
 
     const mainVariants = {
         hidden: { opacity: 0, y: 18 },
@@ -27,15 +30,60 @@ export default function Footer() {
     }
 
     return (
-        <footer ref={ref} className="text-white py-16 md:pt-[18rem] pt-[15rem] relative">
-            <div className="absolute inset-0 flex justify-center items-end">
-                <img
-                    src="/footershape.png"
-                    alt="Footer Shape"
-                    className="w-full h-auto object-contain"
+        <footer ref={ref} className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden">
+            {/* Right Shape - همانند Hero Section */}
+            <motion.div
+                className="absolute top-[15rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
+                           right-0 h-full md:h-full w-[48.9vw]
+                           md:right-[-400px] md:w-[95%]
+                           lg:right-[-340px] lg:w-[80%]
+                           xl:right-[-340px] xl:w-[70%]
+                           2xl:right-[-390px] 2xl:w-[65%]"
+                style={{
+                    maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
+                }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <video
+                    src="/animations/header_left_side.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover scale-x-[-1] object-center pointer-events-none"
                 />
-            </div>
-            <Container className='z-[999] relative'>
+            </motion.div>
+
+            {/* Left Shape - همانند Hero Section */}
+            <motion.div
+                className="absolute top-[15rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
+                           left-0 h-full md:h-full w-[48.9vw]
+                           md:left-[-400px] md:w-[95%]
+                           lg:left-[-340px] lg:w-[80%]
+                           xl:left-[-340px] xl:w-[70%]
+                           2xl:left-[-390px] 2xl:w-[65%]"
+                style={{
+                    maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
+                }}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+            >
+                <video
+                    src="/animations/header_left_side.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover object-center pointer-events-none"
+                />
+            </motion.div>
+
+            <Container className='z-[10] relative'>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Top Section */}
                     <div className="flex flex-col lg:flex-row justify-between gap-16">
@@ -85,9 +133,38 @@ export default function Footer() {
                             <div>
                                 <h3 className="font-semibold mb-3">Partner</h3>
                                 <ul className="space-y-2 text-white/70">
-                                    <li><a href="#" className="transition-colors hover:text-accent-green_light">Program Overview</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-accent-green_light">Reviews & Commission Details</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-accent-green_light">Brand Assets & Promo Materials</a></li>
+                                    <li>
+                                        <a
+                                            href="#hero"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                navigate({ label: 'Program Overview', url: '#hero' });
+                                            }}
+                                            className="transition-colors hover:text-accent-green_light"
+                                        >
+                                            Program Overview
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#commissions"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                navigate({ label: 'Commission Details', url: '#plan' });
+                                            }}
+                                            className="transition-colors hover:text-accent-green_light"
+                                        >
+                                            Commission Details
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://thrill.framer.website/"
+                                            className="transition-colors hover:text-accent-green_light"
+                                        >
+                                            Brand Assets & Promo Materials
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </motion.div>
@@ -136,7 +213,6 @@ export default function Footer() {
                                 </div>
                             </div>
                         </div>
-
                         {/* Social Icons */}
                         <div className="flex space-x-4">
                             <a href="https://x.com/Thrill_com" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300 bg-accent-social hover:bg-accent-green">

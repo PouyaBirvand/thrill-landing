@@ -35,13 +35,13 @@ export default function HeroSection() {
     >
       {/* Right video - با scroll effects */}
       <motion.div
-        className="absolute top-[-8rem] sm:top-0 z-[5] pointer-events-none
-                   right-[-16rem] h-full w-full
-                   sm:right-[-200px] sm:w-[80%]
-                   md:right-[-270px] md:w-[70%]
-                   lg:right-[-260px] lg:w-[58%]
-                   xl:right-[-340px] xl:w-[60%]
-                   2xl:right-[-400px] 2xl:w-[62%]"
+        className="absolute top-0 z-[5] pointer-events-none
+                   right-[-12rem] h-full w-[100%]
+                   sm:right-[-250px] sm:w-[100%]
+                   md:right-[-270px] md:w-[95%]
+                   lg:right-[-260px] lg:w-[80%]
+                   xl:right-[-340px] xl:w-[70%]
+                   2xl:right-[-400px] 2xl:w-[65%]"
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
@@ -65,13 +65,13 @@ export default function HeroSection() {
 
       {/* Left video - با scroll effects */}
       <motion.div
-        className="absolute top-[-8rem] sm:top-0 z-[5] pointer-events-none
-                   left-[-16rem] h-full w-full
-                   sm:left-[-200px] sm:w-[80%]
-                   md:left-[-270px] md:w-[70%]
-                   lg:left-[-260px] lg:w-[58%]
-                   xl:left-[-340px] xl:w-[60%]
-                   2xl:left-[-400px] 2xl:w-[62%]"
+        className="absolute top-0 z-[5] pointer-events-none
+                   left-[-12rem] h-full w-[100%]
+                   sm:left-[-250px] sm:w-[100%]
+                   md:left-[-270px] md:w-[95%]
+                   lg:left-[-260px] lg:w-[80%]
+                   xl:left-[-340px] xl:w-[70%]
+                   2xl:left-[-400px] 2xl:w-[65%]"
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',

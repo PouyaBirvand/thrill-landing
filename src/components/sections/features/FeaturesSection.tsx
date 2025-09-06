@@ -6,25 +6,20 @@ export default function FeaturesSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  // برای انیمیشن‌های لود شدن
+  // بررسی viewport
   const isInView = useInView(contentRef, { once: true, margin: "-100px" })
 
   // کنترل اسکرول
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"], 
+    offset: ["start end", "end start"],
   })
 
-  // اوپاسیتی: 
-  // - وقتی سکشن تازه وارد میشه (0 → 0.2) از 0 میره به 1
-  // - وسط سکشن ثابت می‌مونه (0.2 → 0.6)
-  // - آخر سکشن (0.6 → 1) دوباره میره به 0
+  // اوپاسیتی و اسکیل برای افکت اسکرول
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [0, 1, 1, 0])
-
-  // اسکیل: کمی افکت بزرگ/کوچک
   const contentScale = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [0.95, 1, 1, 0.85])
 
-  // حرکت Y
+  // حرکت Y برای افکت اسکرول
   const subtitleY = useTransform(scrollYProgress, [0, 0.2, 1], ["20px", "0px", "-50px"])
   const titleY = useTransform(scrollYProgress, [0, 0.3, 1], ["20px", "0px", "-80px"])
   const descriptionY = useTransform(scrollYProgress, [0, 0.4, 1], ["20px", "0px", "-100px"])
@@ -35,6 +30,7 @@ export default function FeaturesSection() {
       className="overflow-hidden pt-36 pb-12 relative"
     >
       <motion.div
+        ref={contentRef}
         className="flex flex-col items-center justify-center gap-4 relative z-10 px-4 sm:px-6 md:px-8"
         style={{
           scale: contentScale,
@@ -46,7 +42,7 @@ export default function FeaturesSection() {
           className="uppercase text-accent-green_light font-semibold text-sm sm:text-base mb-2"
           style={{ y: subtitleY }}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
         >
           your growth partner
@@ -57,7 +53,7 @@ export default function FeaturesSection() {
           className="text-center"
           style={{ y: titleY }}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
           <h1 className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold uppercase">
@@ -73,12 +69,12 @@ export default function FeaturesSection() {
           className="text-center space-y-1 mt-4 px-4"
           style={{ y: descriptionY }}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
         >
           <p className="text-neutral-lightGray max-w-[50rem] text-sm sm:text-base">
             Work with a team that values speed, transparency, and real partnership. Whether you're scaling fast or
-            just starting out — we've got the tools, flexible deals, and dedicated support to help you grow. 
+            just starting out — we've got the tools, flexible deals, and dedicated support to help you grow.
           </p>
           <p className="text-neutral-lightGray max-w-[50rem] text-sm sm:text-base">
             No fluff, just results backed by real data, weekly payouts, and a system built to keep your momentum going.
