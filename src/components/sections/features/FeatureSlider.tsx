@@ -51,7 +51,7 @@ export default function FeatureSlider() {
             // موبایل افقی / تبلت کوچک (480px+)
             480: {
               slidesPerView: 1.3,
-              spaceBetween: 16,
+              spaceBetween: 20,
             },
             // تبلت عمودی (640px+)
             640: {
@@ -61,32 +61,32 @@ export default function FeatureSlider() {
             // تبلت افقی (768px+)
             768: {
               slidesPerView: 1.69,
-              spaceBetween: 15,
+              spaceBetween: 20,
             },
             // دسکتاپ کوچک (1024px+)
             1024: {
               slidesPerView: 2.3,
-              spaceBetween: 22,
+              spaceBetween: 20,
             },
             // دسکتاپ متوسط (1280px+)
             1280: {
               slidesPerView: 2.5,
-              spaceBetween: 24,
+              spaceBetween: 20,
             },
             // دسکتاپ بزرگ (1440px+)
             1440: {
               slidesPerView: 2.7,
-              spaceBetween: 26,
+              spaceBetween: 20,
             },
             // دسکتاپ خیلی بزرگ (1600px+)
             1600: {
               slidesPerView: 3.2,
-              spaceBetween: 28,
+              spaceBetween: 20,
             },
             // نمایشگرهای فوق عریض (1920px+)
             1920: {
               slidesPerView: 3.2,
-              spaceBetween: 30,
+              spaceBetween: 20,
             },
           }}
           className="!overflow-visible"
