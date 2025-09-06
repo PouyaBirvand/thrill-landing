@@ -143,23 +143,6 @@ export default function FeatureCard({
           shapeRendering="geometricPrecision"
         />
 
-        {/* Dashed border layers */}
-        <rect
-          x="0.75"
-          y="0.75"
-          width={dimensions.width - 1.5}
-          height={dimensions.height - 1.5}
-          rx="24"
-          ry="24"
-          fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, '-')})`}
-          strokeWidth="3.2"
-          strokeLinecap="round"
-          pathLength="100"
-          strokeDasharray="10 90"
-          strokeDashoffset="6"
-          vectorEffect="non-scaling-stroke"
-        />
 
         <rect
           x="0.75"
@@ -211,7 +194,7 @@ export default function FeatureCard({
               fill
               alt="feat"
               src={image || "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=400&fit=crop"}
-              className="w-full h-full object-contain rounded-xl"
+              className="w-full h-full object-cover rounded-xl"
             />
           </div>
 
