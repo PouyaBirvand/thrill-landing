@@ -5,9 +5,7 @@ import { cn } from "../../lib/utils"
 import { Loader2 } from "lucide-react"
 import { motion, type HTMLMotionProps } from "framer-motion"
 
-// CVA Button Variants - با اصلاح تراز متن
 const buttonVariants = cva(
-  // کلاس‌های پایه با تاکید بر تراز دقیق متن
   "inline-flex items-center justify-center rounded-full uppercase font-600 whitespace-nowrap transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden",
   {
     variants: {
@@ -44,7 +42,6 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "size">, Va
   children: React.ReactNode
 }
 
-// Button Component - با ساختار ساده‌شده برای تراز بهتر
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -66,16 +63,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <motion.button
         className={cn(
           buttonVariants({ variant, size }),
-          // اضافه کردن کلاس‌های تراز اضافی
           "flex items-center justify-center text-center",
-          // تضمین تراز عمودی دقیق
           "[&>*]:flex [&>*]:items-center [&>*]:justify-center",
           className,
         )}
         ref={ref}
         disabled={isDisabled}
         style={{
-          // تضمین تراز دقیق با CSS inline
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -95,7 +89,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </span>
         )}
 
-        {/* Button content - ساده‌سازی شده */}
         <span className="relative top-[0.08rem]">
         {children}
         </span>
