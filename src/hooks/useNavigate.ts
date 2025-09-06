@@ -5,12 +5,10 @@ import type { NavigationItem } from "@/types/navigation.types"
 export function useNavigate(items: NavigationItem[], offset: number = 0) {
   const [activeItem, setActiveItem] = useState("")
 
-  // تابع برای اسکرول به سکشن
   const navigate = (item: NavigationItem) => {
     setActiveItem(item.label)
 
     if (item.url.startsWith("#")) {
-      // سکشن داخلی
       const sectionId = item.url.replace("#", "")
       const section = document.getElementById(sectionId)
       if (section) {
@@ -18,20 +16,17 @@ export function useNavigate(items: NavigationItem[], offset: number = 0) {
         window.scrollTo({ top: y, behavior: "smooth" })
       }
     } else if (item.url.startsWith("http")) {
-      // لینک خارجی
       window.open(item.url, "_blank")
     } else {
-      // مسیر داخلی (Next.js route)
       window.location.href = item.url
     }
   }
 
-  // رصد کردن اسکرول و تغییر activeItem
   useEffect(() => {
     const observerOptions = {
-      root: null, // ویوپورت
+      root: null, 
       rootMargin: "0px",
-      threshold: 0.5, // وقتی 50٪ از سکشن در ویوپورت باشه
+      threshold: 0.5, 
     }
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -48,7 +43,6 @@ export function useNavigate(items: NavigationItem[], offset: number = 0) {
         }
       })
 
-      // اگر هیچ سکشنی در ویوپورت نیست، activeItem رو خالی کن
       if (!isAnySectionVisible) {
         setActiveItem("")
       }
@@ -56,7 +50,6 @@ export function useNavigate(items: NavigationItem[], offset: number = 0) {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions)
 
-    // اضافه کردن تمام سکشن‌ها به observer
     items.forEach((item) => {
       if (item.url.startsWith("#")) {
         const sectionId = item.url.replace("#", "")
@@ -67,7 +60,6 @@ export function useNavigate(items: NavigationItem[], offset: number = 0) {
       }
     })
 
-    // پاکسازی observer هنگام unmount
     return () => {
       items.forEach((item) => {
         if (item.url.startsWith("#")) {
