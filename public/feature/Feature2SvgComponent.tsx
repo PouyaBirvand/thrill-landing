@@ -129,6 +129,7 @@ const Feature2SvgComponent = (props) => {
           strokeOpacity={0.3}
           strokeWidth={1.85782}
           strokeDasharray="6.73 6.73"
+          // @ts-ignore
           variants={gridLineVariants}
           initial="hidden"
           animate={controls}
@@ -139,6 +140,7 @@ const Feature2SvgComponent = (props) => {
   strokeOpacity={0.3}
   strokeWidth={1.85782}
   strokeDasharray="6.73 6.73"
+  // @ts-ignore
   variants={gridLineVariants}
   initial="hidden"
   animate={controls}
@@ -146,6 +148,7 @@ const Feature2SvgComponent = (props) => {
 />
         <foreignObject x={202.077} y={-121.127} width={314.643} height={314.643}>
           <div
+          // @ts-ignore
             xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(50.83px)',
@@ -189,6 +192,7 @@ const Feature2SvgComponent = (props) => {
         </motion.g>
         <foreignObject x={-126.164} y={127.643} width={314.333} height={314.333}>
           <div
+          // @ts-ignore
             xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(50.83px)',
@@ -201,6 +205,7 @@ const Feature2SvgComponent = (props) => {
         <motion.g
           filter="url(#filter1_i_450_12732)"
           data-figma-bg-blur-radius={101.651}
+          // @ts-ignore
           variants={card2Variants}
           initial="hidden"
           animate={controls}
@@ -240,6 +245,7 @@ const Feature2SvgComponent = (props) => {
         </motion.g>
         <foreignObject x={386.056} y={157.944} width={276.161} height={276.161}>
           <div
+          // @ts-ignore
             xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(48.57px)',
@@ -291,6 +297,7 @@ const Feature2SvgComponent = (props) => {
         </motion.g>
         <foreignObject x={-74.8295} y={-83.0465} width={358.777} height={358.777}>
           <div
+          // @ts-ignore
             xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(50.83px)',
@@ -303,6 +310,7 @@ const Feature2SvgComponent = (props) => {
         <motion.g
           filter="url(#filter3_i_450_12732)"
           data-figma-bg-blur-radius={101.651}
+          // @ts-ignore
           variants={card4Variants}
           initial="hidden"
           animate={controls}
@@ -357,6 +365,7 @@ const Feature2SvgComponent = (props) => {
       </g>
       <foreignObject x={419.471} y={181.408} width={43.4226} height={73.8178}>
         <div
+        // @ts-ignore
           xmlns="http://www.w3.org/1999/xhtml"
           style={{
             backdropFilter: 'blur(6.51px)',
@@ -370,6 +379,7 @@ const Feature2SvgComponent = (props) => {
         filter="url(#filter4_di_450_12732)"
         data-figma-bg-blur-radius={13.0265}
         custom={0}
+        // @ts-ignore
         variants={buttonVariants}
         initial="hidden"
         animate={controls}
@@ -423,6 +433,7 @@ const Feature2SvgComponent = (props) => {
         filter="url(#filter5_di_450_12732)"
         data-figma-bg-blur-radius={13.0265}
         custom={1}
+        // @ts-ignore
         variants={buttonVariants}
         initial="hidden"
         animate={controls}
