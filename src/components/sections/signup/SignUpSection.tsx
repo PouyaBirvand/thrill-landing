@@ -99,7 +99,7 @@ const AffiliateSignupForm = () => {
                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                     />
-                    
+
                     <svg
                         className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
                         viewBox="0 0 490 490"
@@ -153,9 +153,14 @@ const AffiliateSignupForm = () => {
                                     {/* Fallback for browsers that don't support WebM */}
                                     Your browser does not support the video tag.
                                 </video>
-                                
+
                                 {/* Dark overlay for better text readability */}
-                                
+                                <div
+                                    className="absolute inset-0 z-1"
+                                    style={{
+                                        background: "linear-gradient(182.46deg, rgba(27, 29, 41, 0) -6.86%, #1B1D29 50.13%, rgba(27, 29, 41, 0.0531915) 78.05%)",
+                                    }}
+                                ></div>
                                 {/* Content overlay */}
                                 <div className="relative z-10 space-y-3 sm:space-y-4 lg:space-y-6 text-center lg:text-left max-w-2xl mx-auto">
                                     <p className="text-[#5CFFC1] font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-2 sm:px-4 lg:px-6">
@@ -171,7 +176,7 @@ const AffiliateSignupForm = () => {
                                     </p>
                                 </div>
                             </div>
-                            
+
                             {/* Right side - Form content */}
                             <div className="flex items-center justify-center h-full px-3 sm:px-6 lg:px-8">
                                 <div className="w-full max-w-md sm:max-w-lg px-2 sm:px-4 py-4 sm:py-6 lg:py-8 xl:py-12">
@@ -186,7 +191,7 @@ const AffiliateSignupForm = () => {
                                             </div>
                                             <Plus color="rgba(255, 255, 255, 0.15)" size="14" className="hidden xl:block" />
                                         </div>
-                                        
+
                                         {/* Form section */}
                                         <div className="flex-1 flex items-start lg:items-center justify-center overflow-hidden">
                                             <motion.div
@@ -356,7 +361,7 @@ const AffiliateSignupForm = () => {
                                                                 Sign Up
                                                             </Button>
                                                         </div>
-                                                        </div>
+                                                    </div>
                                                 ) : (
                                                     <div className="space-y-2 sm:space-y-3 w-full flex flex-col justify-center h-auto lg:h-full">
                                                         <div>
@@ -424,11 +429,11 @@ const AffiliateSignupForm = () => {
                                                                 Log in as affiliate
                                                             </Button>
                                                         </div>
-                                                        </div>
+                                                    </div>
                                                 )}
                                             </motion.div>
                                         </div>
-                                        
+
                                         {/* Footer section */}
                                         <div className="text-center pt-3 sm:pt-4 lg:pt-6">
                                             <div className="justify-center flex items-center">
