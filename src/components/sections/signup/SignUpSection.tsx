@@ -138,14 +138,27 @@ const AffiliateSignupForm = () => {
                     </svg>
                     <div className="relative w-full h-full rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[linear-gradient(36.25deg,#1B2D33_13.55%,#181A26_84.75%)] overflow-hidden">
                         <div className="grid lg:grid-cols-2 items-stretch min-h-[500px] sm:min-h-[600px] lg:min-h-[886px]">
-                            {/* Left side - Text content */}
-                            <div
-                                className="text-white space-y-4 sm:space-y-6 items-center relative bg-cover bg-center bg-no-repeat h-full min-h-[200px] sm:min-h-[300px] lg:min-h-[886px] flex flex-col justify-center px-3 sm:px-6 lg:px-8 xl:px-12"
-                                style={{ backgroundImage: "url(/formbg.png)" }}
-                            >
-                                <div className="absolute inset-0 bg-black/10"></div>
+                            {/* Left side - Video Background */}
+                            <div className="text-white space-y-4 sm:space-y-6 items-center relative h-full min-h-[200px] sm:min-h-[300px] lg:min-h-[886px] flex flex-col justify-center px-3 sm:px-6 lg:px-8 xl:px-12 overflow-hidden">
+                                {/* Video Background */}
+                                <video
+                                    className="absolute inset-0 w-full h-full object-cover z-0"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    preload="auto"
+                                >
+                                    <source src="/loginshape.webm" type="video/webm" />
+                                    {/* Fallback for browsers that don't support WebM */}
+                                    Your browser does not support the video tag.
+                                </video>
+                                
+                                {/* Dark overlay for better text readability */}
+                                
+                                {/* Content overlay */}
                                 <div className="relative z-10 space-y-3 sm:space-y-4 lg:space-y-6 text-center lg:text-left max-w-2xl mx-auto">
-                                    <p className="text-accent-green_light font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-2 sm:px-4 lg:px-6">
+                                    <p className="text-[#5CFFC1] font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-2 sm:px-4 lg:px-6">
                                         YOUR AUDIENCE. YOUR PROFIT.
                                     </p>
                                     <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-semibold leading-tight px-2 sm:px-4 lg:px-6">
@@ -331,10 +344,10 @@ const AffiliateSignupForm = () => {
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-3 sm:px-4 py-2 min-w-[160px] sm:min-w-[180px] lg:min-w-[200px] text-center whitespace-nowrap"
+                                                                className="text-[#5CFFC1] text-base sm:text-lg font-extrabold hover:text-[#5CFFC1]/60 px-3 sm:px-4 py-2 min-w-[160px] sm:min-w-[180px] lg:min-w-[200px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
-                                                                        className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
+                                                                        className="text-[#5CFFC1] group-hover:text-[#5CFFC1]/60 duration-500"
                                                                         strokeWidth="2.5"
                                                                         size={18}
                                                                     />
@@ -399,10 +412,10 @@ const AffiliateSignupForm = () => {
                                                             <Button
                                                                 variant="ghost"
                                                                 type="submit"
-                                                                className="text-accent-green_light text-base sm:text-lg font-extrabold group-hover:text-accent-green_light/60 px-3 sm:px-4 py-2 min-w-[180px] sm:min-w-[200px] lg:min-w-[240px] text-center whitespace-nowrap"
+                                                                className="text-[#5CFFC1] text-base sm:text-lg font-extrabold hover:text-[#5CFFC1]/60 px-3 sm:px-4 py-2 min-w-[180px] sm:min-w-[200px] lg:min-w-[240px] text-center whitespace-nowrap"
                                                                 rightIcon={
                                                                     <ChevronRight
-                                                                        className="text-accent-green_light group-hover:text-accent-green_light/60 duration-500"
+                                                                        className="text-[#5CFFC1] group-hover:text-[#5CFFC1]/60 duration-500"
                                                                         strokeWidth="2.5"
                                                                         size={18}
                                                                     />
