@@ -33,8 +33,6 @@ const Feature1SvgComponent = (props) => (
         <g mask="url(#mask0_450_12385)">
           <foreignObject x={433.807} y={11.9557} width={252.998} height={332.415}>
             <div
-            {/* @ts-ignore */}
-              xmlns="http://www.w3.org/1999/xhtml"
               style={{
                 backdropFilter: 'blur(23.1px)',
                 clipPath: 'url(#bgblur_1_450_12385_clip_path)',
