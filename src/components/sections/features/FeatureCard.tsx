@@ -1,23 +1,24 @@
 'use client'
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
+import Feature1SvgComponent from "../../../../public/feature/Feature1SvgComponent"; // Keep existing import
+// Add imports for other SVG components as you create them
+// import Feature2SvgComponent from "../../../../public/feature/Feature2SvgComponent";
+// import Feature3SvgComponent from "../../../../public/feature/Feature3SvgComponent";
+// import Feature4SvgComponent from "../../../../public/feature/Feature4SvgComponent";
+// import Feature5SvgComponent from "../../../../public/feature/Feature5SvgComponent";
 
 interface FeatureCardProps {
   title: string;
   description: string;
-  image: string;
+  svgComponent?: React.FC; // Changed from svgPath to svgComponent for reusability
+  imagePath: string;
   more_detail?: string;
   stats: {
-    primary: {
-      value: string;
-      label: string;
-    };
-    secondary: {
-      value: string;
-      label: string;
-    };
+    primary: { value: string; label: string };
+    secondary: { value: string; label: string };
   };
   isExpanded?: boolean;
   onClose?: () => void;
@@ -28,7 +29,8 @@ interface FeatureCardProps {
 export default function FeatureCard({
   title,
   description,
-  image,
+  svgComponent: SvgComponent, // Now receiving the SVG component as prop
+  imagePath,
   stats,
   more_detail,
   isExpanded: forcedExpanded,
@@ -180,21 +182,28 @@ export default function FeatureCard({
       </svg>
 
       {/* Content Container - Fixed height */}
-      <div className="relative w-full h-full rounded-[28px] bg-[#F8F8F805] flex flex-col overflow-hidden">
+      <div
+        className="relative w-full h-full rounded-[28px] bg-[#F8F8F805] flex flex-col overflow-hidden">
 
         {/* Image Section - Fixed height */}
         <div className="flex-shrink-0 mt-2 relative">
           <div
             className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${isModal
-                ? "h-[260px] mt-8"
-                : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
+              ? "h-[260px] mt-8"
+              : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
               }`}
           >
+            {/* SVG Background - Now dynamic based on prop */}
+            <div className="relative z-[99999] left-[-4rem]">
+              {SvgComponent && <SvgComponent />}
+            </div>
+            {/* Center PNG Image */}
             <Image
+              src={imagePath}
+              alt={title}
               fill
-              alt="feat"
-              src={image || "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=400&fit=crop"}
-              className="w-full h-full object-cover rounded-xl"
+              className="relative object-contain  pt-8 rounded-xl"
+              style={{ zIndex: 1000 }} // Ensure PNG is above SVG
             />
           </div>
 
@@ -221,8 +230,8 @@ export default function FeatureCard({
           {!isModal && (
             <div className="flex items-center justify-between flex-shrink-0 pt-3 h-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px] xl:h-[70px]">
               <h2 className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 transition-all duration-300 ${isModal
-                  ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-[32px]"
-                  : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
+                ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-[32px]"
+                : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
                 }`}>
                 {title}
               </h2>
@@ -279,15 +288,15 @@ export default function FeatureCard({
               <div className="flex-1 mb-3 xs:mb-4 sm:mb-5 md:mb-6 mt-3 min-h-0 overflow-hidden">
                 <div className="h-full pr-1">
                   <p className={`text-neutral-lightGray leading-6 mb-2 ${isModal
-                      ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
-                      : "text-xs xs:text-sm sm:text-base md:text-lg"
+                    ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
+                    : "text-xs xs:text-sm sm:text-base md:text-lg"
                     }`}>
                     {description}
                   </p>
                   {more_detail && (
                     <p className={`text-neutral-lightGray leading-6 ${isModal
-                        ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
-                        : "text-xs xs:text-sm sm:text-base md:text-lg"
+                      ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
+                      : "text-xs xs:text-sm sm:text-base md:text-lg"
                       }`}>
                       {more_detail}
                     </p>
@@ -300,16 +309,16 @@ export default function FeatureCard({
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
                     className={`text-white font-semibold leading-tight ${isModal
-                        ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                        : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
+                      ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
+                      : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
                       }`}
                   >
                     {stats.primary.value}
                   </span>
                   <span
                     className={`text-neutral-lightGray leading-tight mt-1 ${isModal
-                        ? "text-xs xs:text-sm sm:text-base md:text-lg"
-                        : "text-sm xs:text-base sm:text-lg md:text-[18px]"
+                      ? "text-xs xs:text-sm sm:text-base md:text-lg"
+                      : "text-sm xs:text-base sm:text-lg md:text-[18px]"
                       }`}
                   >
                     {stats.primary.label}
@@ -318,16 +327,16 @@ export default function FeatureCard({
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
                     className={`text-white font-semibold leading-tight ${isModal
-                        ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                        : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
+                      ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
+                      : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
                       }`}
                   >
                     {stats.secondary.value}
                   </span>
                   <span
                     className={`text-neutral-lightGray leading-tight mt-1 ${isModal
-                        ? "text-xs xs:text-sm sm:text-base md:text-lg"
-                        : "text-sm xs:text-base sm:text-lg md:text-[18px]"
+                      ? "text-xs xs:text-sm sm:text-base md:text-lg"
+                      : "text-sm xs:text-base sm:text-lg md:text-[18px]"
                       }`}
                   >
                     {stats.secondary.label}
