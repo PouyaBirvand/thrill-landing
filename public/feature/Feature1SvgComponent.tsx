@@ -45,8 +45,8 @@ const Feature1SvgComponent = (props) => (
           id="Rectangle 39789"
           filter="url(#filter0_d_450_12385)"
           data-figma-bg-blur-radius={46.1944}
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          initial={{ x: 40, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
         >
           <path
@@ -86,8 +86,8 @@ const Feature1SvgComponent = (props) => (
           id="Rectangle 39790"
           filter="url(#filter1_d_450_12385)"
           data-figma-bg-blur-radius={46.1944}
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          initial={{ x: -40, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
         >
           <path
@@ -114,7 +114,7 @@ const Feature1SvgComponent = (props) => (
           strokeOpacity={0.3}
           strokeWidth={1.08554}
           strokeDasharray="5.34 5.34"
-          animate={{ strokeDashoffset: [0, -10.68] }}
+          whileInView={{ strokeDashoffset: [0, -10.68] }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
         <motion.path
@@ -124,7 +124,7 @@ const Feature1SvgComponent = (props) => (
           strokeOpacity={0.3}
           strokeWidth={1.08554}
           strokeDasharray="5.34 5.34"
-          animate={{ strokeDashoffset: [0, -10.68] }}
+          whileInView={{ strokeDashoffset: [0, -10.68] }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
         <motion.path
@@ -134,7 +134,7 @@ const Feature1SvgComponent = (props) => (
           strokeOpacity={0.3}
           strokeWidth={1.08554}
           strokeDasharray="5.34 5.34"
-          animate={{ strokeDashoffset: [0, -10.68] }}
+          whileInView={{ strokeDashoffset: [0, -10.68] }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
         <motion.path
@@ -144,7 +144,7 @@ const Feature1SvgComponent = (props) => (
           strokeOpacity={0.3}
           strokeWidth={1.08554}
           strokeDasharray="5.34 5.34"
-          animate={{ strokeDashoffset: [0, -10.68] }}
+          whileInView={{ strokeDashoffset: [0, -10.68] }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
         <motion.rect
@@ -155,7 +155,7 @@ const Feature1SvgComponent = (props) => (
           height={244.537}
           fill="url(#pattern0_450_12385)"
           initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1 }}
         />
       </g>
@@ -180,7 +180,7 @@ const Feature1SvgComponent = (props) => (
           position: "relative",
         }}
         initial={{ x: 50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
       >
         <rect
@@ -231,7 +231,7 @@ const Feature1SvgComponent = (props) => (
           filter="url(#filter3_dd_450_12385)"
           data-figma-bg-blur-radius={5.58098}
           initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
           <path
@@ -256,7 +256,7 @@ const Feature1SvgComponent = (props) => (
         id="icon-button-wrapper"
         filter="url(#filter4_di_450_12385)"
         data-figma-bg-blur-radius={13.0265}
-        animate={{ y: [0, 20, 0] }}
+        whileInView={{ y: [0, 20, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
         <rect
@@ -307,7 +307,7 @@ const Feature1SvgComponent = (props) => (
         id="icon-button-wrapper_2"
         filter="url(#filter5_di_450_12385)"
         data-figma-bg-blur-radius={13.0265}
-        animate={{ y: [0, 20, 0] }}
+        whileInView={{ y: [0, 20, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >
         <rect

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect, Suspense } from "react";
@@ -42,7 +42,8 @@ export default function FeatureCard({
   const [dimensions, setDimensions] = useState({ width: 490, height: 490 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isExpanded = forcedExpanded !== undefined ? forcedExpanded : localExpanded;
+  const isExpanded =
+    forcedExpanded !== undefined ? forcedExpanded : localExpanded;
 
   const toggleExpanded = () => {
     if (onExpand) {
@@ -70,14 +71,20 @@ export default function FeatureCard({
     const updateDimensions = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const baseWidth = isExpanded ? Math.max(rect.width, 300) || 600 : Math.max(rect.width, 300) || 490;
+        const baseWidth = isExpanded
+          ? Math.max(rect.width, 300) || 600
+          : Math.max(rect.width, 300) || 490;
         const baseHeight = isModal
-          ? (isExpanded ? 800 : 490)
-          : (isExpanded ? 850 : 490);
+          ? isExpanded
+            ? 800
+            : 490
+          : isExpanded
+            ? 850
+            : 490;
 
         setDimensions({
           width: baseWidth,
-          height: baseHeight
+          height: baseHeight,
         });
       }
     };
@@ -99,8 +106,9 @@ export default function FeatureCard({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full transition-all duration-700 ease-out cursor-pointer ${isExpanded ? "max-w-[600px]" : "max-w-[490px]"
-        } ${getFixedHeight()}`}
+      className={`relative w-full transition-all duration-700 ease-out cursor-pointer ${
+        isExpanded ? "max-w-[600px]" : "max-w-[490px]"
+      } ${getFixedHeight()}`}
     >
       {/* SVG Border - Now responsive */}
       <svg
@@ -109,13 +117,13 @@ export default function FeatureCard({
         preserveAspectRatio="none"
         aria-hidden="true"
         style={{
-          width: '100%',
-          height: '100%'
+          width: "100%",
+          height: "100%",
         }}
       >
         <defs>
           <linearGradient
-            id={`borderGradient-${title.replace(/\s+/g, '-')}`}
+            id={`borderGradient-${title.replace(/\s+/g, "-")}`}
             gradientUnits="userSpaceOnUse"
             x1="0"
             y1="0"
@@ -139,12 +147,11 @@ export default function FeatureCard({
           rx="24"
           ry="24"
           fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, '-')})`}
+          stroke={`url(#borderGradient-${title.replace(/\s+/g, "-")})`}
           strokeWidth="1.5"
           vectorEffect="non-scaling-stroke"
           shapeRendering="geometricPrecision"
         />
-
 
         <rect
           x="0.75"
@@ -154,7 +161,7 @@ export default function FeatureCard({
           rx="24"
           ry="24"
           fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, '-')})`}
+          stroke={`url(#borderGradient-${title.replace(/\s+/g, "-")})`}
           strokeWidth="0.2"
           strokeLinecap="round"
           pathLength="100"
@@ -171,7 +178,7 @@ export default function FeatureCard({
           rx="24"
           ry="24"
           fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, '-')})`}
+          stroke={`url(#borderGradient-${title.replace(/\s+/g, "-")})`}
           strokeWidth=".3"
           strokeLinecap="round"
           pathLength="100"
@@ -182,27 +189,29 @@ export default function FeatureCard({
       </svg>
 
       {/* Content Container - Fixed height */}
-      <div
-        className="relative w-full h-full rounded-[28px] bg-[#F8F8F805] flex flex-col overflow-hidden">
-
+      <div className="relative w-full h-full rounded-[28px] bg-[#F8F8F805] flex flex-col overflow-hidden">
         {/* Image Section - Fixed height */}
         <div className="flex-shrink-0 mt-2 relative">
           <div
-            className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${isModal
-              ? "h-[260px] mt-8"
-              : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
-              }`}
+            className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
+              isModal
+                ? "h-[260px] mt-8"
+                : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
+            }`}
           >
             {/* SVG Background - Now dynamic based on prop */}
             <div className="relative z-[99999] left-[-4rem]">
               {SvgComponent && <SvgComponent />}
             </div>
             {/* Center PNG Image */}
-            <Image
+            <motion.img
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
               src={imagePath}
               alt={title}
-              fill
-              className="relative object-contain  pt-8 rounded-xl"
+              className="absolute top-0 w-3/5 m-auto inset-0  pt-8 rounded-xl"
               style={{ zIndex: 1000 }} // Ensure PNG is above SVG
             />
           </div>
@@ -225,14 +234,16 @@ export default function FeatureCard({
 
         {/* Main Content Area - Flex grow to fill remaining space */}
         <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-7 sm:pt-0 pt-3 min-h-0">
-
           {/* Header Section - Title + Button (Non-Modal) - Fixed height */}
           {!isModal && (
             <div className="flex items-center justify-between flex-shrink-0 pt-3 h-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px] xl:h-[70px]">
-              <h2 className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 transition-all duration-300 ${isModal
-                ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-[32px]"
-                : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
-                }`}>
+              <h2
+                className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 transition-all duration-300 ${
+                  isModal
+                    ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-[32px]"
+                    : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
+                }`}
+              >
                 {title}
               </h2>
               {onClose ? (
@@ -258,7 +269,7 @@ export default function FeatureCard({
                     className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-all duration-300"
                     color={isExpanded ? "#83FFDA" : "#A0A9B0"}
                     style={{
-                      transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)"
+                      transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
                     }}
                   />
                 </motion.button>
@@ -278,26 +289,31 @@ export default function FeatureCard({
             transition={{
               duration: 0.7,
               ease: [0.4, 0, 0.2, 1],
-              opacity: { duration: 0.5 }
+              opacity: { duration: 0.5 },
             }}
             className="overflow-hidden flex-1 min-h-0"
           >
             <div className="h-full flex flex-col justify-between min-h-0">
-
               {/* Description - Flexible height but contained */}
               <div className="flex-1 mb-3 xs:mb-4 sm:mb-5 md:mb-6 mt-3 min-h-0 overflow-hidden">
                 <div className="h-full pr-1">
-                  <p className={`text-neutral-lightGray leading-6 mb-2 ${isModal
-                    ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
-                    : "text-xs xs:text-sm sm:text-base md:text-lg"
-                    }`}>
+                  <p
+                    className={`text-neutral-lightGray leading-6 mb-2 ${
+                      isModal
+                        ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
+                        : "text-xs xs:text-sm sm:text-base md:text-lg"
+                    }`}
+                  >
                     {description}
                   </p>
                   {more_detail && (
-                    <p className={`text-neutral-lightGray leading-6 ${isModal
-                      ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
-                      : "text-xs xs:text-sm sm:text-base md:text-lg"
-                      }`}>
+                    <p
+                      className={`text-neutral-lightGray leading-6 ${
+                        isModal
+                          ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
+                          : "text-xs xs:text-sm sm:text-base md:text-lg"
+                      }`}
+                    >
                       {more_detail}
                     </p>
                   )}
@@ -308,36 +324,40 @@ export default function FeatureCard({
               <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[120px] h-auto w-full">
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
-                    className={`text-white font-semibold leading-tight ${isModal
-                      ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                      : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
-                      }`}
+                    className={`text-white font-semibold leading-tight ${
+                      isModal
+                        ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
+                        : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
+                    }`}
                   >
                     {stats.primary.value}
                   </span>
                   <span
-                    className={`text-neutral-lightGray leading-tight mt-1 ${isModal
-                      ? "text-xs xs:text-sm sm:text-base md:text-lg"
-                      : "text-sm xs:text-base sm:text-lg md:text-[18px]"
-                      }`}
+                    className={`text-neutral-lightGray leading-tight mt-1 ${
+                      isModal
+                        ? "text-xs xs:text-sm sm:text-base md:text-lg"
+                        : "text-sm xs:text-base sm:text-lg md:text-[18px]"
+                    }`}
                   >
                     {stats.primary.label}
                   </span>
                 </div>
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
-                    className={`text-white font-semibold leading-tight ${isModal
-                      ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                      : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
-                      }`}
+                    className={`text-white font-semibold leading-tight ${
+                      isModal
+                        ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
+                        : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
+                    }`}
                   >
                     {stats.secondary.value}
                   </span>
                   <span
-                    className={`text-neutral-lightGray leading-tight mt-1 ${isModal
-                      ? "text-xs xs:text-sm sm:text-base md:text-lg"
-                      : "text-sm xs:text-base sm:text-lg md:text-[18px]"
-                      }`}
+                    className={`text-neutral-lightGray leading-tight mt-1 ${
+                      isModal
+                        ? "text-xs xs:text-sm sm:text-base md:text-lg"
+                        : "text-sm xs:text-base sm:text-lg md:text-[18px]"
+                    }`}
                   >
                     {stats.secondary.label}
                   </span>
