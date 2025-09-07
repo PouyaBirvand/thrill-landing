@@ -296,7 +296,7 @@ const Feature1SvgComponent = (props) => (
         <div
           xmlns="http://www.w3.org/1999/xhtml"
           style={{
-            backdropFilter: "blur(6.51px)",
+            backdropFilter: "blur(0px)",
             clipPath: "url(#bgblur_6_450_12385_clip_path)",
             height: "100%",
             width: "100%",
