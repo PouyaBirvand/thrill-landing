@@ -1,5 +1,5 @@
 'use client';
-import { motion, useAnimation } from 'framer-motion';
+import { easeInOut, easeOut, motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import * as React from 'react';
 import { useEffect } from 'react';
@@ -30,7 +30,7 @@ const Feature2SvgComponent = (props) => {
       scale: 1,
       opacity: 1,
       rotate: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.8, ease: easeOut },
     },
   };
 
@@ -49,7 +49,7 @@ const Feature2SvgComponent = (props) => {
       x: 0,
       opacity: 1,
       rotate: 0,
-      transition: { duration: 0.8, ease: 'easeOut', delay: 0.4 },
+      transition: { duration: 0.8, ease: easeOut, delay: 0.4 },
     },
   };
 
@@ -67,7 +67,7 @@ const Feature2SvgComponent = (props) => {
     visible: {
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.8, ease: 'easeOut', delay: 0.8 },
+      transition: { duration: 0.8, ease: easeOut, delay: 0.8 },
     },
   };
 
@@ -76,7 +76,7 @@ const Feature2SvgComponent = (props) => {
     visible: {
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.8, ease: 'easeOut', delay: 1 },
+      transition: { duration: 0.8, ease: easeOut, delay: 1 },
     },
   };
 
@@ -88,7 +88,7 @@ const Feature2SvgComponent = (props) => {
       transition: {
         duration: 1.5,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: easeInOut,
         delay: (index) => 1.2 + index * 0.3,
       },
     },
@@ -133,16 +133,17 @@ const Feature2SvgComponent = (props) => {
           initial="hidden"
           animate={controls}
         />
-        <motion.path
-          d="M599.256 205.075L22.0312 205.075"
-          stroke="url(#paint2_linear_450_12732)"
-          strokeOpacity={0.3}
-          strokeWidth={1.85782}
-          strokeDasharray="6.73 6.73"
-          variants={gridLineVariants}
-          initial="hidden"
-          animate={controls}
-        />
+<motion.path
+  d="M599.256 205.075L22.0312 205.075"
+  stroke="url(#paint2_linear_450_12732)"
+  strokeOpacity={0.3}
+  strokeWidth={1.85782}
+  strokeDasharray="6.73 6.73"
+  variants={gridLineVariants}
+  initial="hidden"
+  animate={controls}
+  transform="translate(0, -7)" // جابجایی 20 واحد به بالا
+/>
         <foreignObject x={202.077} y={-121.127} width={314.643} height={314.643}>
           <div
             xmlns="http://www.w3.org/1999/xhtml"

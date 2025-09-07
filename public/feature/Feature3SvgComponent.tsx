@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { easeInOut, easeOut, motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const Feature3SvgComponent = () => {
@@ -42,7 +42,7 @@ const Feature3SvgComponent = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1, ease: 'easeOut' },
+      transition: { duration: 1, ease: easeOut },
     },
   };
 
@@ -55,7 +55,7 @@ const Feature3SvgComponent = () => {
         repeat: Infinity,
         repeatType: 'loop',
         duration: 3 + i * 0.2, // Slightly different durations for organic feel
-        ease: 'easeInOut',
+        ease: easeInOut,
         delay: i * 0.3,
       },
     }),
@@ -69,7 +69,7 @@ const Feature3SvgComponent = () => {
         repeat: Infinity,
         repeatType: 'loop',
         duration: 2,
-        ease: 'easeInOut',
+        ease: easeInOut,
       },
     },
   };
@@ -81,7 +81,7 @@ const Feature3SvgComponent = () => {
         repeat: Infinity,
         repeatType: 'loop',
         duration: 2.5,
-        ease: 'easeInOut',
+        ease: easeInOut,
       },
     },
   };

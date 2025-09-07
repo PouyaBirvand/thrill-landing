@@ -189,7 +189,7 @@ export default function FeatureCard({
       </svg>
 
       {/* Content Container - Fixed height */}
-      <div className="relative w-full h-full rounded-[28px] bg-[#F8F8F805] flex flex-col overflow-hidden">
+      <div className="relative w-full h-full rounded-[24px] bg-[#F8F8F805] flex flex-col overflow-hidden">
         {/* Image Section - Fixed height */}
         <div className="flex-shrink-0 mt-2 relative">
           <div
@@ -200,18 +200,15 @@ export default function FeatureCard({
             }`}
           >
             {/* SVG Background - Now dynamic based on prop */}
-            <div className="relative z-[99999] left-[-4rem]">
+            <div className="relative z-[99999]">
               {SvgComponent && <SvgComponent />}
             </div>
             {/* Center PNG Image */}
-            <motion.img
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
+            <Image
+            fill
               src={imagePath}
               alt={title}
-              className="absolute top-0 w-3/5 m-auto inset-0  pt-8 rounded-xl"
+              className="absolute top-0 object-contain scale-75 m-auto inset-0 rounded-xl"
               style={{ zIndex: 1000 }} // Ensure PNG is above SVG
             />
           </div>
