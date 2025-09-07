@@ -73,7 +73,6 @@ const Feature1SvgComponent = (props) => (
             height={332.415}
           >
             <div
-              xmlns="http://www.w3.org/1999/xhtml"
               style={{
                 backdropFilter: 'blur(23.1px)',
                 clipPath: 'url(#bgblur_2_450_12385_clip_path)',
@@ -161,7 +160,6 @@ const Feature1SvgComponent = (props) => (
         </g>
         <foreignObject x={370.961} y={198.004} width={115.805} height={103.248}>
           <div
-            xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(8.37px)',
               clipPath: 'url(#bgblur_3_450_12385_clip_path)',
@@ -217,7 +215,6 @@ const Feature1SvgComponent = (props) => (
         <g id="user-tag-right-container">
           <foreignObject x={346.159} y={189.561} width={51.9021} height={55.1183}>
             <div
-              xmlns="http://www.w3.org/1999/xhtml"
               style={{
                 backdropFilter: 'blur(2.79px)',
                 clipPath: 'url(#bgblur_4_450_12385_clip_path)',
@@ -243,7 +240,6 @@ const Feature1SvgComponent = (props) => (
         </g>
         <foreignObject x={104.062} y={152.845} width={43.4227} height={73.8178}>
           <div
-            xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(6.51px)',
               clipPath: 'url(#bgblur_5_450_12385_clip_path)',
@@ -294,7 +290,6 @@ const Feature1SvgComponent = (props) => (
         </motion.g>
         <foreignObject x={445.062} y={152.845} width={43.4226} height={73.8178}>
           <div
-            xmlns="http://www.w3.org/1999/xhtml"
             style={{
               backdropFilter: 'blur(0px)',
               clipPath: 'url(#bgblur_6_450_12385_clip_path)',
