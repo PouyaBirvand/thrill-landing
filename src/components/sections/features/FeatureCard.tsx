@@ -2,7 +2,7 @@
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import { easeOut, motion } from "framer-motion";
+import { easeOut, motion, Variants } from "framer-motion";
 
 
 interface FeatureCardProps {
@@ -39,7 +39,7 @@ export default function FeatureCard({
 
   const isExpanded =
     forcedExpanded !== undefined ? forcedExpanded : localExpanded;
-    const containerVariants = {
+    const containerVariants: Variants = {
       hidden: {
         opacity: 0,
         y: 50,
@@ -51,14 +51,13 @@ export default function FeatureCard({
         scale: 1,
         transition: {
           duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94], // Custom easing
+          ease: [0.25, 0.46, 0.45, 0.94],
           staggerChildren: 0.2,
         },
       },
     };
   
-    // Animation variants for the SVG background
-    const svgVariants = {
+    const svgVariants: Variants = {
       hidden: {
         opacity: 0,
         scale: 0.8,
@@ -75,8 +74,7 @@ export default function FeatureCard({
       },
     };
   
-    // Animation variants for the main image
-    const imageVariants = {
+    const imageVariants: Variants = {
       hidden: {
         opacity: 0,
         scale: 0.6,
@@ -242,7 +240,6 @@ export default function FeatureCard({
         {/* Image Section - Fixed height */}
         <motion.div 
       className="relative"
-      // @ts-ignore
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
