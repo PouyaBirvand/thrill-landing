@@ -106,6 +106,7 @@ const Feature1SvgComponent = (props) => (
               shapeRendering="crispEdges"
             />
           </motion.g>
+          <g style={{ zIndex: -99999 }}> {/* z-index پایین */}
           <motion.path
             id="Vector 38"
             d="M102.75 -27.153V60.7757L124.461 82.4864V192.669V256.173L102.75 278.426V395.664"
@@ -126,6 +127,7 @@ const Feature1SvgComponent = (props) => (
             whileInView={{ strokeDashoffset: [0, -10.68] }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
           />
+        </g>
           <motion.path
             id="Vector 40"
             d="M326.747 -70.575V17.3537L305.036 39.0645V149.247V212.751L326.747 235.004V352.242"

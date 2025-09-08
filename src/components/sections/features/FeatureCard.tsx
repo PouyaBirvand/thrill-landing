@@ -1,14 +1,9 @@
 "use client";
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
-import { useState, useRef, useEffect, Suspense } from "react";
-import { motion } from "framer-motion";
-import Feature1SvgComponent from "../../../../public/feature/Feature1SvgComponent"; // Keep existing import
-// Add imports for other SVG components as you create them
-// import Feature2SvgComponent from "../../../../public/feature/Feature2SvgComponent";
-// import Feature3SvgComponent from "../../../../public/feature/Feature3SvgComponent";
-// import Feature4SvgComponent from "../../../../public/feature/Feature4SvgComponent";
-// import Feature5SvgComponent from "../../../../public/feature/Feature5SvgComponent";
+import { useState, useRef, useEffect } from "react";
+import { easeOut, motion } from "framer-motion";
+
 
 interface FeatureCardProps {
   title: string;
@@ -44,6 +39,60 @@ export default function FeatureCard({
 
   const isExpanded =
     forcedExpanded !== undefined ? forcedExpanded : localExpanded;
+    const containerVariants = {
+      hidden: {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+          duration: 0.8,
+          ease: [0.25, 0.46, 0.45, 0.94], // Custom easing
+          staggerChildren: 0.2,
+        },
+      },
+    };
+  
+    // Animation variants for the SVG background
+    const svgVariants = {
+      hidden: {
+        opacity: 0,
+        scale: 0.8,
+        rotate: -10,
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        transition: {
+          duration: 1,
+          ease: easeOut,
+        },
+      },
+    };
+  
+    // Animation variants for the main image
+    const imageVariants = {
+      hidden: {
+        opacity: 0,
+        scale: 0.6,
+        y: 30,
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+          duration: 0.9,
+          ease: easeOut,
+          delay: 0.3,
+        },
+      },
+    };
 
   const toggleExpanded = () => {
     if (onExpand) {
@@ -191,43 +240,44 @@ export default function FeatureCard({
       {/* Content Container - Fixed height */}
       <div className="relative w-full h-full rounded-[24px] bg-[#F8F8F805] flex flex-col overflow-hidden">
         {/* Image Section - Fixed height */}
-        <div className="flex-shrink-0 mt-2 relative">
-          <div
-            className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
-              isModal
-                ? "h-[260px] mt-8"
-                : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
-            }`}
-          >
-            {/* SVG Background - Now dynamic based on prop */}
-            <div className="relative z-[99999]">
-              {SvgComponent && <SvgComponent />}
-            </div>
-            {/* Center PNG Image */}
-            <Image
-            fill
-              src={imagePath}
-              alt={title}
-              className="absolute top-0 object-contain scale-75 m-auto inset-0 rounded-xl"
-              style={{ zIndex: 1000 }} // Ensure PNG is above SVG
-            />
-          </div>
+        <motion.div 
+      className="relative"
+      // @ts-ignore
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }} // Trigger when 30% is visible
+    >
+      <div
+        className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
+          isModal
+            ? "h-[260px] mt-8"
+            : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
+        }`}
+      >
+        {/* Animated SVG Background */}
+        <motion.div 
+          className="relative z-[99999]"
+          variants={svgVariants}
+        >
+          {SvgComponent && <SvgComponent />}
+        </motion.div>
 
-          {/* Button in Modal Mode */}
-          {isModal && onClose && (
-            <motion.button
-              onClick={onClose}
-              className="absolute top-3 right-5 flex-shrink-0 bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110 hover:rotate-90"
-              aria-label={`Close ${title} details`}
-            >
-              <X
-                size={14}
-                className="xs:w-4 xs:h-4 sm:w-4 sm:h-4 transition-all duration-300"
-                color="#A0A9B0"
-              />
-            </motion.button>
-          )}
-        </div>
+        {/* Animated Center PNG Image */}
+        <motion.div
+          variants={imageVariants}
+          className="absolute inset-0"
+        >
+          <Image
+            fill
+            src={imagePath}
+            alt={title}
+            className="object-contain scale-75 m-auto rounded-xl"
+            style={{ zIndex: 1000 }}
+          />
+        </motion.div>
+      </div>
+    </motion.div>
 
         {/* Main Content Area - Flex grow to fill remaining space */}
         <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-7 sm:pt-0 pt-3 min-h-0">
