@@ -115,7 +115,7 @@ const AffiliateSignupSection = () => {
                         <div className="grid lg:grid-cols-2 items-stretch min-h-[500px] sm:min-h-[600px] lg:min-h-[700px]">
                             
                             {/* Left side - Hero content with video background */}
-                            <div className="text-white relative h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[700px] flex flex-col justify-center px-6 sm:px-8 lg:px-12 overflow-hidden">
+                            <div className="text-white relative h-full min-h-[200px] sm:min-h-[300px] lg:min-h-[700px] flex flex-col justify-center px-3 sm:px-6 lg:px-8 xl:px-12 overflow-hidden">
                                 
                                 {/* Background media */}
                                 <div
@@ -148,9 +148,9 @@ const AffiliateSignupSection = () => {
                                 />
                                 
                                 {/* Hero text */}
-                                <div className="relative z-10 space-y-4 lg:space-y-6 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+                                <div className="relative z-10 space-y-3 sm:space-y-4 lg:space-y-6 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
                                     <motion.p 
-                                        className="text-[#5CFFC1] font-medium tracking-wide uppercase text-sm lg:text-base"
+                                        className="text-[#5CFFC1] font-medium tracking-wide uppercase text-xs sm:text-sm lg:text-base px-2 sm:px-4 lg:px-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
@@ -158,7 +158,7 @@ const AffiliateSignupSection = () => {
                                         YOUR AUDIENCE. YOUR PROFIT.
                                     </motion.p>
                                     <motion.h1 
-                                        className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight"
+                                        className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-semibold leading-tight px-2 sm:px-4 lg:px-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
@@ -168,7 +168,7 @@ const AffiliateSignupSection = () => {
                                         GET AFFILIATE ACCESS.
                                     </motion.h1>
                                     <motion.p 
-                                        className="text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0"
+                                        className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-300 leading-relaxed max-w-sm sm:max-w-lg xl:max-w-xl mx-auto lg:mx-0 px-2 sm:px-4 lg:px-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
@@ -179,8 +179,8 @@ const AffiliateSignupSection = () => {
                             </div>
 
                             {/* Right side - CTA and navigation */}
-                            <div className="flex flex-col justify-center items-center h-full px-6 sm:px-8 lg:px-12 py-8 lg:py-12">
-                                <div className="w-full max-w-md space-y-8 lg:space-y-12">
+                            <div className="flex flex-col justify-center items-center h-full px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 xl:py-12">
+                                <div className="w-full max-w-md sm:max-w-lg space-y-4 sm:space-y-6 lg:space-y-8 xl:space-y-12">
                                     
                                     {/* Main CTA Button */}
                                     <motion.div
@@ -192,12 +192,12 @@ const AffiliateSignupSection = () => {
                                         <Button
                                             variant="ghost"
                                             onClick={handleAffiliateClick}
-                                            className="w-full text-[#5CFFC1] text-xl font-extrabold hover:text-[#5CFFC1]/70 px-8 py-4 min-h-[60px] group transition-all duration-300 hover:scale-[1.02] border border-[#5CFFC1]/20 hover:border-[#5CFFC1]/40 rounded-xl"
+                                            className="w-full text-[#5CFFC1] text-base sm:text-lg lg:text-xl font-extrabold hover:text-[#5CFFC1]/70 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-h-[50px] sm:min-h-[60px] group transition-all duration-300 hover:scale-[1.02] border border-[#5CFFC1]/20 hover:border-[#5CFFC1]/40 rounded-lg sm:rounded-xl"
                                             rightIcon={
                                                 <ChevronRight
                                                     className="text-[#5CFFC1] group-hover:text-[#5CFFC1]/70 group-hover:translate-x-1 transition-all duration-300"
                                                     strokeWidth="2.5"
-                                                    size={24}
+                                                    size={18}
                                                 />
                                             }
                                         >
@@ -207,27 +207,27 @@ const AffiliateSignupSection = () => {
 
                                     {/* Navigation Links */}
                                     <motion.div
-                                        className="space-y-6"
+                                        className="space-y-4 sm:space-y-6"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
                                     >
                                         <div className="text-center">
-                                            <h3 className="text-white/70 text-sm font-medium mb-4">Quick Access</h3>
-                                            <div className="grid grid-cols-2 gap-3">
+                                            <h3 className="text-white/70 text-xs sm:text-sm font-medium mb-3 sm:mb-4">Quick Access</h3>
+                                            <div className="grid grid-cols-2 gap-2 sm:gap-3">
                                                 {navigationLinks.map((link, index) => (
                                                     <motion.a
                                                         key={link.name}
                                                         href={link.url}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="flex items-center justify-center gap-2 text-white/80 hover:text-[#5CFFC1] transition-all duration-200 text-sm font-medium py-3 px-4 rounded-lg hover:bg-white/5 group"
+                                                        className="flex items-center justify-center gap-1 sm:gap-2 text-white/80 hover:text-[#5CFFC1] transition-all duration-200 text-xs sm:text-sm font-medium py-2 sm:py-3 px-3 sm:px-4 rounded-md sm:rounded-lg hover:bg-white/5 group"
                                                         initial={{ opacity: 0, y: 10 }}
                                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                                                         transition={{ duration: 0.4, delay: 0.8 + (index * 0.1), ease: "easeOut" }}
                                                     >
                                                         {link.name}
-                                                        <ExternalLink size={14} className="group-hover:scale-110 transition-transform duration-200" />
+                                                        <ExternalLink size={12} className="group-hover:scale-110 transition-transform duration-200" />
                                                     </motion.a>
                                                 ))}
                                             </div>
@@ -236,12 +236,12 @@ const AffiliateSignupSection = () => {
 
                                     {/* Footer section */}
                                     <motion.div
-                                        className="text-center space-y-3 pt-4 border-t border-white/10"
+                                        className="text-center space-y-2 sm:space-y-3 pt-3 sm:pt-4 border-t border-white/10"
                                         initial={{ opacity: 0 }}
                                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                                         transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
                                     >
-                                        <div className="flex justify-center gap-6 text-xs">
+                                        <div className="flex justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
                                             {footerLinks.map((link) => (
                                                 <a
                                                     key={link.name}
@@ -256,7 +256,7 @@ const AffiliateSignupSection = () => {
                                         </div>
                                         <a
                                             href="mailto:team@thrillaffiliates.com"
-                                            className="text-white/50 hover:text-[#5CFFC1] transition-colors duration-200 text-sm font-medium inline-block"
+                                            className="text-white/50 hover:text-[#5CFFC1] transition-colors duration-200 text-xs sm:text-sm font-medium inline-block"
                                         >
                                             team@thrillaffiliates.com
                                         </a>

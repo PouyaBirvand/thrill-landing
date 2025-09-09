@@ -106,7 +106,7 @@ const Feature1SvgComponent = (props) => (
               shapeRendering="crispEdges"
             />
           </motion.g>
-          <g > {/* z-index پایین */}
+          <g > 
           <motion.path
             id="Vector 38"
             d="M102.75 -27.153V60.7757L124.461 82.4864V192.669V256.173L102.75 278.426V395.664"

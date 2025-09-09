@@ -1,6 +1,7 @@
 import * as React from "react";
+import { motion } from "framer-motion";
 
-const SvgIcon = (props) => (
+const Feature2SvgComponent = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="629"
@@ -24,21 +25,29 @@ const SvgIcon = (props) => (
         ></path>
       </mask>
       <g mask="url(#mask0_2055_279)">
-        <path
-          stroke="url(#paint1_linear_2055_279)"
-          strokeDasharray="6.73 6.73"
+        <motion.path
+          stroke="white"
           strokeOpacity="0.3"
           strokeWidth="1.858"
+          strokeDasharray="6.73 6.73"
           d="M43.021 24.565v469.988"
-        ></path>
-        <path
-          stroke="url(#paint2_linear_2055_279)"
-          strokeDasharray="6.73 6.73"
+          whileInView={{ strokeDashoffset: [0, -13.46] }}
+          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.path
+          stroke="white"
           strokeOpacity="0.3"
           strokeWidth="1.858"
-          d="M628.256 220.54H51.031"
-        ></path>
-        <g filter="url(#filter0_i_2055_279)">
+          strokeDasharray="6.73 6.73"
+          d="M628.256 205.54H51.031"
+          whileInView={{ strokeDashoffset: [0, -13.46] }}
+          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.g
+          filter="url(#filter0_i_2055_279)"
+          whileInView={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
           <path
             fill="#fff"
             fillOpacity="0.01"
@@ -70,8 +79,12 @@ const SvgIcon = (props) => (
               clipRule="evenodd"
             ></path>
           </g>
-        </g>
-        <g filter="url(#filter1_i_2055_279)">
+        </motion.g>
+        <motion.g
+          filter="url(#filter1_i_2055_279)"
+          whileInView={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
           <path
             fill="#fff"
             fillOpacity="0.01"
@@ -103,8 +116,12 @@ const SvgIcon = (props) => (
               clipRule="evenodd"
             ></path>
           </g>
-        </g>
-        <g filter="url(#filter2_i_2055_279)">
+        </motion.g>
+        <motion.g
+          filter="url(#filter2_i_2055_279)"
+          whileInView={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
           <path
             fill="#fff"
             fillOpacity="0.01"
@@ -136,8 +153,12 @@ const SvgIcon = (props) => (
               clipRule="evenodd"
             ></path>
           </g>
-        </g>
-        <g filter="url(#filter3_i_2055_279)">
+        </motion.g>
+        <motion.g
+          filter="url(#filter3_i_2055_279)"
+          whileInView={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
           <path
             fill="#fff"
             fillOpacity="0.01"
@@ -169,7 +190,7 @@ const SvgIcon = (props) => (
               clipRule="evenodd"
             ></path>
           </g>
-        </g>
+        </motion.g>
       </g>
     </g>
     <defs>
@@ -390,4 +411,4 @@ const SvgIcon = (props) => (
   </svg>
 );
 
-export default SvgIcon;
+export default Feature2SvgComponent;
