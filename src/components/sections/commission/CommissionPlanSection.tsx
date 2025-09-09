@@ -9,7 +9,7 @@ export default function CommissionPlanSection() {
 
     return (
         <section id="plan" ref={ref}>
-            <div className="flex flex-col items-center justify-center gap-2 pt-48">
+            <div className="flex flex-col items-center justify-center gap-2 pt-14 pb-12">
                 {/* Block 1: Subtitle */}
                 <motion.h3
                     className="uppercase text-[#83FFDA] font-semibold text-sm sm:text-base mb-2"
@@ -22,7 +22,7 @@ export default function CommissionPlanSection() {
 
                 {/* Block 2: Main Title */}
                 <motion.h1
-                    className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase"
+                    className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold text-center uppercase"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
@@ -41,7 +41,7 @@ export default function CommissionPlanSection() {
                     Custom deal structures are available directly through your account manager.
                 </motion.p>
             </div>
-            <CommissionCard/>
+            <CommissionCard />
         </section>
     )
 }

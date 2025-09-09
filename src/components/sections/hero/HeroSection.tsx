@@ -65,7 +65,7 @@ export default function HeroSection() {
 
       {/* Left video - با scroll effects */}
       <motion.div
-        className="absolute top-0 z-[5] pointer-events-none
+        className="absolute top-0 z-[2] pointer-events-none
                    left-[-12rem] h-full w-[100%]
                    sm:left-[-250px] sm:w-[100%]
                    md:left-[-270px] md:w-[95%]
@@ -114,7 +114,7 @@ export default function HeroSection() {
         
         {/* Background blur effect */}
         <motion.div 
-          className="h-[12rem] w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" 
+          className="h-[12rem] hidden sm:block w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" 
           style={{ y: backgroundY }}
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: 20 }}
@@ -129,7 +129,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
-          streaming partnership you've Been waiting For
+          The Affiliate partnership you've Been waiting For
         </motion.h1>
 
         {/* Block 3: Description */}
@@ -141,10 +141,10 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
         >
           <p className="text-neutral-lightGray text-md sm:text-xl">
-            It's time to make your streams Thrilling.
+          It’s time to make your reach thrilling.
           </p>
           <p className="text-neutral-lightGray text-md sm:text-xl">
-            Join the best casino affiliate program built around creators.
+            Join the best casino affiliate programbuilt for creators, streamers, publishers, and platforms of all kinds.
           </p>
         </motion.div>
 

@@ -6,9 +6,9 @@ export const plans = [
       desc: 'We offer flexible CPA and hybrid models designed to fit your traffic and conversion style.',
     },
     {
-      eyebrow: 'GET UP FROM THE START',
+      eyebrow: 'Get up to',
       highlight: '50%',
-      title: 'MAX REVENUE SHARE',
+      title: 'REVENUE SHARE',
       desc: 'Earn up to 50% commission across casino & sportsbook verticals.',
     },
     {
@@ -31,9 +31,9 @@ export const plans = [
     },
     {
       eyebrow: 'RECEIVE YOUR PAYOUTS',
-      highlight: '€200+',
+      highlight: '$100+',
       title: 'MONTHLY PAYOUTS',
-      desc: 'Paid in crypto or fiat. Min €100-250. Processed monthly.',
+      desc: 'Min payout of $100, processed monthly',
     },
   ]
   

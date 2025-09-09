@@ -30,15 +30,17 @@ export default function Footer() {
     }
 
     return (
-        <footer ref={ref} className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden">
-            {/* Right Shape - همانند Hero Section */}
+        <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden">
+            {/* Right Shape - بهبود یافته برای موبایل */}
             <motion.div
-                className="absolute top-[15rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
-                           right-0 h-full md:h-full w-[48.9vw]
-                           md:right-[-400px] md:w-[95%]
-                           lg:right-[-340px] lg:w-[80%]
-                           xl:right-[-340px] xl:w-[70%]
-                           2xl:right-[-390px] 2xl:w-[65%]"
+                className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
+                       right-[-100px] h-[25%] sm:h-[35%] w-[60%]
+                       sm:right-[-50px] sm:w-[40%]
+                       md:right-[-400px] md:w-[95%] md:h-full
+                       lg:right-[-440px] lg:w-[80%]
+                       xl:right-[-470px] xl:w-[70%]
+                       2xl:right-[-470px] 2xl:w-[65%]
+                       max-sm:!scale-[1.8]"
                 style={{
                     maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
                     WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
@@ -57,14 +59,16 @@ export default function Footer() {
                 />
             </motion.div>
 
-            {/* Left Shape - همانند Hero Section */}
+            {/* Left Shape - بهبود یافته برای موبایل */}
             <motion.div
-                className="absolute top-[15rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
-                           left-0 h-full md:h-full w-[48.9vw]
-                           md:left-[-400px] md:w-[95%]
-                           lg:left-[-340px] lg:w-[80%]
-                           xl:left-[-340px] xl:w-[70%]
-                           2xl:left-[-390px] 2xl:w-[65%]"
+                className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
+                       left-[-100px] h-[25%] sm:h-[35%] w-[60%]
+                       sm:left-[-50px] sm:w-[40%]
+                       md:left-[-400px] md:w-[95%] md:h-full
+                       lg:left-[-440px] lg:w-[80%]
+                       xl:left-[-470px] xl:w-[70%]
+                       2xl:left-[-470px] 2xl:w-[65%]
+                       max-sm:!scale-[1.8]"
                 style={{
                     maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
                     WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
@@ -95,13 +99,10 @@ export default function Footer() {
                             variants={mainVariants}
                         >
                             <h2 className="text-[28px] md:text-[45px] font-semibold mb-3">
-                                STREAM, EARN, GROW
+                                REFER, EARN, GROW
                             </h2>
                             <p className="text-white/70 mb-10 leading-relaxed">
-                                Thrill is a performance-first iGaming platform built by industry pros.
-                                <br />
-                                <br />
-                                With casino and sportsbook expertise, it offers bold design, smooth UX, and transparent terms to maximize value for players and partners.
+                                Thrill is a performance-first iGaming platform built by industry pros. With our casino and sportsbook expertise, bold design, smooth UX, and transparent terms, we give you the tools to maximise value for both your audience and your business.
                             </p>
                         </motion.div>
 

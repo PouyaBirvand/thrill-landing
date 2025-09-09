@@ -8,7 +8,7 @@ const StepsSection = () => {
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
     return (
-        <section id="guide" className="overflow-hidden pt-48 relative" ref={ref}>
+        <section id="guide" className="overflow-hidden pt-32 relative" ref={ref}>
             <div className="flex flex-col items-center justify-center gap-2 relative">
                 {/* Block 1: Subtitle */}
                 <motion.h3
@@ -26,10 +26,10 @@ const StepsSection = () => {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                 >
-                    <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase">
+                    <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-semibold text-center uppercase">
                         5 fast steps to
                     </h1>
-                    <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-bold text-center uppercase">
+                    <h1 className="text-neutral-white text-3xl sm:text-4xl lg:text-5xl max-w-5xl font-semibold text-center uppercase">
                         become an affiliate
                     </h1>
                 </motion.div>

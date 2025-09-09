@@ -11,6 +11,9 @@ interface FeatureCardProps {
   svgComponent?: React.FC; // Changed from svgPath to svgComponent for reusability
   imagePath: string;
   more_detail?: string;
+  toleft?: boolean;
+  size?: boolean;
+  maxstack?: boolean
   stats: {
     primary: { value: string; label: string };
     secondary: { value: string; label: string };
@@ -27,7 +30,10 @@ export default function FeatureCard({
   svgComponent: SvgComponent, // Now receiving the SVG component as prop
   imagePath,
   stats,
+  toleft,
   more_detail,
+  maxstack,
+  size,
   isExpanded: forcedExpanded,
   onClose,
   onExpand,
@@ -74,23 +80,22 @@ export default function FeatureCard({
       },
     };
   
-    const imageVariants: Variants = {
-      hidden: {
-        opacity: 0,
-        scale: 0.6,
-        y: 30,
-      },
-      visible: {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        transition: {
-          duration: 0.9,
-          ease: easeOut,
-          delay: 0.3,
-        },
-      },
-    };
+const imageVariants: Variants = {
+  hidden: {
+    opacity: 0.3,
+    scale: 0.9, 
+    y: 10, 
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.2, 
+      ease: "easeInOut", 
+    },
+  },
+};
 
   const toggleExpanded = () => {
     if (onExpand) {
@@ -254,7 +259,7 @@ export default function FeatureCard({
       >
         {/* Animated SVG Background */}
         <motion.div 
-          className="relative z-[99999]"
+          className={`relative ${maxstack && "z-[9]"} z-[99999]`}
           variants={svgVariants}
         >
           {SvgComponent && <SvgComponent />}
@@ -269,7 +274,7 @@ export default function FeatureCard({
             fill
             src={imagePath}
             alt={title}
-            className="object-contain scale-75 m-auto rounded-xl"
+            className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-7 xl:ml-7 lg:ml-7 md:ml-7 sm:ml-6 ml-5 sm:scale-75 scale-[0.65]"}`}
             style={{ zIndex: 1000 }}
           />
         </motion.div>
@@ -365,7 +370,7 @@ export default function FeatureCard({
               </div>
 
               {/* Stats Grid - Fixed height */}
-              <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[120px] h-auto w-full">
+              <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[165px] pt-2 h-auto w-full">
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
                     className={`text-white font-semibold leading-tight ${

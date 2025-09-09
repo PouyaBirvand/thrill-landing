@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 
 const CursorSpotlight = ({ 
@@ -14,11 +15,13 @@ const CursorSpotlight = ({
 }) => {
   const canvasRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [mouseInside, setMouseInside] = useState(false); // وضعیت حضور موس
+  const [mouseInside, setMouseInside] = useState(false);
   const [ripples, setRipples] = useState([]);
   const animationId = useRef(null);
   const dotsGrid = useRef([]);
   const rippleId = useRef(0);
+  const mouseThrottleId = useRef(null);
+  const leaveThrottleId = useRef(null);
 
   const hexToRgb = useCallback((hex) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -37,7 +40,42 @@ const CursorSpotlight = ({
     return Math.sqrt(dx * dx + dy * dy);
   }, []);
 
-  // چک کردن اینکه کلیک روی المان قابل تعامل است یا نه
+  const isInHeroVideoArea = useCallback((x, y) => {
+    const heroSection = document.getElementById('hero');
+    if (!heroSection) return false;
+
+    const rect = heroSection.getBoundingClientRect();
+    const heroTop = rect.top + window.scrollY;
+    const heroBottom = heroTop + rect.height;
+    
+    if (y < heroTop || y > heroBottom) return false;
+    
+    const windowWidth = window.innerWidth;
+    const centerZone = windowWidth * 0.5; 
+    const leftVideoZone = (windowWidth - centerZone) / 2;
+    const rightVideoZone = windowWidth - leftVideoZone;
+    
+    return x < leftVideoZone || x > rightVideoZone;
+  }, []);
+
+  const isInFooterVideoArea = useCallback((x, y) => {
+    const footerSection = document.getElementById('footer');
+    if (!footerSection) return false;
+
+    const rect = footerSection.getBoundingClientRect();
+    const footerTop = rect.top + window.scrollY + 170;
+    const footerBottom = footerTop + rect.height + 170;
+    
+    if (y < footerTop || y > footerBottom) return false;
+    
+    const windowWidth = window.innerWidth;
+    const centerZone = windowWidth * 0.55; 
+    const leftVideoZone = (windowWidth - centerZone) / 3;
+    const rightVideoZone = windowWidth - leftVideoZone;
+    
+    return x < leftVideoZone || x > rightVideoZone;
+  }, []);
+
   const isInteractiveElement = useCallback((element) => {
     if (!element) return false;
     
@@ -45,22 +83,18 @@ const CursorSpotlight = ({
     const interactiveRoles = ['button', 'link', 'tab', 'option', 'menuitem'];
     const interactiveTypes = ['button', 'submit', 'reset', 'checkbox', 'radio'];
     
-    // بررسی تگ
     if (interactiveTags.includes(element.tagName)) {
       return true;
     }
     
-    // بررسی نوع input
     if (element.type && interactiveTypes.includes(element.type)) {
       return true;
     }
     
-    // بررسی role
     if (element.getAttribute('role') && interactiveRoles.includes(element.getAttribute('role'))) {
       return true;
     }
     
-    // بررسی کلاس‌ها یا صفات مربوط به المان‌های تعاملی
     if (element.classList && (
       element.classList.contains('btn') ||
       element.classList.contains('button') ||
@@ -70,13 +104,11 @@ const CursorSpotlight = ({
       return true;
     }
     
-    // بررسی cursor pointer
     const computedStyle = window.getComputedStyle(element);
     if (computedStyle.cursor === 'pointer') {
       return true;
     }
     
-    // بررسی onclick handler
     if (element.onclick || element.getAttribute('onclick')) {
       return true;
     }
@@ -84,19 +116,17 @@ const CursorSpotlight = ({
     return false;
   }, []);
 
-  // بررسی اینکه آیا کلیک باید ripple ایجاد کند یا نه
   const shouldCreateRipple = useCallback((e) => {
     let element = e.target;
     
-    // بررسی المان کلیک شده و والدین آن
     while (element && element !== document.body) {
       if (isInteractiveElement(element)) {
-        return false; // روی المان تعاملی کلیک شده، ripple نساز
+        return false;
       }
       element = element.parentElement;
     }
     
-    return true; // می‌توان ripple ساخت
+    return true;
   }, [isInteractiveElement]);
 
   const addRipple = useCallback((x, y) => {
@@ -114,7 +144,6 @@ const CursorSpotlight = ({
     }, rippleDuration);
   }, [rippleDuration]);
 
-  // محاسبه شدت ripple
   const getRippleIntensity = useCallback((dotX, dotY, currentTime) => {
     let maxIntensity = 0;
     
@@ -143,7 +172,6 @@ const CursorSpotlight = ({
     return maxIntensity;
   }, [ripples, calculateDistance, rippleDuration, spacing, waveThickness, pulseStrength]);
 
-  // ایجاد grid نقطه‌ها
   const initializeGrid = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -164,7 +192,13 @@ const CursorSpotlight = ({
     dotsGrid.current = dots;
   }, [spacing]);
 
-  // رسم نقطه‌ها
+  const clearCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, []);
+
   const drawDots = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -172,11 +206,19 @@ const CursorSpotlight = ({
     const ctx = canvas.getContext('2d');
     const currentTime = Date.now();
 
-    // پاک کردن canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // اگر موس داخل نیست و هیچ ripple ای نداریم، کنوس رو پاک کن و انیمیشن رو متوقف کن
+    if (!mouseInside && ripples.length === 0) {
+      return;
+    }
+
     dotsGrid.current.forEach(dot => {
-      // اگر موس داخل صفحه نیست، فقط ripple را نشان بده
+      const absoluteY = dot.y + window.scrollY;
+      if (isInHeroVideoArea(dot.x, absoluteY) || isInFooterVideoArea(dot.x, absoluteY)) {
+        return; 
+      }
+
       const mouseOpacity = mouseInside ? (() => {
         const mouseDistance = calculateDistance(dot.x, dot.y, mousePos.x, mousePos.y);
         return mouseDistance < maxDistance 
@@ -184,21 +226,14 @@ const CursorSpotlight = ({
           : 0;
       })() : 0;
 
-      // شدت ripple
       const rippleIntensity = getRippleIntensity(dot.x, dot.y, currentTime);
-
-      // ترکیب افکت‌ها
       const totalOpacity = Math.min(1, mouseOpacity + rippleIntensity);
 
       if (totalOpacity > 0.02) {
-        // اندازه ثابت برای همه نقطه‌ها
         const radius = dotSize / 2;
-        
-        // فقط در موج، اندازه کمی تغییر کند
         const rippleScale = rippleIntensity > 0 ? 1 + (rippleIntensity * 0.3) : 1;
         const finalRadius = radius * rippleScale;
 
-        // رسم گلو (shadow) فقط برای نقطه‌های روشن
         if (totalOpacity > 0.3) {
           const glowSize = 6 + (rippleIntensity * 8);
           const glowOpacity = totalOpacity * glowIntensity * 0.6;
@@ -216,22 +251,19 @@ const CursorSpotlight = ({
           ctx.fill();
         }
 
-        // رسم نقطه اصلی با opacity متغیر
         ctx.fillStyle = `rgba(${baseColor.r}, ${baseColor.g}, ${baseColor.b}, ${totalOpacity})`;
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, finalRadius, 0, Math.PI * 2);
         ctx.fill();
       }
     });
-  }, [mousePos, mouseInside, calculateDistance, getRippleIntensity, maxDistance, dotSize, baseColor, glowIntensity]);
+  }, [mousePos, mouseInside, calculateDistance, getRippleIntensity, maxDistance, dotSize, baseColor, glowIntensity, isInHeroVideoArea, isInFooterVideoArea, ripples.length]);
 
-  // انیمیشن لوپ
   const animate = useCallback(() => {
     drawDots();
     animationId.current = requestAnimationFrame(animate);
   }, [drawDots]);
 
-  // تنظیم اندازه canvas
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -242,26 +274,39 @@ const CursorSpotlight = ({
     initializeGrid();
   }, [initializeGrid]);
 
-  // Mouse handlers
   useEffect(() => {
-    let throttleId = null;
-    
     const handleMouseMove = (e) => {
-      if (throttleId) return;
+      // کنسل کردن هر leave timeout قبلی
+      if (leaveThrottleId.current) {
+        clearTimeout(leaveThrottleId.current);
+        leaveThrottleId.current = null;
+      }
+
+      if (mouseThrottleId.current) return;
       
-      throttleId = setTimeout(() => {
+      mouseThrottleId.current = setTimeout(() => {
         setMousePos({ x: e.clientX, y: e.clientY });
         setMouseInside(true);
-        throttleId = null;
+        mouseThrottleId.current = null;
       }, 16);
     };
 
     const handleMouseLeave = () => {
-      setMouseInside(false);
+      // کنسل کردن هر mouse move timeout قبلی
+      if (mouseThrottleId.current) {
+        clearTimeout(mouseThrottleId.current);
+        mouseThrottleId.current = null;
+      }
+
+      // تاخیر در پاک کردن تا اطمینان حاصل شه که انیمیشن اجرا شده
+      leaveThrottleId.current = setTimeout(() => {
+        setMouseInside(false);
+        clearCanvas();
+        leaveThrottleId.current = null;
+      }, 50); // کمی بیشتر از mouse move throttle
     };
 
     const handleClick = (e) => {
-      // فقط اگر نباید روی المان تعاملی ripple ساخت
       if (shouldCreateRipple(e)) {
         addRipple(e.clientX, e.clientY);
       }
@@ -270,14 +315,15 @@ const CursorSpotlight = ({
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setMouseInside(false);
+        clearCanvas();
       }
     };
 
     const handleBlur = () => {
       setMouseInside(false);
+      clearCanvas();
     };
 
-    // Event listeners
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
     document.addEventListener('click', handleClick, { passive: true });
@@ -292,11 +338,17 @@ const CursorSpotlight = ({
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('blur', handleBlur);
       window.removeEventListener('resize', resizeCanvas);
-      if (throttleId) clearTimeout(throttleId);
+      
+      // پاک کردن timeouts
+      if (mouseThrottleId.current) {
+        clearTimeout(mouseThrottleId.current);
+      }
+      if (leaveThrottleId.current) {
+        clearTimeout(leaveThrottleId.current);
+      }
     };
-  }, [addRipple, resizeCanvas, shouldCreateRipple]);
+  }, [addRipple, resizeCanvas, shouldCreateRipple, clearCanvas]);
 
-  // راه‌اندازی اولیه
   useEffect(() => {
     resizeCanvas();
     animationId.current = requestAnimationFrame(animate);
