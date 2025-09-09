@@ -113,7 +113,7 @@ const imageVariants: Variants = {
         : "h-[310px] sm:h-[300px] md:h-[310px] lg:h-[325px] xl:h-[380px]";
     } else {
       return isExpanded
-        ? "h-[740px] sm:h-[770px] md:h-[800px] lg:h-[830px] xl:h-[850px]"
+        ? "h-[740px] sm:h-[800px] md:h-[850px] lg:h-[860px] xl:h-[890px]"
         : "h-[310px] sm:h-[300px] md:h-[310px] lg:h-[325px] xl:h-[380px]";
     }
   };
@@ -370,7 +370,7 @@ const imageVariants: Variants = {
               </div>
 
               {/* Stats Grid - Fixed height */}
-              <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[165px] pt-2 h-auto w-full">
+              <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[185px] pt-2 h-auto w-full">
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
                     className={`text-white font-semibold leading-tight ${
