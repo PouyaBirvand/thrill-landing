@@ -26,8 +26,8 @@ export default function FeaturesSection() {
 
   return (
     <section
-        ref={sectionRef}
-        className="overflow-hidden pt-32 pb-12 relative"
+      ref={sectionRef}
+      className="overflow-hidden pt-28 md:pt-52 pb-8 relative"
     >
       <motion.div
         ref={contentRef}

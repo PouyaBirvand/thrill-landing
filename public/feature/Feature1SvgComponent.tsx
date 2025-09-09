@@ -128,7 +128,7 @@ const Feature1SvgComponent = (props) => (
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
           />
         </g>
-          <motion.path
+          {/* <motion.path
             id="Vector 40"
             d="M326.747 -70.575V17.3537L305.036 39.0645V149.247V212.751L326.747 235.004V352.242"
             stroke="white"
@@ -147,7 +147,7 @@ const Feature1SvgComponent = (props) => (
             strokeDasharray="5.34 5.34"
             whileInView={{ strokeDashoffset: [0, -10.68] }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          />
+          /> */}
           <motion.rect
             id="image 1"
             x={165.689}

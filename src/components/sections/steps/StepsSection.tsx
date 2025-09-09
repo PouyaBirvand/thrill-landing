@@ -8,7 +8,7 @@ const StepsSection = () => {
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
     return (
-        <section id="guide" className="overflow-hidden pt-32 relative" ref={ref}>
+        <section id="guide" className="overflow-hidden pt-28 relative" ref={ref}>
             <div className="flex flex-col items-center justify-center gap-2 relative">
                 {/* Block 1: Subtitle */}
                 <motion.h3
@@ -189,9 +189,9 @@ const StepsSection = () => {
                                         transition={{ duration: 0.5, delay: 0.8 + index * 0.15, ease: "easeOut" }}
                                     >
                                         <span className="text-accent-green_light text-xl font-semibold">{step.number}</span>
-                                        
+
                                         {/* Small dot indicator */}
-       
+
                                     </motion.div>
 
                                     {/* Content */}

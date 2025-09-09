@@ -40,18 +40,18 @@ const AffiliateSignupSection = () => {
     return (
         <section
             id="signin"
-            className="min-h-[500px] sm:min-h-[600px] lg:min-h-screen relative  flex items-center justify-center"
+            className="min-h-[500px] sm:min-h-[600px] lg:min-h-screen relative pt-[8rem] md:pt-0 flex items-center justify-center"
             ref={ref}
         >
             {/* Background blur effects */}
             <motion.div
-                className="h-[15rem] w-[15rem] sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[30rem] xl:w-[30rem] left-[-10%] sm:left-[-8%] lg:left-[-2%] top-[20%] sm:top-[25%] lg:top-[35%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
+                className="h-[15rem] w-[15rem] sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[30rem] xl:w-[30rem] left-[-10%] sm:left-[-8%] lg:left-[-2%] top-[20%] sm:top-[25%] lg:top-[25%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
             />
             <motion.div
-                className="h-[15rem] w-[15rem] sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[30rem] xl:w-[30rem] right-[-10%] sm:right-[-8%] lg:right-[-2%] top-[20%] sm:top-[25%] lg:top-[35%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
+                className="h-[15rem] w-[15rem] sm:h-[20rem] sm:w-[20rem] lg:h-[25rem] lg:w-[25rem] xl:h-[30rem] xl:w-[30rem] right-[-10%] sm:right-[-8%] lg:right-[-2%] top-[20%] sm:top-[25%] lg:top-[25%] rounded-full bg-[#363a4e] blur-2xl z-[0] bg-opacity-90 absolute"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
