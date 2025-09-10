@@ -29,9 +29,9 @@ export default function FeaturesSection() {
       ref={sectionRef}
       className="overflow-hidden pt-28 md:pt-52 relative"
     >
-      <motion.div
+    <motion.div
         ref={contentRef}
-        className="flex flex-col items-center justify-center gap-4 relative z-10 px-4 sm:px-6 md:px-8"
+        className="flex flex-col items-center justify-center  relative z-10 px-4 sm:px-6 md:px-8"
         style={{
           scale: contentScale,
           opacity: contentOpacity,
@@ -39,7 +39,7 @@ export default function FeaturesSection() {
       >
         {/* Subtitle */}
         <motion.h3
-          className="uppercase text-accent-green_light font-semibold text-sm sm:text-base mb-2"
+          className="uppercase text-accent-green_light font-semibold text-sm sm:text-base mb-3"
           style={{ y: subtitleY }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ export default function FeaturesSection() {
 
         {/* Description */}
         <motion.div
-          className="text-center space-y-1 mt-4 px-4"
+          className="text-center space-y-1  px-4"
           style={{ y: descriptionY }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}

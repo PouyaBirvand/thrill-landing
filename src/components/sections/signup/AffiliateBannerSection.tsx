@@ -3,11 +3,25 @@
 import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 import { motion, useInView, easeOut } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function AffiliateBannerSection() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.25 });
+    
+    // State for screen size detection
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768); // 768px is md breakpoint
+        };
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
 
     // Animation variants for the main container
     const containerVariants = {
@@ -66,7 +80,7 @@ export default function AffiliateBannerSection() {
     };
 
     return (
-        <section id="signin" className="w-full pt-[8rem] md:pt-[6rem]" ref={ref}>
+        <section id="signin" className="w-full pt-[8rem] md:pt-[6rem] lg:px-0 px-4" ref={ref}>
             <motion.div
                 className="relative rounded-[32px] overflow-hidden border-[#FFFFFF1F] border"
                 initial="hidden"
@@ -151,7 +165,7 @@ export default function AffiliateBannerSection() {
                     </div>
 
                     {/* Right Content */}
-                    <div className="flex-shrink-0 text-center lg:text-right space-y-6 lg:space-y-8">
+                    <div className="flex-shrink-0 text-center lg:text-right space-y-6 lg:space-y-12">
                         {/* Description */}
                         <motion.p
                             className="text-white/50 text-sm lg:text-base max-w-md lg:max-w-[435px] lg:text-left text-center leading-relaxed"
@@ -169,7 +183,8 @@ export default function AffiliateBannerSection() {
                             animate={isInView ? 'show' : 'hidden'}
                             variants={getContentVariants(0.5)}
                         >
-                            <Button 
+                            <Button
+                                size={isMobile ? "sm" : "default"}
                                 className="!w-full !shadow-signin-glow !z-[9999]"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}

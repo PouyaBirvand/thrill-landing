@@ -253,7 +253,7 @@ const imageVariants: Variants = {
       <div
         className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
           isModal
-            ? "h-[260px] mt-8"
+            ? "h-[260px]"
             : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
         }`}
       >
