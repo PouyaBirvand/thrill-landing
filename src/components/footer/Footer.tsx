@@ -30,7 +30,7 @@ export default function Footer() {
     }
 
     return (
-        <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden">
+        <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden z-0">
             {/* Right Shape - بهبود یافته برای موبایل */}
             <motion.div
                 className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
