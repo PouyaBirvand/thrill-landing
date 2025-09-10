@@ -8,7 +8,7 @@ const StepsSection = () => {
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
     return (
-        <section id="guide" className="overflow-hidden pt-28 relative" ref={ref}>
+        <section id="guide" className="overflow-hidden pt-32 relative" ref={ref}>
             <div className="flex flex-col items-center justify-center gap-2 relative">
                 {/* Block 1: Subtitle */}
                 <motion.h3
@@ -50,7 +50,7 @@ const StepsSection = () => {
             </div>
 
             {/* Desktop Version - Unchanged */}
-            <div className="hidden md:block min-[467px]:mt-28 flex items-center justify-center w-full transition-all duration-100">
+            <div className="hidden md:block min-[467px]:mt-24 flex items-center justify-center w-full transition-all duration-100">
                 <div className="relative flex-col items-end justify-end w-full max-[467px]:scale-[0.8] transition-all duration-100">
                     {/* Top Stepper */}
                     <div className="transition-all duration-100 md:flex max-md:left-[-200px] flex md:flex-row flex-col items-center justify-center gap-32 relative">
@@ -164,7 +164,7 @@ const StepsSection = () => {
             </div>
 
             {/* Mobile Version - Clean Minimal Timeline */}
-            <div className="md:hidden mt-20 px-8">
+            <div className="md:hidden pt-12 md:pt-24 px-8">
                 <div className="relative max-w-xs mx-auto">
                     {steps.map((step, index) => {
                         const isLast = index === steps.length - 1;
@@ -183,7 +183,7 @@ const StepsSection = () => {
                                 <div className="flex items-start gap-6">
                                     {/* Step Number */}
                                     <motion.div
-                                        className="flex-shrink-0 w-16 h-16 bg-slate-900 border-2 border-accent-green_light/50 rounded-full flex items-center justify-center relative"
+                                        className="flex-shrink-0 w-16 h-16 bg-body border-2 border-accent-green_light/50 rounded-full flex items-center justify-center relative"
                                         initial={{ opacity: 0, scale: 0 }}
                                         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                                         transition={{ duration: 0.5, delay: 0.8 + index * 0.15, ease: "easeOut" }}

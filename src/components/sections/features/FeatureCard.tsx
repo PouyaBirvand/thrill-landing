@@ -282,7 +282,7 @@ const imageVariants: Variants = {
     </motion.div>
 
         {/* Main Content Area - Flex grow to fill remaining space */}
-        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 pb-6 xs:pb-4 sm:pb-7 sm:pt-0 pt-3 min-h-0">
+        <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 sm:pt-0 pt-3 min-h-0">
           {/* Header Section - Title + Button (Non-Modal) - Fixed height */}
           {!isModal && (
             <div className="flex items-center justify-between flex-shrink-0 pt-3 h-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px] xl:h-[70px]">
@@ -376,7 +376,7 @@ const imageVariants: Variants = {
                     className={`text-white font-semibold leading-tight ${
                       isModal
                         ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                        : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
+                        : "text-lg xs:text-xl sm:text-2xl md:text-md lg:text-2xl uppercase"
                     }`}
                   >
                     {stats.primary.value}
@@ -396,7 +396,7 @@ const imageVariants: Variants = {
                     className={`text-white font-semibold leading-tight ${
                       isModal
                         ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                        : "text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[28px] xl:text-[28px]"
+                        : "text-lg xs:text-xl sm:text-2xl md:text-md lg:text-2xl uppercase"
                     }`}
                   >
                     {stats.secondary.value}

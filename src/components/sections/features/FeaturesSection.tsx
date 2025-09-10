@@ -27,7 +27,7 @@ export default function FeaturesSection() {
   return (
     <section
       ref={sectionRef}
-      className="overflow-hidden pt-28 md:pt-52 pb-8 relative"
+      className="overflow-hidden pt-28 md:pt-52 relative"
     >
       <motion.div
         ref={contentRef}
@@ -56,10 +56,10 @@ export default function FeaturesSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
-          <h1 className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold uppercase">
+          <h1 className="text-neutral-white text-[25.6px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold uppercase">
             built for performance.
           </h1>
-          <h1 className="text-neutral-white text-[28px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold uppercase">
+          <h1 className="text-neutral-white text-[25.6px] sm:text-4xl lg:text-5xl max-w-5xl font-semibold uppercase">
             backed by experience.
           </h1>
         </motion.div>

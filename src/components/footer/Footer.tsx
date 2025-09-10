@@ -216,14 +216,14 @@ export default function Footer() {
                         </div>
                         {/* Social Icons */}
                         <div className="flex space-x-4">
-                            <a href="https://x.com/Thrill_com" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300 bg-accent-social hover:bg-accent-green">
+                            <a href="https://x.com/Thrill_com" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 bg-accent-social hover:scale-110">
                                 <svg
                                     width="16"
                                     height="16"
                                     viewBox="0 0 16 16"
                                     fill="white"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="transition-colors group-hover:fill-accent-green_light hover:fill-accent-green_light"
+                                    className=""
                                 >
                                     <path
                                         fillRule="evenodd"
@@ -233,14 +233,14 @@ export default function Footer() {
                                 </svg>
                             </a>
 
-                            <a href="https://www.instagram.com/thrill_com/" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300 bg-accent-social hover:bg-accent-green">
+                            <a href="https://www.instagram.com/thrill_com/" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 bg-accent-social hover:scale-110">
                                 <svg
                                     width="18"
                                     height="18"
                                     viewBox="0 0 18 18"
                                     fill="white"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="transition-colors group-hover:fill-accent-green_light hover:fill-accent-green_light"
+                                    className=""
                                 >
                                     <path
                                         fillRule="evenodd"
@@ -250,14 +250,14 @@ export default function Footer() {
                                 </svg>
                             </a>
 
-                            <a href="https://discord.com/invite/YqA2Kn32xP" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300 bg-accent-social hover:bg-accent-green">
+                            <a href="https://discord.com/invite/YqA2Kn32xP" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 bg-accent-social hover:scale-110">
                                 <svg
                                     width="18"
                                     height="14"
                                     viewBox="0 0 18 14"
                                     fill="white"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="transition-colors group-hover:fill-accent-green_light hover:fill-accent-green_light"
+                                    className=""
                                 >
                                     <path
                                         fillRule="evenodd"
@@ -267,14 +267,14 @@ export default function Footer() {
                                 </svg>
                             </a>
 
-                            <a href="https://t.me/Thrillcom" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300 bg-accent-social hover:bg-accent-green">
+                            <a href="https://t.me/Thrillcom" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 bg-accent-social hover:scale-110">
                                 <svg
                                     width="18"
                                     height="18"
                                     viewBox="0 0 18 18"
                                     fill="white"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="transition-colors group-hover:fill-accent-green_light hover:fill-accent-green_light"
+                                    className=""
                                 >
                                     <path
                                         fillRule="evenodd"

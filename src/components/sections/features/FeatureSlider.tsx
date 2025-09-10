@@ -18,7 +18,7 @@ export default function FeatureSlider() {
   return (
     <motion.div
       ref={ref}
-      className="relative w-full  bg-body"
+      className="relative w-full bg-body pt-12 md:pt-24"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.8, ease: "easeOut" }}

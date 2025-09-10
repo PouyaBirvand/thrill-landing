@@ -9,7 +9,7 @@ export default function CommissionPlanSection() {
 
     return (
         <section id="plan" ref={ref}>
-            <div className="flex flex-col items-center justify-center gap-2 lg:pt-0 pt-28">
+            <div className="flex flex-col items-center justify-center gap-2 sm:pt-36 pt-28">
                 {/* Block 1: Subtitle */}
                 <motion.h3
                     className="uppercase text-[#83FFDA] font-semibold text-sm sm:text-base mb-2"

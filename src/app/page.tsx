@@ -4,6 +4,7 @@ import CommissionPlanSection from "@/components/sections/commission/CommissionPl
 import FeatureSlider from "@/components/sections/features/FeatureSlider";
 import FeaturesSection from "@/components/sections/features/FeaturesSection";
 import HeroSection from "@/components/sections/hero/HeroSection";
+import AffiliateBannerSection from "@/components/sections/signup/AffiliateBannerSection";
 import AffiliateSignupForm from "@/components/sections/signup/SignUpSection";
 import StepsSection from "@/components/sections/steps/StepsSection";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
@@ -26,7 +27,8 @@ export default function Home() {
           <FeaturesSection />
           <FeatureSlider />
           <StepsSection />
-          <AffiliateSignupForm />
+          {/* <AffiliateSignupForm /> */}
+          <AffiliateBannerSection/>
           <CommissionPlanSection />
         </Container>
       </div>
