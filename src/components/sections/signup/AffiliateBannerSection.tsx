@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 
 export default function AffiliateBannerSection() {
     return (
-        <section id="signin" className="w-full pt-[8rem] md:pt-[2rem]">
+        <section id="signin" className="w-full pt-[8rem] md:pt-[6rem]">
             <div className="relative rounded-[32px]  overflow-hidden border-[#FFFFFF1F] border">
 
                 {/* Corner Plus Icons */}
