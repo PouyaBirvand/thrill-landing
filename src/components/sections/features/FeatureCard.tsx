@@ -3,9 +3,10 @@ import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { easeOut, motion, Variants } from "framer-motion";
-
+import VectoreLine from "@/../public/feature/Feature4SvgComponent";
 
 interface FeatureCardProps {
+  index: number;
   title: string;
   description: string;
   svgComponent?: React.FC; // Changed from svgPath to svgComponent for reusability
@@ -13,7 +14,7 @@ interface FeatureCardProps {
   more_detail?: string;
   toleft?: boolean;
   size?: boolean;
-  maxstack?: boolean
+  maxstack?: boolean;
   stats: {
     primary: { value: string; label: string };
     secondary: { value: string; label: string };
@@ -25,6 +26,7 @@ interface FeatureCardProps {
 }
 
 export default function FeatureCard({
+  index,
   title,
   description,
   svgComponent: SvgComponent, // Now receiving the SVG component as prop
@@ -45,57 +47,57 @@ export default function FeatureCard({
 
   const isExpanded =
     forcedExpanded !== undefined ? forcedExpanded : localExpanded;
-    const containerVariants: Variants = {
-      hidden: {
-        opacity: 0,
-        y: 50,
-        scale: 0.9,
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-          duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          staggerChildren: 0.2,
-        },
-      },
-    };
-  
-    const svgVariants: Variants = {
-      hidden: {
-        opacity: 0,
-        scale: 0.8,
-        rotate: -10,
-      },
-      visible: {
-        opacity: 1,
-        scale: 1,
-        rotate: 0,
-        transition: {
-          duration: 1,
-          ease: easeOut,
-        },
-      },
-    };
-  
-const imageVariants: Variants = {
-  hidden: {
-    opacity: 0.3,
-    scale: 0.9, 
-    y: 10, 
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.2, 
-      ease: "easeInOut", 
+  const containerVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+      scale: 0.9,
     },
-  },
-};
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const svgVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      rotate: -10,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 1,
+        ease: easeOut,
+      },
+    },
+  };
+
+  const imageVariants: Variants = {
+    hidden: {
+      opacity: 0.3,
+      scale: 0.9,
+      y: 10,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
+    },
+  };
 
   const toggleExpanded = () => {
     if (onExpand) {
@@ -242,44 +244,48 @@ const imageVariants: Variants = {
 
       {/* Content Container - Fixed height */}
       <div className="relative w-full h-full rounded-[24px] bg-[#F8F8F805] flex flex-col overflow-hidden">
+        {index === 2 && (
+          <div className="vectore-line w-[50px] h-[50px] absolute 2xl:top-[170px] xl:top-[170px] lg:top-[135px] 2xl:left-[110px] xl:left-[100px] lg:left-[100px] md:top-[130px] md:left-[110px] sm:top-[125px] sm:left-[100px] top-[130px] [@media(max-width:640px)]:left-[23vw]">
+            <VectoreLine
+              className="middle-vectore-line md:w-[50px] md:h-[50px] sm:w-[4rem] sm:h-[3rem] w-[3.6rem] h-[2rem]  relative bottom-2"
+            />
+          </div>
+        )}
         {/* Image Section - Fixed height */}
-        <motion.div 
-      className="relative"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }} // Trigger when 30% is visible
-    >
-      <div
-        className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
-          isModal
-            ? "h-[260px]"
-            : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
-        }`}
-      >
-        {/* Animated SVG Background */}
-        <motion.div 
-          className={`relative ${maxstack && "z-[9]"} z-[99999]`}
-          variants={svgVariants}
-        >
-          {SvgComponent && <SvgComponent />}
-        </motion.div>
-
-        {/* Animated Center PNG Image */}
         <motion.div
-          variants={imageVariants}
-          className="absolute inset-0"
+          className="relative"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }} // Trigger when 30% is visible
         >
-          <Image
-            fill
-            src={imagePath}
-            alt={title}
-            className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-7 xl:ml-7 lg:ml-7 md:ml-7 sm:ml-6 ml-5 sm:scale-75 scale-[0.65]"}`}
-            style={{ zIndex: 1000 }}
-          />
+          <div
+            className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
+              isModal
+                ? "h-[260px]"
+                : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
+            }`}
+          >
+            {/* Animated SVG Background */}
+            <motion.div
+              className={`relative ${maxstack && "z-[9]"} z-[99999]`}
+              variants={svgVariants}
+            >
+              {SvgComponent && <SvgComponent />}
+            </motion.div>
+
+            {/* Animated Center PNG Image */}
+            <motion.div variants={imageVariants} className="absolute inset-0">
+              <Image
+                fill
+                src={imagePath}
+                alt={title}
+                className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-7 xl:ml-7 lg:ml-7 md:ml-7 sm:ml-6 ml-5 sm:scale-75 scale-[0.65]"}`}
+                style={{ zIndex: 1000 }}
+              />
+            </motion.div>
+          </div>
         </motion.div>
-      </div>
-    </motion.div>
 
         {/* Main Content Area - Flex grow to fill remaining space */}
         <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 sm:pt-0 pt-3 min-h-0">

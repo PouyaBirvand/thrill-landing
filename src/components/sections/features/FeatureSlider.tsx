@@ -31,7 +31,7 @@ export default function FeatureSlider() {
   return (
     <motion.div
       ref={ref}
-      className="relative w-full bg-body pt-12 md:pt-24"
+      className="relative w-full bg-body pt-6 md:pt-8"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -66,7 +66,7 @@ export default function FeatureSlider() {
 
         {/* Mobile: Stack cards vertically */}
         {isMobile ? (
-          <div className="flex flex-col items-center gap-4 px-4">
+          <div className="flex flex-col gap-4 px-4">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -74,7 +74,7 @@ export default function FeatureSlider() {
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
               >
-                <FeatureCard {...feature} />
+                <FeatureCard index={index} {...feature} />
               </motion.div>
             ))}
           </div>
@@ -140,7 +140,7 @@ export default function FeatureSlider() {
           >
             {features.map((feature, index) => (
               <SwiperSlide key={index} className="h-auto">
-                <FeatureCard {...feature} />
+                <FeatureCard index={index} {...feature} />
               </SwiperSlide>
             ))}
           </Swiper>
