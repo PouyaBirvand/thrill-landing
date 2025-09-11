@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 import { motion, useInView, easeOut } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function AffiliateBannerSection() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.25 });
-    
+
     // State for screen size detection
     const [isMobile, setIsMobile] = useState(false);
 
@@ -183,15 +184,21 @@ export default function AffiliateBannerSection() {
                             animate={isInView ? 'show' : 'hidden'}
                             variants={getContentVariants(0.5)}
                         >
-                            <Button
-                                size={isMobile ? "sm" : "default"}
-                                className="!w-full !shadow-signin-glow !z-[9999]"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                transition={{ duration: 0.001, ease: 'easeOut' }}
+                            <Link
+                                href="https://dashboard.thrillaffiliates.com/partner/register"
+                                rel="noopener noreferrer"
                             >
-                                BECOME AN AFFILIATE
-                            </Button>
+                                <Button
+                                    size={isMobile ? "sm" : "default"}
+                                    className="!w-full !shadow-signin-glow !z-[9999]"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    transition={{ duration: 0.001, ease: 'easeOut' }}
+                                >
+                                    BECOME AN AFFILIATE
+                                </Button>
+
+                            </Link>
                         </motion.div>
                     </div>
                 </div>

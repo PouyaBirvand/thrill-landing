@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Container from '../common/Container'
 import { useRef } from 'react'
 import { useNavigate } from '@/hooks/useNavigate'
+import Link from 'next/link'
 
 export default function Footer() {
     const ref = useRef<HTMLElement | null>(null)
@@ -178,15 +179,20 @@ export default function Footer() {
                         animate={isInView ? "show" : "hidden"}
                         variants={buttonVariants}
                     >
-                        <Button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
-                            transition={{ duration: 0.001, ease: 'easeOut' }}
-                            className="!shadow-signin-glow !p-0 w-[258px]"
-                            size="lg"
+                        <Link
+                            href="https://dashboard.thrillaffiliates.com/partner/register"
+                            rel="noopener noreferrer"
                         >
-                            BECOME AN AFFILIATE
-                        </Button>
+                            <Button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                                transition={{ duration: 0.001, ease: 'easeOut' }}
+                                className="!shadow-signin-glow !p-0 w-[258px]"
+                                size="lg"
+                            >
+                                BECOME AN AFFILIATE
+                            </Button>
+                        </Link>
                     </motion.div>
 
                     {/* Bottom Section */}
