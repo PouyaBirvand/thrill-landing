@@ -66,7 +66,7 @@ export default function FeatureSlider() {
 
         {/* Mobile: Stack cards vertically */}
         {isMobile ? (
-          <div className="flex flex-col gap-4 px-4">
+          <div className="flex flex-col items-center gap-4 px-4">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
