@@ -81,7 +81,7 @@ export default function AffiliateBannerSection() {
     };
 
     return (
-        <section id="signin" className="w-full pt-[8rem] md:pt-[6rem] lg:px-0 px-4" ref={ref}>
+        <section id="signin" className="w-full pt-[8rem] md:pt-[6rem] lg:px-0 px-5" ref={ref}>
             <motion.div
                 className="relative rounded-[32px] overflow-hidden border-[#FFFFFF1F] border"
                 initial="hidden"

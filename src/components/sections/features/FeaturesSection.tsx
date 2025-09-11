@@ -74,10 +74,9 @@ export default function FeaturesSection() {
         >
           <p className="text-neutral-lightGray max-w-[50rem] text-sm sm:text-base">
             Work with a team that values speed, transparency, and real partnership. Whether you're scaling fast or just starting out, we've got the tools, flexible deals, and dedicated support to help you grow.
-          </p>
-          <p className="text-neutral-lightGray max-w-[50rem] text-sm sm:text-base">
           No fluff, just results backed by real data and a system built to keep your momentum going.
           </p>
+ 
         </motion.div>
       </motion.div>
     </section>

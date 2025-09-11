@@ -164,7 +164,7 @@ const StepsSection = () => {
             </div>
 
             {/* Mobile Version - Clean Minimal Timeline */}
-            <div className="md:hidden pt-12 md:pt-24 px-8">
+            <div className="md:hidden pt-12 md:pt-24 px-5">
                 <div className="relative max-w-xs mx-auto">
                     {steps.map((step, index) => {
                         const isLast = index === steps.length - 1;

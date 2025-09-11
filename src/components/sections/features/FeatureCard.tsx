@@ -370,13 +370,13 @@ const imageVariants: Variants = {
               </div>
 
               {/* Stats Grid - Fixed height */}
-              <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[185px] pt-2 h-auto w-full">
+              <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[155px] pt-2 h-auto w-full">
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
-                    className={`text-white font-semibold leading-tight ${
+                    className={`text-white font-semibold leading-tight uppercase ${
                       isModal
-                        ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                        : "text-lg xs:text-xl sm:text-2xl md:text-md lg:text-2xl uppercase"
+                        ? "text-[11px] xs:text-[13px] sm:text-sm md:text-base lg:text-base xl:text-[22px]"
+                        : "text-base md:text-lg lg:text-xl xl:text-[24px]"
                     }`}
                   >
                     {stats.primary.value}
@@ -385,7 +385,7 @@ const imageVariants: Variants = {
                     className={`text-neutral-lightGray leading-tight mt-1 ${
                       isModal
                         ? "text-xs xs:text-sm sm:text-base md:text-lg"
-                        : "text-sm xs:text-base sm:text-lg md:text-[18px]"
+                        : "text-sm md:text-[18px]"
                     }`}
                   >
                     {stats.primary.label}
@@ -393,10 +393,10 @@ const imageVariants: Variants = {
                 </div>
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
-                    className={`text-white font-semibold leading-tight ${
+                    className={`text-white font-semibold leading-tight uppercase ${
                       isModal
-                        ? "text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[28px]"
-                        : "text-lg xs:text-xl sm:text-2xl md:text-md lg:text-2xl uppercase"
+                        ? "text-[11px] xs:text-[13px] sm:text-sm md:text-base lg:text-base xl:text-[22px]"
+                        : "text-base md:text-lg lg:text-xl xl:text-[24px]"
                     }`}
                   >
                     {stats.secondary.value}
@@ -405,7 +405,7 @@ const imageVariants: Variants = {
                     className={`text-neutral-lightGray leading-tight mt-1 ${
                       isModal
                         ? "text-xs xs:text-sm sm:text-base md:text-lg"
-                        : "text-sm xs:text-base sm:text-lg md:text-[18px]"
+                        : "text-sm md:text-[18px]"
                     }`}
                   >
                     {stats.secondary.label}
