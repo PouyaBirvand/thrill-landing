@@ -39,16 +39,16 @@ const SvgIcon = (props) => (
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         ></motion.path>
         <motion.path
-        className=""
+          className="responsive-path"
           stroke="url(#paint2_linear_2055_279)"
           strokeDasharray="6.73 6.73"
           strokeOpacity="0.3"
           strokeWidth="1.858"
           d="M628.256 220.54H51.031"
           initial={{ strokeDashoffset: 0 }}
-          animate={{ strokeDashoffset: -13.46 }} // Doubled dasharray for smooth run toward center
+          animate={{ strokeDashoffset: -13.46 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        ></motion.path>
+        />
         <motion.g
           filter="url(#filter0_i_2055_279)"
           initial={{ y: 50, x: -50, opacity: 0 }} // Start from bottom-left

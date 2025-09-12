@@ -100,3 +100,71 @@ figma-input {
   background: transparent;
   z-index: -1;
 }
+
+.responsive-path {
+  transform: translateY(0px); /* Desktop default */
+  transition: transform 0.3s ease; /* انیمیشن نرم برای تغییرات */
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1920px) {
+  .responsive-path {
+    transform: translateY(-15px);
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .responsive-path {
+    transform: translateY(-15px);
+  }
+}
+
+/* Medium Desktop */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .responsive-path {
+    transform: translateY(-35px);
+  }
+}
+
+/* Small Desktop / Large Laptop */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .responsive-path {
+    transform: translateY(-35px);
+  }
+}
+
+/* Laptop */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-path {
+    transform: translateY(-30px);
+  }
+}
+
+/* Large Tablet */
+@media (min-width: 640px) and (max-width: 767px) {
+  .responsive-path {
+    transform: translateY(-58px);
+  }
+}
+
+/* Small Tablet */
+@media (min-width: 480px) and (max-width: 639px) {
+  .responsive-path {
+    transform: translateY(-52px);
+  }
+}
+
+/* Large Mobile */
+@media (min-width: 375px) and (max-width: 479px) {
+  .responsive-path {
+    transform: translateY(-55px);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 374px) {
+  .responsive-path {
+    transform: translateY(-52px);
+  }
+}
