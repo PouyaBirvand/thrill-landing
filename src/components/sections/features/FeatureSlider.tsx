@@ -6,7 +6,7 @@ import { Navigation, Autoplay } from "swiper/modules"
 import type { Swiper as SwiperType } from "swiper"
 import "swiper/css"
 import "swiper/css/navigation"
-import { features } from "@/constants/data/features"
+import { featuresDesktop, featuresMobile } from "@/constants/data/features"
 import { Swiper, SwiperSlide } from "swiper/react"
 import FeatureCard from "./FeatureCard"
 
@@ -67,7 +67,7 @@ export default function FeatureSlider() {
         {/* Mobile: Stack cards vertically */}
         {isMobile ? (
           <div className="flex flex-col gap-4 px-4">
-            {features.map((feature, index) => (
+            {featuresMobile.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -84,61 +84,60 @@ export default function FeatureSlider() {
             modules={[Navigation, Autoplay]}
             spaceBetween={8}
             slidesPerView={1.05}
+            slidesPerGroup={1} // فقط یک اسلاید در هر حرکت
             centeredSlides={false}
             loop={true}
             onSwiper={(swiper) => {
               swiperRef.current = swiper
             }}
             breakpoints={{
-              // تبلت عمودی (640px+)
               640: {
                 slidesPerView: 1.7,
                 spaceBetween: 18,
+                slidesPerGroup: 1, // محدود به یک اسلاید در هر حرکت
               },
-              // تبلت افقی (768px+)
               768: {
                 slidesPerView: 1.5,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
               },
-              // دسکتاپ کوچک (1024px+)
               1024: {
                 slidesPerView: 2.3,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
               },
-              // دسکتاپ متوسط (1280px+)
               1280: {
                 slidesPerView: 2.5,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
               },
-              // دسکتاپ بزرگ (1440px+)
               1440: {
                 slidesPerView: 2.7,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
               },
-              // دسکتاپ خیلی بزرگ (1600px+)
               1600: {
                 slidesPerView: 3.2,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
               },
-              // نمایشگرهای فوق عریض (1920px+)
               1920: {
                 slidesPerView: 3.2,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
               },
             }}
             className="!overflow-visible"
             watchSlidesProgress={true}
             watchOverflow={true}
-            // grabCursor={true}
-            allowTouchMove={false}
-            // تنظیمات اضافی برای تجربه بهتر
+            allowTouchMove={true} // فعال کردن جابه‌جایی با ماوس
+            // تنظیمات برای کنترل دقیق‌تر جابه‌جایی
+            longSwipesRatio={0.3} // کاهش نسبت swipeهای طولانی
+            longSwipesMs={200} // کاهش زمان swipeهای طولانی
             resistance={true}
             resistanceRatio={0.85}
-            threshold={10}
-            longSwipesRatio={0.5}
-            longSwipesMs={300}
           >
-            {features.map((feature, index) => (
+            {featuresDesktop.map((feature, index) => (
               <SwiperSlide key={index} className="h-auto">
                 <FeatureCard index={index} {...feature} />
               </SwiperSlide>

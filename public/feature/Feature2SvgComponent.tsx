@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 
-const SvgIcon = (props) => (
+const Feature2SvgComponent = () => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     width="629"
@@ -421,4 +421,4 @@ const SvgIcon = (props) => (
   </motion.svg>
 );
 
-export default SvgIcon;
+export default Feature2SvgComponent;
