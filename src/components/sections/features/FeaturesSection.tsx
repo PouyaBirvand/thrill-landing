@@ -7,7 +7,7 @@ export default function FeaturesSection() {
   const contentRef = useRef<HTMLDivElement>(null)
 
   // بررسی viewport
-  const isInView = useInView(contentRef, { once: true, margin: "-100px" })
+  const isInView = useInView(contentRef, { once: false, margin: "-100px" })
 
   // کنترل اسکرول
   const { scrollYProgress } = useScroll({

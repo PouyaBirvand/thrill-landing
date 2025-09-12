@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function AffiliateBannerSection() {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.25 });
+    const isInView = useInView(ref, { once: false, amount: 0.25 });
 
     // State for screen size detection
     const [isMobile, setIsMobile] = useState(false);

@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 export default function Footer() {
     const ref = useRef<HTMLElement | null>(null)
-    const isInView = useInView(ref, { once: true, amount: 0.5 })
+    const isInView = useInView(ref, { once: false, amount: 0.5 })
 
     const { navigate } = useNavigate([], 0)
 

@@ -5,7 +5,7 @@ import { steps } from "@/constants/data/steps";
 
 const StepsSection = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
+    const isInView = useInView(ref, { once: false, amount: 0.3 });
 
     return (
         <section id="guide" className="overflow-hidden pt-32 relative" ref={ref}>

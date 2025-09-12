@@ -13,7 +13,7 @@ import FeatureCard from "./FeatureCard"
 export default function FeatureSlider() {
   const swiperRef = useRef<SwiperType>(null)
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-150px" })
+  const isInView = useInView(ref, { once: false, margin: "-150px" })
   const [isMobile, setIsMobile] = useState(false)
 
   // Check if device is mobile
