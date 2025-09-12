@@ -13,8 +13,9 @@ export const features = [
       "At Thrill, you're not just another affiliate - you're a partner.",
     svgComponent: Feature1SvgComponent,
     imagePath: "/feature/feature1.png",
-    maxstack: true,
+    // maxstack: true,
     toleft: true,
+    totop: true,
     stats: {
       primary: {
         value: "200+",

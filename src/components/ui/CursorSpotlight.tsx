@@ -1,17 +1,16 @@
 'use client'
-
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 
 const CursorSpotlight = ({ 
-  spacing = 40,                    
-  maxDistance = 150,               
-  dotSize = 2,                    
-  rippleSpeed = 180,               
-  rippleDuration = 3000,          
-  waveThickness = 3,             
-  dotColor = '#5CFFC1',       
-  glowIntensity = 0,         
-  pulseStrength = 2        
+  spacing = 40, 
+  maxDistance = 150, 
+  dotSize = 2, 
+  rippleSpeed = 180, 
+  rippleDuration = 3000, 
+  waveThickness = 3, 
+  dotColor = '#5CFFC1', 
+  glowIntensity = 0, 
+  pulseStrength = 2 
 }) => {
   const canvasRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -43,7 +42,7 @@ const CursorSpotlight = ({
   const isInHeroVideoArea = useCallback((x, y) => {
     const heroSection = document.getElementById('hero');
     if (!heroSection) return false;
-
+    
     const rect = heroSection.getBoundingClientRect();
     const heroTop = rect.top + window.scrollY;
     const heroBottom = heroTop + rect.height;
@@ -51,7 +50,7 @@ const CursorSpotlight = ({
     if (y < heroTop || y > heroBottom) return false;
     
     const windowWidth = window.innerWidth;
-    const centerZone = windowWidth * 0.5; 
+    const centerZone = windowWidth * 0.5;
     const leftVideoZone = (windowWidth - centerZone) / 2;
     const rightVideoZone = windowWidth - leftVideoZone;
     
@@ -61,7 +60,7 @@ const CursorSpotlight = ({
   const isInFooterVideoArea = useCallback((x, y) => {
     const footerSection = document.getElementById('footer');
     if (!footerSection) return false;
-
+    
     const rect = footerSection.getBoundingClientRect();
     const footerTop = rect.top + window.scrollY + 170;
     const footerBottom = footerTop + rect.height + 170;
@@ -69,11 +68,25 @@ const CursorSpotlight = ({
     if (y < footerTop || y > footerBottom) return false;
     
     const windowWidth = window.innerWidth;
-    const centerZone = windowWidth * 0.55; 
+    const centerZone = windowWidth * 0.55;
     const leftVideoZone = (windowWidth - centerZone) / 3;
     const rightVideoZone = windowWidth - leftVideoZone;
     
     return x < leftVideoZone || x > rightVideoZone;
+  }, []);
+
+  // New function to check if point is in affiliate banner area
+  const isInAffiliateBannerArea = useCallback((x, y) => {
+    const affiliateSection = document.getElementById('signin');
+    if (!affiliateSection) return false;
+    
+    const rect = affiliateSection.getBoundingClientRect();
+    const sectionTop = rect.top + window.scrollY;
+    const sectionBottom = sectionTop + rect.height;
+    const sectionLeft = rect.left;
+    const sectionRight = rect.right;
+    
+    return (y >= sectionTop && y <= sectionBottom && x >= sectionLeft && x <= sectionRight);
   }, []);
 
   const isInteractiveElement = useCallback((element) => {
@@ -118,14 +131,12 @@ const CursorSpotlight = ({
 
   const shouldCreateRipple = useCallback((e) => {
     let element = e.target;
-    
     while (element && element !== document.body) {
       if (isInteractiveElement(element)) {
         return false;
       }
       element = element.parentElement;
     }
-    
     return true;
   }, [isInteractiveElement]);
 
@@ -137,7 +148,10 @@ const CursorSpotlight = ({
       startTime: Date.now()
     };
     
-    setRipples(prev => [...prev.filter(r => Date.now() - r.startTime < rippleDuration), newRipple]);
+    setRipples(prev => [
+      ...prev.filter(r => Date.now() - r.startTime < rippleDuration),
+      newRipple
+    ]);
     
     setTimeout(() => {
       setRipples(prev => prev.filter(r => r.id !== newRipple.id));
@@ -154,7 +168,6 @@ const CursorSpotlight = ({
       const distance = calculateDistance(dotX, dotY, ripple.x, ripple.y);
       const maxRadius = Math.max(window.innerWidth, window.innerHeight) * 1.5;
       const currentRadius = (elapsed / rippleDuration) * maxRadius;
-      
       const actualThickness = waveThickness * spacing * 0.8;
       const distanceFromWave = Math.abs(distance - currentRadius);
       
@@ -163,7 +176,6 @@ const CursorSpotlight = ({
         const thicknessPosition = 1 - (distanceFromWave / actualThickness);
         const timeDecay = Math.max(0, 1 - Math.pow(waveProgress, 1.2));
         const pulseEffect = (Math.sin(waveProgress * Math.PI * 3) * 0.3 + 0.7);
-        
         const intensity = thicknessPosition * timeDecay * pulseEffect * pulseStrength;
         maxIntensity = Math.max(maxIntensity, intensity);
       }
@@ -175,11 +187,11 @@ const CursorSpotlight = ({
   const initializeGrid = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
+    
     const dots = [];
     const cols = Math.ceil(canvas.width / spacing) + 3;
     const rows = Math.ceil(canvas.height / spacing) + 3;
-
+    
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         dots.push({
@@ -188,7 +200,7 @@ const CursorSpotlight = ({
         });
       }
     }
-
+    
     dotsGrid.current = dots;
   }, [spacing]);
 
@@ -202,42 +214,44 @@ const CursorSpotlight = ({
   const drawDots = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
+    
     const ctx = canvas.getContext('2d');
     const currentTime = Date.now();
-
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
     // اگر موس داخل نیست و هیچ ripple ای نداریم، کنوس رو پاک کن و انیمیشن رو متوقف کن
     if (!mouseInside && ripples.length === 0) {
       return;
     }
-
+    
     dotsGrid.current.forEach(dot => {
       const absoluteY = dot.y + window.scrollY;
-      if (isInHeroVideoArea(dot.x, absoluteY) || isInFooterVideoArea(dot.x, absoluteY)) {
-        return; 
+      
+      // Check if dot is in excluded areas (hero video, footer video, or affiliate banner)
+      if (isInHeroVideoArea(dot.x, absoluteY) || 
+          isInFooterVideoArea(dot.x, absoluteY) ||
+          isInAffiliateBannerArea(dot.x, absoluteY)) {
+        return;
       }
-
+      
       const mouseOpacity = mouseInside ? (() => {
         const mouseDistance = calculateDistance(dot.x, dot.y, mousePos.x, mousePos.y);
-        return mouseDistance < maxDistance 
-          ? Math.max(0, (maxDistance - mouseDistance) / maxDistance)
-          : 0;
+        return mouseDistance < maxDistance ? 
+          Math.max(0, (maxDistance - mouseDistance) / maxDistance) : 0;
       })() : 0;
-
+      
       const rippleIntensity = getRippleIntensity(dot.x, dot.y, currentTime);
       const totalOpacity = Math.min(1, mouseOpacity + rippleIntensity);
-
+      
       if (totalOpacity > 0.02) {
         const radius = dotSize / 2;
         const rippleScale = rippleIntensity > 0 ? 1 + (rippleIntensity * 0.3) : 1;
         const finalRadius = radius * rippleScale;
-
+        
         if (totalOpacity > 0.3) {
           const glowSize = 6 + (rippleIntensity * 8);
           const glowOpacity = totalOpacity * glowIntensity * 0.6;
-          
           const gradient = ctx.createRadialGradient(
             dot.x, dot.y, 0,
             dot.x, dot.y, glowSize
@@ -250,14 +264,27 @@ const CursorSpotlight = ({
           ctx.arc(dot.x, dot.y, glowSize, 0, Math.PI * 2);
           ctx.fill();
         }
-
+        
         ctx.fillStyle = `rgba(${baseColor.r}, ${baseColor.g}, ${baseColor.b}, ${totalOpacity})`;
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, finalRadius, 0, Math.PI * 2);
         ctx.fill();
       }
     });
-  }, [mousePos, mouseInside, calculateDistance, getRippleIntensity, maxDistance, dotSize, baseColor, glowIntensity, isInHeroVideoArea, isInFooterVideoArea, ripples.length]);
+  }, [
+    mousePos, 
+    mouseInside, 
+    calculateDistance, 
+    getRippleIntensity, 
+    maxDistance, 
+    dotSize, 
+    baseColor, 
+    glowIntensity, 
+    isInHeroVideoArea, 
+    isInFooterVideoArea,
+    isInAffiliateBannerArea,
+    ripples.length
+  ]);
 
   const animate = useCallback(() => {
     drawDots();
@@ -267,10 +294,9 @@ const CursorSpotlight = ({
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
+    
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
     initializeGrid();
   }, [initializeGrid]);
 
@@ -281,7 +307,7 @@ const CursorSpotlight = ({
         clearTimeout(leaveThrottleId.current);
         leaveThrottleId.current = null;
       }
-
+      
       if (mouseThrottleId.current) return;
       
       mouseThrottleId.current = setTimeout(() => {
@@ -297,7 +323,7 @@ const CursorSpotlight = ({
         clearTimeout(mouseThrottleId.current);
         mouseThrottleId.current = null;
       }
-
+      
       // تاخیر در پاک کردن تا اطمینان حاصل شه که انیمیشن اجرا شده
       leaveThrottleId.current = setTimeout(() => {
         setMouseInside(false);
@@ -352,7 +378,7 @@ const CursorSpotlight = ({
   useEffect(() => {
     resizeCanvas();
     animationId.current = requestAnimationFrame(animate);
-
+    
     return () => {
       if (animationId.current) {
         cancelAnimationFrame(animationId.current);
@@ -364,7 +390,7 @@ const CursorSpotlight = ({
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ 
+      style={{
         zIndex: 1,
         background: 'transparent'
       }}

@@ -1,13 +1,16 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 
-const Feature2SvgComponent = (props) => (
-  <svg
+const SvgIcon = (props) => (
+  <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     width="629"
     height="453"
     fill="none"
     viewBox="30 55 809 539"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1, ease: "easeInOut" }}
   >
     <g clipPath="url(#clip0_2055_279)">
       <mask
@@ -26,27 +29,31 @@ const Feature2SvgComponent = (props) => (
       </mask>
       <g mask="url(#mask0_2055_279)">
         <motion.path
-          stroke="white"
+          stroke="url(#paint1_linear_2055_279)"
+          strokeDasharray="6.73 6.73"
           strokeOpacity="0.3"
           strokeWidth="1.858"
-          strokeDasharray="6.73 6.73"
           d="M43.021 24.565v469.988"
-          whileInView={{ strokeDashoffset: [0, -13.46] }}
-          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-        />
+          initial={{ strokeDashoffset: 0 }}
+          animate={{ strokeDashoffset: -13.46 }} // Doubled dasharray for smooth run toward center
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        ></motion.path>
         <motion.path
-          stroke="white"
+        className=""
+          stroke="url(#paint2_linear_2055_279)"
+          strokeDasharray="6.73 6.73"
           strokeOpacity="0.3"
           strokeWidth="1.858"
-          strokeDasharray="6.73 6.73"
-          d="M628.256 205.54H51.031"
-          whileInView={{ strokeDashoffset: [0, -13.46] }}
-          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-        />
+          d="M628.256 220.54H51.031"
+          initial={{ strokeDashoffset: 0 }}
+          animate={{ strokeDashoffset: -13.46 }} // Doubled dasharray for smooth run toward center
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        ></motion.path>
         <motion.g
           filter="url(#filter0_i_2055_279)"
-          whileInView={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          initial={{ y: 50, x: -50, opacity: 0 }} // Start from bottom-left
+          animate={{ y: -50, x: 50, opacity: 1 }} // Move to top-right with fade in
+          transition={{ duration: 5, repeat: Infinity, repeatType: "loop", ease: "linear" }} // Infinite scroll-like motion
         >
           <path
             fill="#fff"
@@ -82,8 +89,9 @@ const Feature2SvgComponent = (props) => (
         </motion.g>
         <motion.g
           filter="url(#filter1_i_2055_279)"
-          whileInView={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          initial={{ y: 50, x: -50, opacity: 0 }} // Start from bottom-left
+          animate={{ y: -50, x: 50, opacity: 1 }} // Move to top-right with fade in
+          transition={{ duration: 5, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 0.5 }} // Infinite scroll-like motion with delay for stagger
         >
           <path
             fill="#fff"
@@ -119,8 +127,9 @@ const Feature2SvgComponent = (props) => (
         </motion.g>
         <motion.g
           filter="url(#filter2_i_2055_279)"
-          whileInView={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          initial={{ y: 50, x: -50, opacity: 0 }} // Start from bottom-left
+          animate={{ y: -50, x: 50, opacity: 1 }} // Move to top-right with fade in
+          transition={{ duration: 5, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 1 }} // Infinite scroll-like motion with delay for stagger
         >
           <path
             fill="#fff"
@@ -156,8 +165,9 @@ const Feature2SvgComponent = (props) => (
         </motion.g>
         <motion.g
           filter="url(#filter3_i_2055_279)"
-          whileInView={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          initial={{ y: 50, x: -50, opacity: 0 }} // Start from bottom-left
+          animate={{ y: -50, x: 50, opacity: 1 }} // Move to top-right with fade in
+          transition={{ duration: 5, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 1.5 }} // Infinite scroll-like motion with delay for stagger
         >
           <path
             fill="#fff"
@@ -408,7 +418,7 @@ const Feature2SvgComponent = (props) => (
         <path fill="#fff" d="M0 0h629v433H0z"></path>
       </clipPath>
     </defs>
-  </svg>
+  </motion.svg>
 );
 
-export default Feature2SvgComponent;
+export default SvgIcon;

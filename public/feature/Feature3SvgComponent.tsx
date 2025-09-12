@@ -103,7 +103,7 @@ const Feature3SvgComponent = () => {
             fill="url(#paint1_linear_525_777)"
             fillOpacity="0.05"
             style={{ mixBlendMode: "luminosity" }}
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -114,7 +114,7 @@ const Feature3SvgComponent = () => {
             stroke="url(#paint2_linear_525_777)"
             strokeOpacity="0.25"
             strokeWidth="2.39004"
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -125,7 +125,7 @@ const Feature3SvgComponent = () => {
             fill="url(#paint3_linear_525_777)"
             fillOpacity="0.05"
             style={{ mixBlendMode: "luminosity" }}
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -136,7 +136,7 @@ const Feature3SvgComponent = () => {
             stroke="url(#paint4_linear_525_777)"
             strokeOpacity="0.25"
             strokeWidth="2.39004"
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -147,7 +147,7 @@ const Feature3SvgComponent = () => {
             fill="url(#paint5_linear_525_777)"
             fillOpacity="0.05"
             style={{ mixBlendMode: "luminosity" }}
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -158,7 +158,7 @@ const Feature3SvgComponent = () => {
             stroke="url(#paint6_linear_525_777)"
             strokeOpacity="0.25"
             strokeWidth="2.39004"
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -169,7 +169,7 @@ const Feature3SvgComponent = () => {
             fill="url(#paint7_linear_525_777)"
             fillOpacity="0.05"
             style={{ mixBlendMode: "luminosity" }}
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -180,7 +180,7 @@ const Feature3SvgComponent = () => {
             stroke="url(#paint8_linear_525_777)"
             strokeOpacity="0.25"
             strokeWidth="2.39004"
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -191,7 +191,7 @@ const Feature3SvgComponent = () => {
             fill="url(#paint9_linear_525_777)"
             fillOpacity="0.05"
             style={{ mixBlendMode: "luminosity" }}
-            
+
             // @ts-ignore
             variants={shapeVariants}
             // @ts-ignore
@@ -201,7 +201,7 @@ const Feature3SvgComponent = () => {
             d="M466.214 125.943V247.919C466.214 261.961 466.214 268.982 463.499 274.384C461.11 279.137 457.295 283.024 452.586 285.5C447.235 288.314 440.215 288.443 426.176 288.702L358.584 289.948C354.687 290.02 352.738 290.056 350.831 289.802C349.137 289.577 347.471 289.182 345.856 288.623C344.038 287.994 342.312 287.088 338.862 285.275L299.088 264.379L299.088 264.379C291.158 260.213 287.193 258.13 284.301 255.092C281.742 252.406 279.801 249.193 278.613 245.679C277.269 241.706 277.269 237.227 277.269 228.269V135.528C277.269 124.345 277.269 118.754 279.204 114.075C280.911 109.946 283.673 106.339 287.214 103.614C291.226 100.526 296.624 99.0674 307.42 96.1505L342.898 86.5649L342.898 86.5649C344.854 86.0363 345.832 85.7721 346.824 85.5866C347.706 85.4218 348.596 85.3037 349.491 85.2328C350.497 85.1529 351.51 85.1529 353.537 85.1529H425.424C439.702 85.1529 446.841 85.1529 452.294 87.9316C457.091 90.3757 460.991 94.2758 463.435 99.0727C466.214 104.526 466.214 111.665 466.214 125.943Z"
             stroke="url(#paint10_linear_525_777)"
             strokeOpacity="0.25"
-            
+
             strokeWidth="2.39004"
             // @ts-ignore
             variants={shapeVariants}
@@ -213,9 +213,9 @@ const Feature3SvgComponent = () => {
             stroke="white"
             strokeOpacity="0.3"
             strokeWidth="1.59336"
-            strokeDasharray="6.73 6.73" // الگوی - - - - - - - مثل نمونه
-            whileInView={{ strokeDashoffset: [0, -13.46] }} // انیمیشن حرکت خط‌چین
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }} // تکرار بی‌نهایت
+            strokeDasharray="6.73 6.73"  // الگوی خط‌چین: - - - - (دَشد لاین)
+            whileInView={{ strokeDashoffset: [0, -13.46] }}  // انیمیشن: خط‌چین به جلو حرکت می‌کنه
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}  // تکرار بی‌نهایت، خطی
           />
         </motion.g>
       </g>

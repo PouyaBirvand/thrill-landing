@@ -10,14 +10,21 @@ const Feature4SvgComponent = (props) => (
     viewBox="0 0 85 37"
     {...props}
   >
-    <motion.path
+   <motion.path
       d="M83.438 1.223 47.89 35.858H.784"
       stroke="#fff"
       strokeDasharray="8.96 8.96"
       strokeOpacity="0.3"
       strokeWidth="1.823"
-      whileInView={{ strokeDashoffset: [0, -17.92] }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      animate={{ 
+        strokeDashoffset: [-17.92, 17.92]
+      }}
+      transition={{ 
+        duration: 3, 
+        repeat: Infinity, 
+        ease: "easeInOut",
+        repeatType: "reverse"
+      }}
     />
   </svg>
 );

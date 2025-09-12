@@ -31,15 +31,15 @@ export default function HeroSection() {
     <section 
       ref={sectionRef}
       id="hero" 
-      className="sm:pt-[15rem] pt-[10rem] relative overflow-hidden"
+      className="sm:pt-[15rem] pt-[10rem] relative lg:overflow-hidden"
     >
       {/* Right video - با scroll effects */}
       <motion.div
-        className="absolute top-0 z-[5] pointer-events-none
-                   right-[-12rem] h-full w-[100%]
-                   sm:right-[-250px] sm:w-[100%]
-                   md:right-[-270px] md:w-[95%]
-                   lg:right-[-260px] lg:w-[80%]
+        className="absolute lg:top-0 top-[14rem] z-[5] pointer-events-none
+                   right-[-12rem] h-full w-[90%]
+                   sm:right-[-250px] sm:w-[70%]
+                   md:right-[-270px] md:w-[65%]
+                   lg:right-[-420px] lg:w-[70%]
                    xl:right-[-540px] xl:w-[80%]
                    2xl:right-[-400px] 2xl:w-[65%]"
         style={{
@@ -65,11 +65,11 @@ export default function HeroSection() {
 
       {/* Left video - با scroll effects */}
       <motion.div
-        className="absolute top-0 z-[2] pointer-events-none
-                   left-[-12rem] h-full w-[100%]
-                   sm:left-[-250px] sm:w-[100%]
-                   md:left-[-270px] md:w-[95%]
-                   lg:left-[-260px] lg:w-[80%]
+        className="absolute lg:top-0 top-[14rem] z-[2] pointer-events-none
+                   left-[-12rem] h-full w-[90%]
+                   sm:left-[-250px] sm:w-[70%]
+                   md:left-[-270px] md:w-[65%]
+                   lg:left-[-420px] lg:w-[70%]
                    xl:left-[-540px] xl:w-[80%]
                    2xl:left-[-400px] 2xl:w-[65%]"
         style={{

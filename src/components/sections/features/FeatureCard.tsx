@@ -115,8 +115,8 @@ export default function FeatureCard({
         : "h-[310px] sm:h-[300px] md:h-[310px] lg:h-[325px] xl:h-[380px]";
     } else {
       return isExpanded
-        ? "h-[740px] sm:h-[800px] md:h-[850px] lg:h-[860px] xl:h-[890px]"
-        : "h-[310px] sm:h-[300px] md:h-[310px] lg:h-[325px] xl:h-[380px]";
+        ? "h-[740px] sm:h-[800px] md:h-[850px] lg:h-[860px] xl:h-[880px]"
+        : "h-[310px] sm:h-[300px] md:h-[340px] lg:h-[325px] xl:h-[370px]";
     }
   };
 
@@ -247,7 +247,7 @@ export default function FeatureCard({
         {index === 2 && (
           <div className="vectore-line w-[50px] h-[50px] absolute 2xl:top-[170px] xl:top-[170px] lg:top-[135px] 2xl:left-[110px] xl:left-[100px] lg:left-[100px] md:top-[130px] md:left-[110px] sm:top-[125px] sm:left-[100px] top-[130px] [@media(max-width:640px)]:left-[23vw]">
             <VectoreLine
-              className="middle-vectore-line md:w-[50px] md:h-[50px] sm:w-[4rem] sm:h-[3rem] w-[3.6rem] h-[2rem]  relative bottom-2"
+              className="middle-vectore-line md:w-[20px] md:h-[50px] sm:w-[1rem] sm:h-[3rem] w-[1.8rem] sm:scale-120 scale-[2.1] h-[2rem]  relative sm:bottom-3 md:top-3 md:left-9 lg:left-4 lg:-top-2 xl:left-7"
             />
           </div>
         )}
@@ -263,7 +263,7 @@ export default function FeatureCard({
             className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
               isModal
                 ? "h-[260px]"
-                : "h-[220px] sm:h-[210px] md:h-[220px] lg:h-[230px] xl:h-[280px]"
+                : "h-[220px] sm:h-[210px] md:h-[260px] lg:h-[250px] xl:h-[280px]"
             }`}
           >
             {/* Animated SVG Background */}
@@ -280,7 +280,7 @@ export default function FeatureCard({
                 fill
                 src={imagePath}
                 alt={title}
-                className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-7 xl:ml-7 lg:ml-7 md:ml-7 sm:ml-6 ml-5 sm:scale-75 scale-[0.65]"}`}
+                className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-1 xl:ml-1.5 lg:ml-1 md:ml-1 sm:ml-1 ml-1 sm:scale-75 scale-[0.65]"}`}
                 style={{ zIndex: 1000 }}
               />
             </motion.div>

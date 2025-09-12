@@ -31,7 +31,7 @@ export default function FeatureSlider() {
   return (
     <motion.div
       ref={ref}
-      className="relative w-full bg-body pt-6 md:pt-8"
+      className="relative w-full bg-body mt-6 md:mt-8"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -97,7 +97,7 @@ export default function FeatureSlider() {
               },
               // تبلت افقی (768px+)
               768: {
-                slidesPerView: 1.69,
+                slidesPerView: 1.5,
                 spaceBetween: 20,
               },
               // دسکتاپ کوچک (1024px+)
@@ -129,8 +129,8 @@ export default function FeatureSlider() {
             className="!overflow-visible"
             watchSlidesProgress={true}
             watchOverflow={true}
-            grabCursor={true}
-            allowTouchMove={true}
+            // grabCursor={true}
+            allowTouchMove={false}
             // تنظیمات اضافی برای تجربه بهتر
             resistance={true}
             resistanceRatio={0.85}
