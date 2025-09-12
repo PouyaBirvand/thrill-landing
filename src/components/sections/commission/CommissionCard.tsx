@@ -6,7 +6,7 @@ import { useRef } from 'react'
 
 export default function CommissionCard() {
   const ref = useRef<HTMLElement | null>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.25 })
+  const isInView = useInView(ref, { once: false, amount: 0.25 })
 
   const gridVariants = {
     hidden: {},
