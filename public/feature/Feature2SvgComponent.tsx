@@ -33,11 +33,11 @@ const Feature2SvgComponent = () => (
           strokeDasharray="6.73 6.73"
           strokeOpacity="0.3"
           strokeWidth="1.858"
-          d="M43.021 24.565v469.988"
+          d="M43.021 24.565v209.988"
           initial={{ strokeDashoffset: 0 }}
-          animate={{ strokeDashoffset: -13.46 }} // Doubled dasharray for smooth run toward center
+          animate={{ strokeDashoffset: -13.46 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        ></motion.path>
+        />
         <motion.path
           className="responsive-path"
           stroke="url(#paint2_linear_2055_279)"
