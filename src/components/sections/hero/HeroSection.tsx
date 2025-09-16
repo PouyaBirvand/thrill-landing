@@ -144,7 +144,7 @@ export default function HeroSection() {
           It’s time to make your reach thrilling.
           </p>
           <p className="text-neutral-lightGray text-md sm:text-xl max-w-lg">
-            Join the best casino affiliate programbuilt for creators, streamers, publishers, and platforms of all kinds.
+            Join the best casino affiliate program built for creators, streamers, publishers, and platforms of all kinds.
           </p>
         </motion.div>
 

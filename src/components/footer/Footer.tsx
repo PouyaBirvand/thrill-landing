@@ -32,7 +32,7 @@ export default function Footer() {
 
     return (
         <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden z-0">
-            {/* Right Shape - بهبود یافته برای موبایل */}
+            {/* Right Shape */}
             <motion.div
                 className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
                        right-[-100px] h-[25%] sm:h-[35%] w-[60%]
@@ -60,7 +60,7 @@ export default function Footer() {
                 />
             </motion.div>
 
-            {/* Left Shape - بهبود یافته برای موبایل */}
+            {/* Left Shape */}
             <motion.div
                 className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
                        left-[-100px] h-[25%] sm:h-[35%] w-[60%]
@@ -118,8 +118,8 @@ export default function Footer() {
                             <div>
                                 <h3 className="font-semibold mb-3">Explore</h3>
                                 <ul className="space-y-2 text-white/70">
-                                    <li><a href="https://thrill.com/en/casino" className="transition-colors hover:text-accent-green_light">Casino</a></li>
-                                    <li><a href="https://thrill.com/en/sports" className="transition-colors hover:text-accent-green_light">Sports</a></li>
+                                    <li><a target="_blank" href="https://thrill.com/en/casino" className="transition-colors hover:text-accent-green_light">Casino</a></li>
+                                    <li><a target="_blank" href="https://thrill.com/en/sports" className="transition-colors hover:text-accent-green_light">Sports</a></li>
                                 </ul>
                             </div>
 
@@ -160,7 +160,7 @@ export default function Footer() {
                                         </a>
                                     </li>
                                     <li>
-                                        <a
+                                        <a target="_blank"
                                             href="https://thrill.framer.website/"
                                             className="transition-colors hover:text-accent-green_light"
                                         >
@@ -215,8 +215,8 @@ export default function Footer() {
                                 <a href='https://www.thrill.com' target='_blank'>© 2024 Thrill.com</a>
                                 <div className="flex items-center gap-4">
                                     <Dot className="hidden md:block" color="#A0ACC7" />
-                                    <a href="https://dashboard.thrillaffiliates.com/partner/terms_and_conditions" className="underline transition-colors hover:text-accent-green_light">Terms</a>
-                                    <a href="https://thrill.com/en/policies/privacy-policy" className="underline transition-colors hover:text-accent-green_light">Privacy</a>
+                                    <a target='_blank' href="https://dashboard.thrillaffiliates.com/partner/terms_and_conditions" className="underline transition-colors hover:text-accent-green_light">Terms</a>
+                                    <a target='_blank' href="https://thrill.com/en/policies/privacy-policy" className="underline transition-colors hover:text-accent-green_light">Privacy</a>
                                 </div>
                             </div>
                         </div>

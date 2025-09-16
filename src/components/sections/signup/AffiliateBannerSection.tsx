@@ -174,8 +174,7 @@ export default function AffiliateBannerSection() {
                             animate={isInView ? 'show' : 'hidden'}
                             variants={getContentVariants(0.4)}
                         >
-                            It's time to make your streams Thrilling - join the best
-                            casino affiliate program built around creators.
+                            Built for creators, communities, and anyone ready to turn traffic into profit.
                         </motion.p>
 
                         {/* CTA Button */}
