@@ -84,7 +84,7 @@ export default function FeatureSlider() {
             modules={[Navigation, Autoplay]}
             spaceBetween={8}
             slidesPerView={1.05}
-            slidesPerGroup={1} // فقط یک اسلاید در هر حرکت
+            slidesPerGroup={1}
             centeredSlides={false}
             loop={true}
             onSwiper={(swiper) => {
@@ -94,7 +94,7 @@ export default function FeatureSlider() {
               640: {
                 slidesPerView: 1.7,
                 spaceBetween: 18,
-                slidesPerGroup: 1, // محدود به یک اسلاید در هر حرکت
+                slidesPerGroup: 1, 
               },
               768: {
                 slidesPerView: 1.5,
@@ -130,10 +130,10 @@ export default function FeatureSlider() {
             className="!overflow-visible"
             watchSlidesProgress={true}
             watchOverflow={true}
-            allowTouchMove={true} // فعال کردن جابه‌جایی با ماوس
-            // تنظیمات برای کنترل دقیق‌تر جابه‌جایی
-            longSwipesRatio={0.3} // کاهش نسبت swipeهای طولانی
-            longSwipesMs={200} // کاهش زمان swipeهای طولانی
+            allowTouchMove={true} 
+          
+            longSwipesRatio={0.3} 
+            longSwipesMs={200}
             resistance={true}
             resistanceRatio={0.85}
           >

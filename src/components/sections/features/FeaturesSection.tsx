@@ -6,20 +6,16 @@ export default function FeaturesSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  // بررسی viewport
   const isInView = useInView(contentRef, { once: false, margin: "-100px" })
 
-  // کنترل اسکرول
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   })
 
-  // اوپاسیتی و اسکیل برای افکت اسکرول
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [0, 1, 1, 0])
   const contentScale = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [0.95, 1, 1, 0.85])
 
-  // حرکت Y برای افکت اسکرول
   const subtitleY = useTransform(scrollYProgress, [0, 0.2, 1], ["20px", "0px", "-50px"])
   const titleY = useTransform(scrollYProgress, [0, 0.3, 1], ["20px", "0px", "-80px"])
   const descriptionY = useTransform(scrollYProgress, [0, 0.4, 1], ["20px", "0px", "-100px"])

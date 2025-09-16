@@ -35,7 +35,6 @@ export default function CommissionCard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative">
 
-          {/* Desktop - سیستم اصلی */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
             <motion.div
               className="absolute top-0 bottom-0 w-px left-1/3 bg-[rgba(255,255,255,0.15)]"
@@ -82,9 +81,7 @@ export default function CommissionCard() {
             />
           </div>
 
-          {/* Tablet 2-column - خط وسط */}
           <div className="hidden md:block lg:hidden absolute inset-0 pointer-events-none">
-            {/* خط عمودی مرکزی */}
             <motion.div
               className="absolute top-0 bottom-0 w-px left-1/2 -translate-x-1/2 bg-[rgba(255,255,255,0.15)]"
               initial={{ opacity: 0, scaleY: 0 }}
@@ -92,7 +89,6 @@ export default function CommissionCard() {
               transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
             />
 
-            {/* خطوط افقی */}
             <motion.div
               className="absolute left-0 right-0 h-px top-1/3 bg-[rgba(255,255,255,0.15)]"
               initial={{ opacity: 0, scaleX: 0 }}

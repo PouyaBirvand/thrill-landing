@@ -10,15 +10,14 @@ export default function NavMenu() {
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
   const [displayedActiveItem, setDisplayedActiveItem] = useState(activeItem)
 
-  // تأخیر در به‌روزرسانی displayedActiveItem برای جلوگیری از flicker
   useEffect(() => {
     let timeout: NodeJS.Timeout
     if (activeItem !== displayedActiveItem) {
       timeout = setTimeout(() => {
         setDisplayedActiveItem(activeItem)
-      }, 300) // تأخیر 300ms برای تغییر variant
+      }, 300) 
     } else {
-      setDisplayedActiveItem(activeItem) // اگر برابر باشن، فوراً به‌روزرسانی کن
+      setDisplayedActiveItem(activeItem) 
     }
 
     return () => {
