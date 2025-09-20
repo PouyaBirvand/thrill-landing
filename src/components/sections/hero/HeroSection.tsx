@@ -25,8 +25,9 @@ export default function HeroSection() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
   const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, isMobile ? 0.95 : 0.8])
   
-  // فقط برای دسکتاپ حرکت ویدیوها
-  const videoMovement = useTransform(scrollYProgress, [0, 1], isMobile ? ["0px", "0px"] : ["0px", "200px"])
+  // حرکت جداگانه برای هر ویدیو - یکی چپ یکی راست
+  const rightVideoMovement = useTransform(scrollYProgress, [0, 1], isMobile ? ["0px", "0px"] : ["0px", "200px"])
+  const leftVideoMovement = useTransform(scrollYProgress, [0, 1], isMobile ? ["0px", "0px"] : ["0px", "-200px"])
   const videoOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
 
   // انیمیشن های ساده برای ورود
@@ -87,7 +88,7 @@ export default function HeroSection() {
       id="hero" 
       className="sm:pt-[15rem] pt-[10rem] relative lg:overflow-hidden"
     >
-      {/* Right video - ساده‌تر شده */}
+      {/* Right video - به سمت راست حرکت می‌کنه */}
       <motion.div
         className="absolute lg:top-0 top-[14rem] z-[5] pointer-events-none
                    right-[-12rem] h-full w-[90%]
@@ -99,7 +100,7 @@ export default function HeroSection() {
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-          x: videoMovement,
+          x: rightVideoMovement,
           opacity: videoOpacity
         }}
         variants={videoVariants}
@@ -116,7 +117,7 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      {/* Left video - ساده‌تر شده */}
+      {/* Left video - به سمت چپ حرکت می‌کنه */}
       <motion.div
         className="absolute lg:top-0 top-[14rem] z-[2] pointer-events-none
                    left-[-12rem] h-full w-[90%]
@@ -128,7 +129,7 @@ export default function HeroSection() {
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-          x: videoMovement,
+          x: leftVideoMovement,
           opacity: videoOpacity
         }}
         variants={leftVideoVariants}

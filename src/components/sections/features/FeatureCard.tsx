@@ -370,9 +370,7 @@ export default function FeatureCard({
             </div>
           </motion.div>
         </div>
-
-        {/* Background glow - ساده‌تر شده */}
-        {!isMobile && (
+        {/* Background glow */}
           <div
             className="absolute -bottom-[10rem] left-1/2 transform -translate-x-1/2 w-[700px] h-[400px] transition-opacity duration-500 pointer-events-none"
             style={{
@@ -395,7 +393,6 @@ export default function FeatureCard({
               WebkitMaskSize: "100% 100%",
             }}
           />
-        )}
       </div>
     </div>
   );
