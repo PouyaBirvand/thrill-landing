@@ -133,7 +133,12 @@ export default function HeroSection() {
     isFlipped = false 
   }: { 
     variants: Variants
-    style: any
+    style: {
+      maskImage?: string
+      WebkitMaskImage?: string
+      x?: any
+      opacity?: any
+    }
     className: string
     isFlipped?: boolean 
   }) => (
