@@ -134,7 +134,7 @@ export default function FeatureCard({
         : "h-[310px] sm:h-[300px] md:h-[310px] lg:h-[325px] xl:h-[380px]";
     } else {
       return isExpanded
-        ? "h-[740px] sm:h-[800px] md:h-[850px] lg:h-[860px] xl:h-[880px]"
+         ? "h-[680px] min-[385px]:h-[650px] min-[445px]:h-[620px] sm:h-[740px] md:h-[850px] lg:h-[860px] xl:h-[880px]"
         : "h-[310px] sm:h-[300px] md:h-[340px] lg:h-[325px] xl:h-[370px]";
     }
   };
@@ -148,7 +148,7 @@ export default function FeatureCard({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full transition-all duration-700 ease-out cursor-pointer ${isExpanded ? "max-w-[600px]" : "max-w-[490px]"
+      className={`relative w-full transition-all duration-700 ease-out cursor-pointer mx-auto ${isExpanded ? "max-w-[490px] " : "max-w-[490px]"
         } ${getFixedHeight()}`}
     >
       {/* SVG Border - ساده‌تر شده */}
@@ -305,7 +305,7 @@ export default function FeatureCard({
           >
             <div className="h-full flex flex-col justify-between min-h-0">
               {/* Description */}
-              <div className="flex-1 mb-3 xs:mb-4 sm:mb-5 md:mb-6 mt-3 min-h-0 overflow-hidden">
+              <div className="flex-1 mb-3 xs:mb-4 sm:mb-5 md:mb-6  min-h-0 overflow-hidden">
                 <div className="h-full pr-1">
                   <p
                     className={`text-neutral-lightGray leading-6 mb-2 ${isModal
