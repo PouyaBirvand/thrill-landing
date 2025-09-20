@@ -1,5 +1,5 @@
 "use client"
-import { motion, useScroll, useTransform, Variants } from "framer-motion"
+import { motion, useScroll, useTransform, Variants, MotionValue } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import HeroCTAButton from "./HeroCTAButton"
 
@@ -136,8 +136,8 @@ export default function HeroSection() {
     style: {
       maskImage?: string
       WebkitMaskImage?: string
-      x?: any
-      opacity?: any
+      x?: MotionValue<string>
+      opacity?: MotionValue<number>
     }
     className: string
     isFlipped?: boolean 
