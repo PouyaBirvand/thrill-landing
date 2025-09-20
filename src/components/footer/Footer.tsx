@@ -5,15 +5,115 @@ import { Dot } from 'lucide-react'
 import { Button } from '../ui/Button'
 import Image from 'next/image'
 import Container from '../common/Container'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from '@/hooks/useNavigate'
 import Link from 'next/link'
+
+interface VideoData {
+    originalUrl: string
+    blobUrl: string
+    size: number
+    type: string
+}
 
 export default function Footer() {
     const ref = useRef<HTMLElement | null>(null)
     const isInView = useInView(ref, { once: false, amount: 0.5 })
 
+    const [isSafari, setIsSafari] = useState(false)
+    const [videosLoaded, setVideosLoaded] = useState(false)
+    const [videoWorker, setVideoWorker] = useState<Worker | null>(null)
+    const [videoData, setVideoData] = useState<VideoData | null>(null)
+
     const { navigate } = useNavigate([], 0)
+
+    // تشخیص Safari
+    useEffect(() => {
+        const userAgent = navigator.userAgent.toLowerCase()
+        const isSafariBrowser = /safari/.test(userAgent) && !/chrome/.test(userAgent) && !/firefox/.test(userAgent)
+        setIsSafari(isSafariBrowser)
+    }, [])
+
+    // راه‌اندازی Web Worker برای ویدیوهای Footer
+    useEffect(() => {
+        if (typeof Worker !== 'undefined') {
+            const worker = new Worker('/video-worker.js')
+            setVideoWorker(worker)
+
+            // گوش دادن به پیام‌های Worker
+            worker.onmessage = (event) => {
+                const { type, data } = event.data
+
+                switch (type) {
+                    case 'VIDEO_PRELOADED':
+                        console.log('Footer video preloaded:', data)
+                        setVideoData(data)
+                        setVideosLoaded(true)
+                        break
+
+                    case 'MULTIPLE_VIDEOS_PRELOADED':
+                        console.log('Footer multiple videos preloaded:', data)
+                        if (data.successful.length > 0) {
+                            setVideoData(data.successful[0])
+                            setVideosLoaded(true)
+                        }
+                        break
+
+                    case 'VIDEO_PRELOAD_ERROR':
+                    case 'MULTIPLE_VIDEOS_ERROR':
+                        console.error('Footer video preload error:', data)
+                        // fallback به روش معمولی
+                        setVideosLoaded(true)
+                        break
+                }
+            }
+
+            return () => {
+                worker.terminate()
+                setVideoWorker(null)
+            }
+        }
+    }, [])
+
+    // پری‌لود ویدیوها هنگام ورود به viewport
+    useEffect(() => {
+        if (videoWorker && !videosLoaded && isInView) {
+            const videoUrl = isSafari 
+                ? "/animations/header_left_side.mov" 
+                : "/animations/header_left_side.webm"
+
+            // ارسال درخواست پری‌لود به Worker
+            videoWorker.postMessage({
+                type: 'PRELOAD_VIDEO',
+                data: {
+                    url: videoUrl,
+                    priority: 'normal'
+                }
+            })
+        }
+    }, [videoWorker, isSafari, videosLoaded, isInView])
+
+    // پاک‌سازی blob URLs هنگام خروج
+    useEffect(() => {
+        return () => {
+            if (videoWorker && videoData?.blobUrl) {
+                videoWorker.postMessage({
+                    type: 'CLEANUP_BLOBS',
+                    data: {
+                        blobUrls: [videoData.blobUrl]
+                    }
+                })
+            }
+        }
+    }, [videoWorker, videoData])
+
+    // تعیین منبع ویدیو
+    const getVideoSource = () => {
+        if (videoData?.blobUrl) {
+            return videoData.blobUrl
+        }
+        return isSafari ? "/animations/header_left_side.mov" : "/animations/header_left_side.webm"
+    }
 
     const mainVariants = {
         hidden: { opacity: 0, y: 18 },
@@ -30,10 +130,72 @@ export default function Footer() {
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut, delay: 0.6 } }
     }
 
+    // کامپوننت ویدیو بهینه شده Footer
+    const OptimizedFooterVideo = ({ 
+        className, 
+        style,
+        initial,
+        animate,
+        transition,
+        isFlipped = false 
+    }: { 
+        className: string
+        style: {
+            maskImage?: string
+            WebkitMaskImage?: string
+        }
+        initial: { opacity: number; x: number }
+        animate: { opacity: number; x: number }
+        transition: { duration: number; delay?: number; ease: string }
+        isFlipped?: boolean 
+    }) => (
+        <motion.div
+            className={className}
+            style={style}
+            initial={initial}
+            animate={animate}
+            transition={transition}
+        >
+            {videosLoaded && (
+                <video
+                    src={getVideoSource()}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className={`w-full h-full object-cover object-center pointer-events-none ${
+                        isFlipped ? 'scale-x-[-1]' : ''
+                    }`}
+                    style={{
+                        willChange: 'transform',
+                        backfaceVisibility: 'hidden',
+                        perspective: 1000
+                    }}
+                    onError={(e) => {
+                        console.error('Footer video error:', e)
+                        // Fallback to original URL if blob fails
+                        if (videoData?.blobUrl && e.currentTarget.src === videoData.blobUrl) {
+                            const fallbackUrl = isSafari 
+                                ? "/animations/header_left_side.mov" 
+                                : "/animations/header_left_side.webm"
+                            e.currentTarget.src = fallbackUrl
+                        }
+                    }}
+                />
+            )}
+            
+            {/* بک‌آپ برای زمانی که ویدیو لود نمی‌شود */}
+            {!videosLoaded && (
+                <div className="w-full h-full bg-gradient-to-br from-blue-900/10 to-purple-900/10 animate-pulse" />
+            )}
+        </motion.div>
+    )
+
     return (
         <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden z-0">
             {/* Right Shape */}
-            <motion.div
+            <OptimizedFooterVideo
                 className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
                        right-[-100px] h-[25%] sm:h-[35%] w-[60%]
                        sm:right-[-50px] sm:w-[40%]
@@ -49,19 +211,11 @@ export default function Footer() {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-            >
-                <video
-                    src="/animations/header_left_side.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover scale-x-[-1] object-center pointer-events-none"
-                />
-            </motion.div>
+                isFlipped={true}
+            />
 
             {/* Left Shape */}
-            <motion.div
+            <OptimizedFooterVideo
                 className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
                        left-[-100px] h-[25%] sm:h-[35%] w-[60%]
                        sm:left-[-50px] sm:w-[40%]
@@ -77,16 +231,7 @@ export default function Footer() {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-            >
-                <video
-                    src="/animations/header_left_side.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover object-center pointer-events-none"
-                />
-            </motion.div>
+            />
 
             <Container className='z-[10] relative'>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -298,6 +443,16 @@ export default function Footer() {
                     </motion.div>
                 </div>
             </Container>
+
+            {/* Small loading indicator for footer videos */}
+            {!videosLoaded && isInView && (
+                <div className="fixed bottom-4 right-4 z-50 bg-black/50 text-white px-3 py-2 rounded-lg text-xs backdrop-blur-sm">
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <span>Loading footer videos...</span>
+                    </div>
+                </div>
+            )}
         </footer>
     )
 }
