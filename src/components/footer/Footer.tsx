@@ -146,7 +146,7 @@ export default function Footer() {
         }
         initial: { opacity: number; x: number }
         animate: { opacity: number; x: number }
-        transition: { duration: number; delay?: number; ease: string }
+        transition: { duration: number; delay?: number; ease: "easeOut" }
         isFlipped?: boolean 
     }) => (
         <motion.div
