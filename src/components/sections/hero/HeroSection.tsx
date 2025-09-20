@@ -3,11 +3,21 @@ import { motion, useScroll, useTransform, Variants, MotionValue } from "framer-m
 import { useRef, useState, useEffect } from "react"
 import HeroCTAButton from "./HeroCTAButton"
 
+interface VideoData {
+  originalUrl: string
+  blobUrl: string
+  size: number
+  type: string
+}
+
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
   const [isSafari, setIsSafari] = useState(false)
   const [videosLoaded, setVideosLoaded] = useState(false)
+  const [videoWorker, setVideoWorker] = useState<Worker | null>(null)
+  const [videoData, setVideoData] = useState<VideoData | null>(null)
+  const [loadingProgress, setLoadingProgress] = useState(0)
   
   // تشخیص موبایل و Safari
   useEffect(() => {
@@ -23,34 +33,109 @@ export default function HeroSection() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // پری‌لود ویدیوها
+  // راه‌اندازی Service Worker
   useEffect(() => {
-    const preloadVideos = async () => {
-      try {
-        const videoSources = [
-          isSafari ? "/animations/header_left_side.mov" : "/animations/header_left_side.webm"
-        ]
-        
-        const videoPromises = videoSources.map(src => {
-          return new Promise((resolve, reject) => {
-            const video = document.createElement('video')
-            video.preload = 'metadata'
-            video.oncanplaythrough = () => resolve(video)
-            video.onerror = () => reject(new Error(`Failed to load ${src}`))
-            video.src = src
-          })
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/video-sw.js')
+        .then((registration) => {
+          console.log('Video SW registered:', registration)
+          
+          // ارسال درخواست پری‌لود
+          if (registration.active) {
+            registration.active.postMessage({
+              type: 'PRELOAD_VIDEOS'
+            })
+          }
         })
-        
-        await Promise.all(videoPromises)
-        setVideosLoaded(true)
-      } catch (error) {
-        console.error('Video preload failed:', error)
-        setVideosLoaded(true) // بیاید بقیه کامپوننت کار کند حتی اگر ویدیو لود نشد
+        .catch(console.error)
+
+      // گوش دادن به پیام‌های Service Worker
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data?.type === 'VIDEOS_PRELOADED') {
+          console.log('Videos preloaded by service worker!')
+          setLoadingProgress(prev => Math.max(prev, 50))
+        }
+      })
+    }
+  }, [])
+
+  // راه‌اندازی Web Worker برای پردازش ویدیو
+  useEffect(() => {
+    if (typeof Worker !== 'undefined') {
+      const worker = new Worker('/video-worker.js')
+      setVideoWorker(worker)
+
+      // گوش دادن به پیام‌های Worker
+      worker.onmessage = (event) => {
+        const { type, data } = event.data
+
+        switch (type) {
+          case 'VIDEO_PRELOADED':
+            console.log('Video preloaded:', data)
+            setVideoData(data)
+            setVideosLoaded(true)
+            setLoadingProgress(100)
+            break
+
+          case 'MULTIPLE_VIDEOS_PRELOADED':
+            console.log('Multiple videos preloaded:', data)
+            if (data.successful.length > 0) {
+              setVideoData(data.successful[0]) // اولین ویدیو موفق
+              setVideosLoaded(true)
+              setLoadingProgress(100)
+            }
+            break
+
+          case 'VIDEO_PRELOAD_ERROR':
+          case 'MULTIPLE_VIDEOS_ERROR':
+            console.error('Video preload error:', data)
+            // fallback به روش معمولی
+            setVideosLoaded(true)
+            setLoadingProgress(100)
+            break
+        }
+      }
+
+      return () => {
+        worker.terminate()
+        setVideoWorker(null)
       }
     }
-    
-    preloadVideos()
-  }, [isSafari])
+  }, [])
+
+  // پری‌لود ویدیوها با Web Worker
+  useEffect(() => {
+    if (videoWorker && !videosLoaded) {
+      const videoUrl = isSafari 
+        ? "/animations/header_left_side.mov" 
+        : "/animations/header_left_side.webm"
+
+      setLoadingProgress(10)
+
+      // ارسال درخواست پری‌لود به Worker
+      videoWorker.postMessage({
+        type: 'PRELOAD_VIDEO',
+        data: {
+          url: videoUrl,
+          priority: 'high'
+        }
+      })
+    }
+  }, [videoWorker, isSafari, videosLoaded])
+
+  // پاک‌سازی blob URLs هنگام خروج
+  useEffect(() => {
+    return () => {
+      if (videoWorker && videoData?.blobUrl) {
+        videoWorker.postMessage({
+          type: 'CLEANUP_BLOBS',
+          data: {
+            blobUrls: [videoData.blobUrl]
+          }
+        })
+      }
+    }
+  }, [videoWorker, videoData])
 
   // Get scroll progress for this section
   const { scrollYProgress } = useScroll({
@@ -120,8 +205,11 @@ export default function HeroSection() {
     }
   }
 
-  // تعیین فرمت ویدیو بر اساس مرورگر
+  // تعیین منبع ویدیو (blob URL اگر موجود باشد، وگرنه فایل اصلی)
   const getVideoSource = () => {
+    if (videoData?.blobUrl) {
+      return videoData.blobUrl
+    }
     return isSafari ? "/animations/header_left_side.mov" : "/animations/header_left_side.webm"
   }
 
@@ -167,7 +255,16 @@ export default function HeroSection() {
           }}
           onLoadStart={() => console.log('Video loading started')}
           onCanPlay={() => console.log('Video can play')}
-          onError={(e) => console.error('Video error:', e)}
+          onError={(e) => {
+            console.error('Video error:', e)
+            // Fallback to original URL if blob fails
+            if (videoData?.blobUrl && e.currentTarget.src === videoData.blobUrl) {
+              const fallbackUrl = isSafari 
+                ? "/animations/header_left_side.mov" 
+                : "/animations/header_left_side.webm"
+              e.currentTarget.src = fallbackUrl
+            }
+          }}
         />
       )}
       
@@ -276,10 +373,26 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Loading indicator برای زمان لود ویدیوها */}
+      {/* Loading indicator پیشرفته */}
       {!videosLoaded && (
-        <div className="fixed top-4 right-4 z-50 bg-black/50 text-white px-3 py-2 rounded-lg text-sm">
-          Loading videos...
+        <div className="fixed top-4 right-4 z-50 bg-black/50 text-white px-4 py-3 rounded-lg text-sm backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            <div className="flex flex-col">
+              <span>Loading videos...</span>
+              <div className="w-24 h-1 bg-white/20 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-white transition-all duration-300 ease-out"
+                  style={{ width: `${loadingProgress}%` }}
+                />
+              </div>
+            </div>
+          </div>
+          {videoData && (
+            <div className="text-xs text-white/70 mt-1">
+              Size: {(videoData.size / 1024 / 1024).toFixed(1)}MB
+            </div>
+          )}
         </div>
       )}
     </section>
