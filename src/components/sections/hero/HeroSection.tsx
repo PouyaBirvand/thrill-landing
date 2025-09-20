@@ -1,31 +1,85 @@
 "use client"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { motion, useScroll, useTransform, Variants } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 import HeroCTAButton from "./HeroCTAButton"
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
   
+  // تشخیص موبایل
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   // Get scroll progress for this section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"]
   })
 
-  // Transform values based on scroll progress
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
+  // فقط ۳ تا transform برای کل section - خیلی سبک‌تر!
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 1], ["0px", "-150px"])
-  const subtitleY = useTransform(scrollYProgress, [0, 1], ["0px", "-100px"])
-  const descriptionY = useTransform(scrollYProgress, [0, 1], ["0px", "-200px"])
-  const buttonY = useTransform(scrollYProgress, [0, 1], ["0px", "-250px"])
+  const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, isMobile ? 0.95 : 0.8])
   
-  // Video animations
-  const leftVideoX = useTransform(scrollYProgress, [0, 1], ["0px", "-300px"])
-  const rightVideoX = useTransform(scrollYProgress, [0, 1], ["0px", "300px"])
-  const videoScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.2])
+  // فقط برای دسکتاپ حرکت ویدیوها
+  const videoMovement = useTransform(scrollYProgress, [0, 1], isMobile ? ["0px", "0px"] : ["0px", "200px"])
   const videoOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
+
+  // انیمیشن های ساده برای ورود
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  // ویدیو variants برای ورود اولیه
+  const videoVariants: Variants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const leftVideoVariants: Variants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: 1.2,
+        delay: 0.2,
+        ease: "easeOut"
+      }
+    }
+  }
 
   return (
     <section 
@@ -33,7 +87,7 @@ export default function HeroSection() {
       id="hero" 
       className="sm:pt-[15rem] pt-[10rem] relative lg:overflow-hidden"
     >
-      {/* Right video - با scroll effects */}
+      {/* Right video - ساده‌تر شده */}
       <motion.div
         className="absolute lg:top-0 top-[14rem] z-[5] pointer-events-none
                    right-[-12rem] h-full w-[90%]
@@ -45,13 +99,12 @@ export default function HeroSection() {
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-          x: rightVideoX,
-          scale: videoScale,
+          x: videoMovement,
           opacity: videoOpacity
         }}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        variants={videoVariants}
+        initial="hidden"
+        animate="visible"
       >
         <video
           src="/animations/header_left_side.webm"
@@ -63,7 +116,7 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      {/* Left video - با scroll effects */}
+      {/* Left video - ساده‌تر شده */}
       <motion.div
         className="absolute lg:top-0 top-[14rem] z-[2] pointer-events-none
                    left-[-12rem] h-full w-[90%]
@@ -75,13 +128,12 @@ export default function HeroSection() {
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-          x: leftVideoX,
-          scale: videoScale,
+          x: videoMovement,
           opacity: videoOpacity
         }}
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+        variants={leftVideoVariants}
+        initial="hidden"
+        animate="visible"
       >
         <video
           src="/animations/header_left_side.webm"
@@ -93,41 +145,35 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      {/* Content با scroll animations */}
+      {/* Content - فقط کل container حرکت می‌کنه */}
       <motion.div 
         className="flex flex-col items-center justify-center gap-3 relative z-10 px-4 sm:px-6 md:px-8"
         style={{ 
           scale: contentScale,
           opacity: contentOpacity
         }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
         {/* Block 1: Subtitle */}
         <motion.h3
           className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
-          style={{ y: subtitleY }}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          variants={itemVariants}
         >
           grow with thrill
         </motion.h3>
         
         {/* Background blur effect */}
         <motion.div 
-          className="h-[12rem] hidden sm:block w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute" 
-          style={{ y: backgroundY }}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }} 
+          className="h-[12rem] hidden sm:block w-[35rem] blur-3xl top-12 bg-sky-300 bg-opacity-10 absolute"
+          variants={itemVariants}
         />
         
         {/* Block 2: Main Title */}
         <motion.h1
           className="text-white text-[28px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
-          style={{ y: titleY }}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+          variants={itemVariants}
         >
           The Affiliate partnership you've Been waiting For
         </motion.h1>
@@ -135,13 +181,10 @@ export default function HeroSection() {
         {/* Block 3: Description */}
         <motion.div
           className="text-center space-y-1 px-4 mt-2"
-          style={{ y: descriptionY }}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+          variants={itemVariants}
         >
           <p className="text-neutral-lightGray text-md sm:text-xl">
-          It’s time to make your reach thrilling.
+          It's time to make your reach thrilling.
           </p>
           <p className="text-neutral-lightGray text-md sm:text-xl max-w-lg">
             Join the best casino affiliate program built for creators, streamers, publishers, and platforms of all kinds.
@@ -151,10 +194,7 @@ export default function HeroSection() {
         {/* Block 4: CTA Button */}
         <motion.div
           className="mt-8 pb-16"
-          style={{ y: buttonY }}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+          variants={itemVariants}
         >
           <HeroCTAButton />
         </motion.div>

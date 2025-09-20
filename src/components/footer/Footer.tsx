@@ -127,7 +127,12 @@ export default function Footer() {
                             <div>
                                 <h3 className="font-semibold mb-3">Connect</h3>
                                 <ul className="space-y-2 text-white/70">
-                                    <li><a href="mailto:affiliates@thrill.com" className="transition-colors hover:text-accent-green_light">E-mail us</a></li>
+                                    <li>
+                                        <a href="mailto:affiliates@thrill.com" className="transition-colors hover:text-accent-green_light">
+                                            E-mail us
+                                        </a>
+                                        <div className="text-xs text-white/50 mt-1">affiliates@thrill.com</div>
+                                    </li>
                                 </ul>
                             </div>
 

@@ -2,14 +2,14 @@
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import { easeOut, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import VectoreLine from "@/../public/feature/Feature4SvgComponent";
 
 interface FeatureCardProps {
   index: number;
   title: string;
   description: string;
-  svgComponent?: React.FC; // Changed from svgPath to svgComponent for reusability
+  svgComponent?: React.FC;
   imagePath: string;
   more_detail?: string;
   toleft?: boolean;
@@ -29,7 +29,7 @@ export default function FeatureCard({
   index,
   title,
   description,
-  svgComponent: SvgComponent, // Now receiving the SVG component as prop
+  svgComponent: SvgComponent,
   imagePath,
   stats,
   toleft,
@@ -42,59 +42,78 @@ export default function FeatureCard({
   isModal = false,
 }: FeatureCardProps) {
   const [localExpanded, setLocalExpanded] = useState(false);
-  const [dimensions, setDimensions] = useState({ width: 490, height: 490 });
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isExpanded =
-    forcedExpanded !== undefined ? forcedExpanded : localExpanded;
+  const isExpanded = forcedExpanded !== undefined ? forcedExpanded : localExpanded;
+
+  // تشخیص موبایل - فقط یک بار
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+    };
+
+    checkMobile();
+
+    // فقط اگه resize شد چک کن - نه مدام
+    let timeoutId: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkMobile, 150);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  // انیمیشن های ساده‌تر
   const containerVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 50,
-      scale: 0.9,
+      y: isMobile ? 20 : 30, // کمتر حرکت روی موبایل
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        staggerChildren: 0.2,
+        duration: isMobile ? 0.4 : 0.6, // سریع‌تر روی موبایل
+        ease: "easeOut",
+        staggerChildren: isMobile ? 0.05 : 0.1, // کمتر stagger
       },
     },
   };
 
+  // SVG انیمیشن ساده‌تر
   const svgVariants: Variants = {
     hidden: {
       opacity: 0,
-      scale: 0.8,
-      rotate: -10,
+      scale: 0.95, // کمتر scale تغییر
     },
     visible: {
       opacity: 1,
       scale: 1,
-      rotate: 0,
       transition: {
-        duration: 1,
-        ease: easeOut,
+        duration: isMobile ? 0.3 : 0.5, // خیلی سریع‌تر روی موبایل
+        ease: "easeOut", // ease ساده‌تر
       },
     },
   };
 
   const imageVariants: Variants = {
     hidden: {
-      opacity: 0.3,
-      scale: 0.9,
-      y: 10,
+      opacity: 0.5,
+      scale: 0.98,
     },
     visible: {
       opacity: 1,
       scale: 1,
-      y: 0,
       transition: {
-        duration: 0.2,
-        ease: "easeInOut",
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -107,7 +126,7 @@ export default function FeatureCard({
     }
   };
 
-  // Fixed heights for different states and screen sizes
+  // ساده‌تر شده - بدون محاسبات پیچیده
   const getFixedHeight = () => {
     if (isModal) {
       return isExpanded
@@ -120,54 +139,22 @@ export default function FeatureCard({
     }
   };
 
-  // Update SVG dimensions based on container size
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const baseWidth = isExpanded
-          ? Math.max(rect.width, 300) || 600
-          : Math.max(rect.width, 300) || 490;
-        const baseHeight = isModal
-          ? isExpanded
-            ? 800
-            : 490
-          : isExpanded
-            ? 850
-            : 490;
-
-        setDimensions({
-          width: baseWidth,
-          height: baseHeight,
-        });
-      }
-    };
-
-    // Update on mount and expansion change
-    updateDimensions();
-
-    // Use ResizeObserver for better performance
-    const resizeObserver = new ResizeObserver(updateDimensions);
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [isExpanded, isModal]);
+  // ساده‌تر شده - dimensions ثابت
+  const baseDimensions = {
+    width: isExpanded ? 600 : 490,
+    height: isModal ? (isExpanded ? 800 : 490) : (isExpanded ? 850 : 490)
+  };
 
   return (
     <div
       ref={containerRef}
-      className={`relative w-full transition-all duration-700 ease-out cursor-pointer ${
-        isExpanded ? "max-w-[600px]" : "max-w-[490px]"
-      } ${getFixedHeight()}`}
+      className={`relative w-full transition-all duration-700 ease-out cursor-pointer ${isExpanded ? "max-w-[600px]" : "max-w-[490px]"
+        } ${getFixedHeight()}`}
     >
-      {/* SVG Border - Now responsive */}
+      {/* SVG Border - ساده‌تر شده */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+        viewBox={`0 0 ${baseDimensions.width} ${baseDimensions.height}`}
         preserveAspectRatio="none"
         aria-hidden="true"
         style={{
@@ -177,13 +164,12 @@ export default function FeatureCard({
       >
         <defs>
           <linearGradient
-            id={`borderGradient-${title.replace(/\s+/g, "-")}`}
+            id={`borderGradient-${index}`} // ساده‌تر شده
             gradientUnits="userSpaceOnUse"
             x1="0"
             y1="0"
-            x2={dimensions.width}
+            x2={baseDimensions.width}
             y2="0"
-            gradientTransform={`rotate(158.39 ${dimensions.width / 2} ${dimensions.height / 2})`}
           >
             <stop offset="14.19%" stopColor="#ffffff" stopOpacity="0.06" />
             <stop offset="50.59%" stopColor="#ffffff" stopOpacity="0.000015" />
@@ -192,112 +178,80 @@ export default function FeatureCard({
           </linearGradient>
         </defs>
 
-        {/* Main border */}
+        {/* فقط یک border - نه ۳ تا */}
         <rect
           x="0.75"
           y="0.75"
-          width={dimensions.width - 1.5}
-          height={dimensions.height - 1.5}
+          width={baseDimensions.width - 1.5}
+          height={baseDimensions.height - 1.5}
           rx="24"
           ry="24"
           fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, "-")})`}
+          stroke={`url(#borderGradient-${index})`}
           strokeWidth="1.5"
-          vectorEffect="non-scaling-stroke"
-          shapeRendering="geometricPrecision"
-        />
-
-        <rect
-          x="0.75"
-          y="0.75"
-          width={dimensions.width - 1.5}
-          height={dimensions.height - 1.5}
-          rx="24"
-          ry="24"
-          fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, "-")})`}
-          strokeWidth="0.2"
-          strokeLinecap="round"
-          pathLength="100"
-          strokeDasharray="10 90"
-          strokeDashoffset="56"
-          vectorEffect="non-scaling-stroke"
-        />
-
-        <rect
-          x="0.75"
-          y="0.75"
-          width={dimensions.width - 1.5}
-          height={dimensions.height - 1.5}
-          rx="24"
-          ry="24"
-          fill="none"
-          stroke={`url(#borderGradient-${title.replace(/\s+/g, "-")})`}
-          strokeWidth=".3"
-          strokeLinecap="round"
-          pathLength="100"
-          strokeDasharray="9 91"
-          strokeDashoffset="81"
           vectorEffect="non-scaling-stroke"
         />
       </svg>
 
-      {/* Content Container - Fixed height */}
+      {/* Content Container */}
       <div className="relative w-full h-full rounded-[24px] bg-[#F8F8F805] flex flex-col overflow-hidden">
         {index === 2 && (
           <div className="vectore-line w-[50px] h-[50px] absolute 2xl:top-[170px] xl:top-[170px] lg:top-[135px] 2xl:left-[110px] xl:left-[100px] lg:left-[100px] md:top-[130px] md:left-[110px] sm:top-[125px] sm:left-[100px] top-[130px] [@media(max-width:640px)]:left-[23vw]">
             <VectoreLine
-              className="middle-vectore-line md:w-[20px] md:h-[50px] sm:w-[1rem] sm:h-[3rem] w-[1.8rem] sm:scale-120 scale-[2.1] h-[2rem]  relative sm:bottom-3 md:top-3 md:left-9 lg:left-4 lg:-top-2 xl:left-7"
+              className="middle-vectore-line md:w-[20px] md:h-[50px] sm:w-[1rem] sm:h-[3rem] w-[1.8rem] sm:scale-120 scale-[2.1] h-[2rem] relative sm:bottom-3 md:top-3 md:left-9 lg:left-4 lg:-top-2 xl:left-7"
             />
           </div>
         )}
-        {/* Image Section - Fixed height */}
+
+        {/* Image Section */}
         <motion.div
           className="relative"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }} // Trigger when 30% is visible
+          viewport={{ once: true, amount: 0.3 }}
         >
           <div
-            className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${
-              isModal
+            className={`w-full mx-auto rounded-xl relative overflow-hidden transition-all duration-500 ease-out ${isModal
                 ? "h-[260px]"
                 : "h-[220px] sm:h-[210px] md:h-[260px] lg:h-[250px] xl:h-[280px]"
-            }`}
+              }`}
           >
-            {/* Animated SVG Background */}
-            <motion.div
-              className={`relative ${maxstack && "z-[9]"} z-[99999]`}
-              variants={svgVariants}
-            >
-              {SvgComponent && <SvgComponent />}
-            </motion.div>
+            {/* SVG Background - فقط اگه موبایل نباشه یا expanded باشه */}
+            {SvgComponent && (
+              <motion.div
+                className={`relative ${maxstack && "z-[9]"} z-[99999]`}
+                variants={svgVariants}
+              >
+                <SvgComponent />
+              </motion.div>
+            )}
 
-            {/* Animated Center PNG Image */}
+            {/* Center PNG Image */}
             <motion.div variants={imageVariants} className="absolute inset-0">
               <Image
                 fill
                 src={imagePath}
                 alt={title}
+                sizes="(max-width: 768px) 100vw, 50vw" // اضافه شده برای performance
                 className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-1 xl:ml-1.5 lg:ml-1 md:ml-1 sm:ml-1 ml-1 sm:scale-75 scale-[0.65]"}`}
                 style={{ zIndex: 1000 }}
+                loading="lazy" // lazy loading اضافه شده
               />
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Main Content Area - Flex grow to fill remaining space */}
+        {/* Main Content Area */}
         <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 sm:pt-0 pt-3 min-h-0">
-          {/* Header Section - Title + Button (Non-Modal) - Fixed height */}
+          {/* Header Section */}
           {!isModal && (
             <div className="flex items-center justify-between flex-shrink-0 pt-3 h-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px] xl:h-[70px]">
               <h2
-                className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 transition-all duration-300 ${
-                  isModal
+                className={`text-neutral-white text-nowrap font-semibold uppercase leading-[1.15] flex-1 pr-3 xs:pr-4 transition-all duration-300 ${isModal
                     ? "text-base sm:text-lg md:text-xl lg:text-xl xl:text-[32px]"
                     : "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
-                }`}
+                  }`}
               >
                 {title}
               </h2>
@@ -306,6 +260,7 @@ export default function FeatureCard({
                   onClick={onClose}
                   className="flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110 hover:rotate-90"
                   aria-label={`Close ${title} details`}
+                  whileTap={{ scale: 0.95 }} // ساده‌تر شده
                 >
                   <X
                     size={14}
@@ -318,6 +273,7 @@ export default function FeatureCard({
                   onClick={toggleExpanded}
                   className="flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110"
                   aria-label={`Toggle ${title} details`}
+                  whileTap={{ scale: 0.95 }} // ساده‌تر شده
                 >
                   <Plus
                     size={14}
@@ -332,7 +288,7 @@ export default function FeatureCard({
             </div>
           )}
 
-          {/* Expandable Content Area - Takes remaining space */}
+          {/* Expandable Content Area */}
           <motion.div
             initial={false}
             animate={{
@@ -342,32 +298,29 @@ export default function FeatureCard({
               marginBottom: isExpanded ? "1.5rem" : 0,
             }}
             transition={{
-              duration: 0.7,
-              ease: [0.4, 0, 0.2, 1],
-              opacity: { duration: 0.5 },
+              duration: isMobile ? 0.4 : 0.6, // سریع‌تر روی موبایل
+              ease: "easeOut", // ساده‌تر
             }}
             className="overflow-hidden flex-1 min-h-0"
           >
             <div className="h-full flex flex-col justify-between min-h-0">
-              {/* Description - Flexible height but contained */}
+              {/* Description */}
               <div className="flex-1 mb-3 xs:mb-4 sm:mb-5 md:mb-6 mt-3 min-h-0 overflow-hidden">
                 <div className="h-full pr-1">
                   <p
-                    className={`text-neutral-lightGray leading-6 mb-2 ${
-                      isModal
+                    className={`text-neutral-lightGray leading-6 mb-2 ${isModal
                         ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
                         : "text-xs xs:text-sm sm:text-base md:text-lg"
-                    }`}
+                      }`}
                   >
                     {description}
                   </p>
                   {more_detail && (
                     <p
-                      className={`text-neutral-lightGray leading-6 ${
-                        isModal
+                      className={`text-neutral-lightGray leading-6 ${isModal
                           ? "text-[11px] xs:text-xs sm:text-sm md:text-base"
                           : "text-xs xs:text-sm sm:text-base md:text-lg"
-                      }`}
+                        }`}
                     >
                       {more_detail}
                     </p>
@@ -375,44 +328,40 @@ export default function FeatureCard({
                 </div>
               </div>
 
-              {/* Stats Grid - Fixed height */}
+              {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-5 flex-shrink-0 sm:h-[155px] pt-2 h-auto w-full">
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
-                    className={`text-white font-semibold leading-tight uppercase ${
-                      isModal
+                    className={`text-white font-semibold leading-tight uppercase ${isModal
                         ? "text-[11px] xs:text-[13px] sm:text-sm md:text-base lg:text-base xl:text-[22px]"
                         : "text-base md:text-lg lg:text-xl xl:text-[24px]"
-                    }`}
+                      }`}
                   >
                     {stats.primary.value}
                   </span>
                   <span
-                    className={`text-neutral-lightGray leading-tight mt-1 ${
-                      isModal
+                    className={`text-neutral-lightGray leading-tight mt-1 ${isModal
                         ? "text-xs xs:text-sm sm:text-base md:text-lg"
                         : "text-sm md:text-[18px]"
-                    }`}
+                      }`}
                   >
                     {stats.primary.label}
                   </span>
                 </div>
                 <div className="flex flex-col items-start h-full min-w-[100px]">
                   <span
-                    className={`text-white font-semibold leading-tight uppercase ${
-                      isModal
+                    className={`text-white font-semibold leading-tight uppercase ${isModal
                         ? "text-[11px] xs:text-[13px] sm:text-sm md:text-base lg:text-base xl:text-[22px]"
                         : "text-base md:text-lg lg:text-xl xl:text-[24px]"
-                    }`}
+                      }`}
                   >
                     {stats.secondary.value}
                   </span>
                   <span
-                    className={`text-neutral-lightGray leading-tight mt-1 ${
-                      isModal
+                    className={`text-neutral-lightGray leading-tight mt-1 ${isModal
                         ? "text-xs xs:text-sm sm:text-base md:text-lg"
                         : "text-sm md:text-[18px]"
-                    }`}
+                      }`}
                   >
                     {stats.secondary.label}
                   </span>
@@ -422,29 +371,31 @@ export default function FeatureCard({
           </motion.div>
         </div>
 
-        {/* Background glow effect */}
-        <div
-          className="absolute -bottom-[10rem] left-1/2 transform -translate-x-1/2 w-[700px] h-[400px] transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: `
-      linear-gradient(0deg, rgba(248,248,248,0.02), rgba(248,248,248,0.02)),
-      radial-gradient(160% 80% at 75% 130%, rgba(93,255,194,0.18) 0%, rgba(27,29,41,0) 100%),
-      radial-gradient(220% 120% at 30% 120%, rgba(93,255,194,0.25) 0%, rgba(27,29,41,0) 100%),
-      radial-gradient(200% 90% at 50% 110%, rgba(93,255,194,0.20) 0%, rgba(27,29,41,0) 100%),
-      radial-gradient(150% 70% at 60% 140%, rgba(93,255,194,0.12) 0%, rgba(27,29,41,0) 100%)
-    `,
-            filter: "blur(20px)",
-            opacity: isExpanded ? 1 : 0,
-            WebkitMaskImage: `
-      linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,1) 60%),
-      linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)
-    `,
-            WebkitMaskComposite: "multiply",
-            maskComposite: "intersect",
-            WebkitMaskRepeat: "no-repeat",
-            WebkitMaskSize: "100% 100%",
-          }}
-        />
+        {/* Background glow - ساده‌تر شده */}
+        {!isMobile && (
+          <div
+            className="absolute -bottom-[10rem] left-1/2 transform -translate-x-1/2 w-[700px] h-[400px] transition-opacity duration-500 pointer-events-none"
+            style={{
+              background: `
+    linear-gradient(0deg, rgba(248,248,248,0.02), rgba(248,248,248,0.02)),
+    radial-gradient(160% 80% at 75% 130%, rgba(93,255,194,0.18) 0%, rgba(27,29,41,0) 100%),
+    radial-gradient(220% 120% at 30% 120%, rgba(93,255,194,0.25) 0%, rgba(27,29,41,0) 100%),
+    radial-gradient(200% 90% at 50% 110%, rgba(93,255,194,0.20) 0%, rgba(27,29,41,0) 100%),
+    radial-gradient(150% 70% at 60% 140%, rgba(93,255,194,0.12) 0%, rgba(27,29,41,0) 100%)
+  `,
+              filter: "blur(20px)",
+              opacity: isExpanded ? 1 : 0,
+              WebkitMaskImage: `
+    linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,1) 60%),
+    linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)
+  `,
+              WebkitMaskComposite: "multiply",
+              maskComposite: "intersect",
+              WebkitMaskRepeat: "no-repeat",
+              WebkitMaskSize: "100% 100%",
+            }}
+          />
+        )}
       </div>
     </div>
   );
