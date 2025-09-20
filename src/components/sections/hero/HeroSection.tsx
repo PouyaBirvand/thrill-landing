@@ -6,14 +6,51 @@ import HeroCTAButton from "./HeroCTAButton"
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [isSafari, setIsSafari] = useState(false)
+  const [videosLoaded, setVideosLoaded] = useState(false)
   
-  // تشخیص موبایل
+  // تشخیص موبایل و Safari
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
+    
+    // تشخیص Safari
+    const userAgent = navigator.userAgent.toLowerCase()
+    const isSafariBrowser = /safari/.test(userAgent) && !/chrome/.test(userAgent) && !/firefox/.test(userAgent)
+    setIsSafari(isSafariBrowser)
+    
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  // پری‌لود ویدیوها
+  useEffect(() => {
+    const preloadVideos = async () => {
+      try {
+        const videoSources = [
+          isSafari ? "/animations/header_left_side.mov" : "/animations/header_left_side.webm"
+        ]
+        
+        const videoPromises = videoSources.map(src => {
+          return new Promise((resolve, reject) => {
+            const video = document.createElement('video')
+            video.preload = 'metadata'
+            video.oncanplaythrough = () => resolve(video)
+            video.onerror = () => reject(new Error(`Failed to load ${src}`))
+            video.src = src
+          })
+        })
+        
+        await Promise.all(videoPromises)
+        setVideosLoaded(true)
+      } catch (error) {
+        console.error('Video preload failed:', error)
+        setVideosLoaded(true) // بیاید بقیه کامپوننت کار کند حتی اگر ویدیو لود نشد
+      }
+    }
+    
+    preloadVideos()
+  }, [isSafari])
 
   // Get scroll progress for this section
   const { scrollYProgress } = useScroll({
@@ -36,7 +73,7 @@ export default function HeroSection() {
     visible: {
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3
+        delayChildren: videosLoaded ? 0.3 : 1.0 // صبر بیشتر تا ویدیوها لود شوند
       }
     }
   }
@@ -60,11 +97,12 @@ export default function HeroSection() {
   const videoVariants: Variants = {
     hidden: { opacity: 0, x: 100 },
     visible: { 
-      opacity: 1, 
+      opacity: videosLoaded ? 1 : 0, 
       x: 0,
       transition: {
         duration: 1.2,
-        ease: "easeOut"
+        ease: "easeOut",
+        delay: 0.5
       }
     }
   }
@@ -72,15 +110,68 @@ export default function HeroSection() {
   const leftVideoVariants: Variants = {
     hidden: { opacity: 0, x: -100 },
     visible: { 
-      opacity: 1, 
+      opacity: videosLoaded ? 1 : 0, 
       x: 0,
       transition: {
         duration: 1.2,
-        delay: 0.2,
+        delay: 0.7,
         ease: "easeOut"
       }
     }
   }
+
+  // تعیین فرمت ویدیو بر اساس مرورگر
+  const getVideoSource = () => {
+    return isSafari ? "/animations/header_left_side.mov" : "/animations/header_left_side.webm"
+  }
+
+  // کامپوننت ویدیو بهینه شده
+  const OptimizedVideo = ({ 
+    variants, 
+    style, 
+    className, 
+    isFlipped = false 
+  }: { 
+    variants: Variants
+    style: any
+    className: string
+    isFlipped?: boolean 
+  }) => (
+    <motion.div
+      className={className}
+      style={style}
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+    >
+      {videosLoaded && (
+        <video
+          src={getVideoSource()}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className={`w-full h-full object-cover object-center pointer-events-none ${
+            isFlipped ? 'scale-x-[-1]' : ''
+          }`}
+          style={{
+            willChange: 'transform',
+            backfaceVisibility: 'hidden',
+            perspective: 1000
+          }}
+          onLoadStart={() => console.log('Video loading started')}
+          onCanPlay={() => console.log('Video can play')}
+          onError={(e) => console.error('Video error:', e)}
+        />
+      )}
+      
+      {/* بک‌آپ برای زمانی که ویدیو لود نمی‌شود */}
+      {!videosLoaded && (
+        <div className="w-full h-full bg-gradient-to-br from-blue-900/20 to-purple-900/20 animate-pulse" />
+      )}
+    </motion.div>
+  )
 
   return (
     <section 
@@ -89,7 +180,7 @@ export default function HeroSection() {
       className="sm:pt-[15rem] pt-[10rem] relative lg:overflow-hidden"
     >
       {/* Right video - به سمت راست حرکت می‌کنه */}
-      <motion.div
+      <OptimizedVideo
         className="absolute lg:top-0 top-[14rem] z-[5] pointer-events-none
                    right-[-12rem] h-full w-[90%]
                    sm:right-[-250px] sm:w-[70%]
@@ -104,21 +195,11 @@ export default function HeroSection() {
           opacity: videoOpacity
         }}
         variants={videoVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <video
-          src="/animations/header_left_side.webm"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover scale-x-[-1] object-center pointer-events-none"
-        />
-      </motion.div>
+        isFlipped={true}
+      />
 
       {/* Left video - به سمت چپ حرکت می‌کنه */}
-      <motion.div
+      <OptimizedVideo
         className="absolute lg:top-0 top-[14rem] z-[2] pointer-events-none
                    left-[-12rem] h-full w-[90%]
                    sm:left-[-250px] sm:w-[70%]
@@ -133,18 +214,7 @@ export default function HeroSection() {
           opacity: videoOpacity
         }}
         variants={leftVideoVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <video
-          src="/animations/header_left_side.webm"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover object-center pointer-events-none"
-        />
-      </motion.div>
+      />
 
       {/* Content - فقط کل container حرکت می‌کنه */}
       <motion.div 
@@ -200,6 +270,13 @@ export default function HeroSection() {
           <HeroCTAButton />
         </motion.div>
       </motion.div>
+
+      {/* Loading indicator برای زمان لود ویدیوها */}
+      {!videosLoaded && (
+        <div className="fixed top-4 right-4 z-50 bg-black/50 text-white px-3 py-2 rounded-lg text-sm">
+          Loading videos...
+        </div>
+      )}
     </section>
   )
 }
