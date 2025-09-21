@@ -1,141 +1,61 @@
 "use client"
-import { motion, useScroll, useTransform, Variants, MotionValue } from "framer-motion"
+import { motion, useScroll, useTransform, Variants } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
+import Lottie from "lottie-react"
 import HeroCTAButton from "./HeroCTAButton"
 
-interface VideoData {
-  originalUrl: string
-  blobUrl: string
-  size: number
-  type: string
+interface AnimationData {
+  loaded: boolean
+  data: any
 }
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
-  const [isSafari, setIsSafari] = useState(false)
-  const [videosLoaded, setVideosLoaded] = useState(false)
-  const [videoWorker, setVideoWorker] = useState<Worker | null>(null)
-  const [videoData, setVideoData] = useState<VideoData | null>(null)
+  const [animationData, setAnimationData] = useState<AnimationData>({ loaded: false, data: null })
   const [loadingProgress, setLoadingProgress] = useState(0)
   
-  // تشخیص موبایل و Safari
+  // تشخیص موبایل
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
-    
-    // تشخیص Safari
-    const userAgent = navigator.userAgent.toLowerCase()
-    const isSafariBrowser = /safari/.test(userAgent) && !/chrome/.test(userAgent) && !/firefox/.test(userAgent)
-    setIsSafari(isSafariBrowser)
     
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // راه‌اندازی Service Worker
+  // لود کردن انیمیشن JSON
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/video-sw.js')
-        .then((registration) => {
-          console.log('Video SW registered:', registration)
-          
-          // ارسال درخواست پری‌لود
-          if (registration.active) {
-            registration.active.postMessage({
-              type: 'PRELOAD_VIDEOS'
-            })
-          }
+    const loadAnimation = async () => {
+      try {
+        setLoadingProgress(20)
+        
+        const response = await fetch('/animations/header_left_side.json')
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        
+        setLoadingProgress(60)
+        
+        const jsonData = await response.json()
+        
+        setAnimationData({ 
+          loaded: true, 
+          data: jsonData 
         })
-        .catch(console.error)
-
-      // گوش دادن به پیام‌های Service Worker
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        if (event.data?.type === 'VIDEOS_PRELOADED') {
-          console.log('Videos preloaded by service worker!')
-          setLoadingProgress(prev => Math.max(prev, 50))
-        }
-      })
+        setLoadingProgress(100)
+        
+        console.log('Animation JSON loaded successfully')
+      } catch (error) {
+        console.error('Error loading animation:', error)
+        setAnimationData({ loaded: true, data: null }) // حتی در صورت خطا، loading را تمام کن
+        setLoadingProgress(100)
+      }
     }
+
+    loadAnimation()
   }, [])
-
-  // راه‌اندازی Web Worker برای پردازش ویدیو
-  useEffect(() => {
-    if (typeof Worker !== 'undefined') {
-      const worker = new Worker('/video-worker.js')
-      setVideoWorker(worker)
-
-      // گوش دادن به پیام‌های Worker
-      worker.onmessage = (event) => {
-        const { type, data } = event.data
-
-        switch (type) {
-          case 'VIDEO_PRELOADED':
-            console.log('Video preloaded:', data)
-            setVideoData(data)
-            setVideosLoaded(true)
-            setLoadingProgress(100)
-            break
-
-          case 'MULTIPLE_VIDEOS_PRELOADED':
-            console.log('Multiple videos preloaded:', data)
-            if (data.successful.length > 0) {
-              setVideoData(data.successful[0]) // اولین ویدیو موفق
-              setVideosLoaded(true)
-              setLoadingProgress(100)
-            }
-            break
-
-          case 'VIDEO_PRELOAD_ERROR':
-          case 'MULTIPLE_VIDEOS_ERROR':
-            console.error('Video preload error:', data)
-            // fallback به روش معمولی
-            setVideosLoaded(true)
-            setLoadingProgress(100)
-            break
-        }
-      }
-
-      return () => {
-        worker.terminate()
-        setVideoWorker(null)
-      }
-    }
-  }, [])
-
-  // پری‌لود ویدیوها با Web Worker
-  useEffect(() => {
-    if (videoWorker && !videosLoaded) {
-      const videoUrl = isSafari 
-        ? "/animations/header_left_side.mov" 
-        : "/animations/header_left_side.webm"
-
-      setLoadingProgress(10)
-
-      // ارسال درخواست پری‌لود به Worker
-      videoWorker.postMessage({
-        type: 'PRELOAD_VIDEO',
-        data: {
-          url: videoUrl,
-          priority: 'high'
-        }
-      })
-    }
-  }, [videoWorker, isSafari, videosLoaded])
-
-  // پاک‌سازی blob URLs هنگام خروج
-  useEffect(() => {
-    return () => {
-      if (videoWorker && videoData?.blobUrl) {
-        videoWorker.postMessage({
-          type: 'CLEANUP_BLOBS',
-          data: {
-            blobUrls: [videoData.blobUrl]
-          }
-        })
-      }
-    }
-  }, [videoWorker, videoData])
 
   // Get scroll progress for this section
   const { scrollYProgress } = useScroll({
@@ -143,22 +63,22 @@ export default function HeroSection() {
     offset: ["start start", "end start"]
   })
 
-  // فقط ۳ تا transform برای کل section - خیلی سبک‌تر!
+  // Transforms برای scroll
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
   const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, isMobile ? 0.95 : 0.8])
   
-  // حرکت جداگانه برای هر ویدیو - یکی چپ یکی راست
-  const rightVideoMovement = useTransform(scrollYProgress, [0, 1], isMobile ? ["0px", "0px"] : ["0px", "200px"])
-  const leftVideoMovement = useTransform(scrollYProgress, [0, 1], isMobile ? ["0px", "0px"] : ["0px", "-200px"])
-  const videoOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
+  // حرکت جداگانه برای هر انیمیشن
+  const rightAnimationMovement = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, 200])
+  const leftAnimationMovement = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -200])
+  const animationOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
 
-  // انیمیشن های ساده برای ورود
+  // انیمیشن های ورود
   const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
         staggerChildren: 0.2,
-        delayChildren: videosLoaded ? 0.3 : 1.0 // صبر بیشتر تا ویدیوها لود شوند
+        delayChildren: animationData.loaded ? 0.3 : 1.0
       }
     }
   }
@@ -178,11 +98,10 @@ export default function HeroSection() {
     }
   }
 
-  // ویدیو variants برای ورود اولیه
-  const videoVariants: Variants = {
+  const animationVariants: Variants = {
     hidden: { opacity: 0, x: 100 },
     visible: { 
-      opacity: videosLoaded ? 1 : 0, 
+      opacity: animationData.loaded && animationData.data ? 1 : 0, 
       x: 0,
       transition: {
         duration: 1.2,
@@ -192,10 +111,10 @@ export default function HeroSection() {
     }
   }
 
-  const leftVideoVariants: Variants = {
+  const leftAnimationVariants: Variants = {
     hidden: { opacity: 0, x: -100 },
     visible: { 
-      opacity: videosLoaded ? 1 : 0, 
+      opacity: animationData.loaded && animationData.data ? 1 : 0, 
       x: 0,
       transition: {
         duration: 1.2,
@@ -205,16 +124,8 @@ export default function HeroSection() {
     }
   }
 
-  // تعیین منبع ویدیو (blob URL اگر موجود باشد، وگرنه فایل اصلی)
-  const getVideoSource = () => {
-    if (videoData?.blobUrl) {
-      return videoData.blobUrl
-    }
-    return isSafari ? "/animations/header_left_side.mov" : "/animations/header_left_side.webm"
-  }
-
-  // کامپوننت ویدیو بهینه شده
-  const OptimizedVideo = ({ 
+  // کامپوننت Lottie بهینه شده
+  const OptimizedLottie = ({ 
     variants, 
     style, 
     className, 
@@ -224,8 +135,8 @@ export default function HeroSection() {
     style: {
       maskImage?: string
       WebkitMaskImage?: string
-      x?: MotionValue<string>
-      opacity?: MotionValue<number>
+      x?: any
+      opacity?: any
     }
     className: string
     isFlipped?: boolean 
@@ -237,39 +148,26 @@ export default function HeroSection() {
       initial="hidden"
       animate="visible"
     >
-      {videosLoaded && (
-        <video
-          src={getVideoSource()}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className={`w-full h-full object-cover object-center pointer-events-none ${
-            isFlipped ? 'scale-x-[-1]' : ''
-          }`}
-          style={{
-            willChange: 'transform',
-            backfaceVisibility: 'hidden',
-            perspective: 1000
-          }}
-          onLoadStart={() => console.log('Video loading started')}
-          onCanPlay={() => console.log('Video can play')}
-          onError={(e) => {
-            console.error('Video error:', e)
-            // Fallback to original URL if blob fails
-            if (videoData?.blobUrl && e.currentTarget.src === videoData.blobUrl) {
-              const fallbackUrl = isSafari 
-                ? "/animations/header_left_side.mov" 
-                : "/animations/header_left_side.webm"
-              e.currentTarget.src = fallbackUrl
-            }
-          }}
-        />
-      )}
-      
-      {/* بک‌آپ برای زمانی که ویدیو لود نمی‌شود */}
-      {!videosLoaded && (
+      {animationData.loaded && animationData.data ? (
+        <div className={`w-full h-full ${isFlipped ? 'scale-x-[-1]' : ''}`}>
+          <Lottie
+            animationData={animationData.data}
+            loop={true}
+            autoplay={true}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              pointerEvents: 'none'
+            }}
+            rendererSettings={{
+              preserveAspectRatio: 'xMidYMid slice'
+            }}
+          />
+        </div>
+      ) : (
+        // بک‌آپ برای زمانی که انیمیشن لود نمی‌شود
         <div className="w-full h-full bg-gradient-to-br from-blue-900/20 to-purple-900/20 animate-pulse" />
       )}
     </motion.div>
@@ -281,8 +179,8 @@ export default function HeroSection() {
       id="hero" 
       className="sm:pt-[15rem] pt-[10rem] relative lg:overflow-hidden"
     >
-      {/* Right video - به سمت راست حرکت می‌کنه */}
-      <OptimizedVideo
+      {/* Right animation - به سمت راست حرکت می‌کنه */}
+      <OptimizedLottie
         className="absolute lg:top-0 top-[14rem] z-[5] pointer-events-none
                    right-[-12rem] h-full w-[90%]
                    sm:right-[-250px] sm:w-[70%]
@@ -293,15 +191,15 @@ export default function HeroSection() {
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-          x: rightVideoMovement,
-          opacity: videoOpacity
+          x: rightAnimationMovement,
+          opacity: animationOpacity
         }}
-        variants={videoVariants}
+        variants={animationVariants}
         isFlipped={true}
       />
 
-      {/* Left video - به سمت چپ حرکت می‌کنه */}
-      <OptimizedVideo
+      {/* Left animation - به سمت چپ حرکت می‌کنه */}
+      <OptimizedLottie
         className="absolute lg:top-0 top-[14rem] z-[2] pointer-events-none
                    left-[-12rem] h-full w-[90%]
                    sm:left-[-250px] sm:w-[70%]
@@ -312,13 +210,13 @@ export default function HeroSection() {
         style={{
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-          x: leftVideoMovement,
-          opacity: videoOpacity
+          x: leftAnimationMovement,
+          opacity: animationOpacity
         }}
-        variants={leftVideoVariants}
+        variants={leftAnimationVariants}
       />
 
-      {/* Content - فقط کل container حرکت می‌کنه */}
+      {/* Content */}
       <motion.div 
         className="flex flex-col items-center justify-center gap-3 relative z-10 px-4 sm:px-6 md:px-8"
         style={{ 
@@ -329,7 +227,7 @@ export default function HeroSection() {
         initial="hidden"
         animate="visible"
       >
-        {/* Block 1: Subtitle */}
+        {/* Subtitle */}
         <motion.h3
           className="uppercase text-accent-green_light font-semibold text-sm sm:text-base"
           variants={itemVariants}
@@ -343,7 +241,7 @@ export default function HeroSection() {
           variants={itemVariants}
         />
         
-        {/* Block 2: Main Title */}
+        {/* Main Title */}
         <motion.h1
           className="text-white text-[28px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold max-w-5xl text-center uppercase leading-tight px-2"
           variants={itemVariants}
@@ -351,20 +249,20 @@ export default function HeroSection() {
           The Affiliate partnership you've Been waiting For
         </motion.h1>
 
-        {/* Block 3: Description */}
+        {/* Description */}
         <motion.div
           className="text-center space-y-1 px-4 mt-2"
           variants={itemVariants}
         >
           <p className="text-neutral-lightGray text-md sm:text-xl">
-          It's time to make your reach thrilling.
+            It's time to make your reach thrilling.
           </p>
           <p className="text-neutral-lightGray text-md sm:text-xl max-w-lg">
             Join the best casino affiliate program built for creators, streamers, publishers, and platforms of all kinds.
           </p>
         </motion.div>
 
-        {/* Block 4: CTA Button */}
+        {/* CTA Button */}
         <motion.div
           className="mt-8 pb-16"
           variants={itemVariants}
@@ -373,13 +271,13 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Loading indicator پیشرفته */}
-      {!videosLoaded && (
+      {/* Loading indicator ساده */}
+      {!animationData.loaded && (
         <div className="fixed top-4 right-4 z-50 bg-black/50 text-white px-4 py-3 rounded-lg text-sm backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             <div className="flex flex-col">
-              <span>Loading videos...</span>
+              <span>Loading animation...</span>
               <div className="w-24 h-1 bg-white/20 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-white transition-all duration-300 ease-out"
@@ -388,11 +286,6 @@ export default function HeroSection() {
               </div>
             </div>
           </div>
-          {videoData && (
-            <div className="text-xs text-white/70 mt-1">
-              Size: {(videoData.size / 1024 / 1024).toFixed(1)}MB
-            </div>
-          )}
         </div>
       )}
     </section>
