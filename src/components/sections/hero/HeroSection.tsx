@@ -1,12 +1,12 @@
 "use client"
-import { motion, useScroll, useTransform, Variants } from "framer-motion"
+import { motion, MotionValue, useScroll, useTransform, Variants } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Lottie from "lottie-react"
 import HeroCTAButton from "./HeroCTAButton"
 
 interface AnimationData {
   loaded: boolean
-  data: any
+  data: object | null
 }
 
 export default function HeroSection() {
@@ -135,8 +135,8 @@ export default function HeroSection() {
     style: {
       maskImage?: string
       WebkitMaskImage?: string
-      x?: any
-      opacity?: any
+      x?: MotionValue<number>
+      opacity?: MotionValue<number>
     }
     className: string
     isFlipped?: boolean 
