@@ -16,6 +16,7 @@
     "*.{js,jsx,ts,tsx,css,md,json}": "npm run format --"
   },
   "dependencies": {
+    "@rive-app/react-canvas-lite": "^4.23.3",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
     "class-variance-authority": "^0.7.1",

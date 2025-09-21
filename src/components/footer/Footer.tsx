@@ -5,51 +5,14 @@ import { Dot } from 'lucide-react'
 import { Button } from '../ui/Button'
 import Image from 'next/image'
 import Container from '../common/Container'
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { useNavigate } from '@/hooks/useNavigate'
 import Link from 'next/link'
-import Lottie from "lottie-react"
-
-interface AnimationData {
-    loaded: boolean
-    data: object | null
-}
 
 export default function Footer() {
     const ref = useRef<HTMLElement | null>(null)
     const isInView = useInView(ref, { once: false, amount: 0.5 })
-
-    const [animationData, setAnimationData] = useState<AnimationData>({ loaded: false, data: null })
     const { navigate } = useNavigate([], 0)
-
-    // لود کردن انیمیشن JSON هنگام ورود به viewport
-    useEffect(() => {
-        if (isInView && !animationData.loaded) {
-            const loadAnimation = async () => {
-                try {
-                    const response = await fetch('/animations/header_left_side.json')
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`)
-                    }
-                    
-                    const jsonData = await response.json()
-                    
-                    setAnimationData({ 
-                        loaded: true, 
-                        data: jsonData 
-                    })
-                    
-                    console.log('Footer animation JSON loaded successfully')
-                } catch (error) {
-                    console.error('Error loading footer animation:', error)
-                    setAnimationData({ loaded: true, data: null })
-                }
-            }
-
-            loadAnimation()
-        }
-    }, [isInView, animationData.loaded])
 
     const mainVariants = {
         hidden: { opacity: 0, y: 18 },
@@ -66,98 +29,8 @@ export default function Footer() {
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut, delay: 0.6 } }
     }
 
-    // کامپوننت Lottie بهینه شده Footer
-    const OptimizedFooterLottie = ({ 
-        className, 
-        style,
-        initial,
-        animate,
-        transition,
-        isFlipped = false 
-    }: { 
-        className: string
-        style: {
-            maskImage?: string
-            WebkitMaskImage?: string
-        }
-        initial: { opacity: number; x: number }
-        animate: { opacity: number; x: number }
-        transition: { duration: number; delay?: number; ease: "easeOut" }
-        isFlipped?: boolean 
-    }) => (
-        <motion.div
-            className={className}
-            style={style}
-            initial={initial}
-            animate={animate}
-            transition={transition}
-        >
-            {animationData.loaded && animationData.data ? (
-                <div className={`w-full h-full ${isFlipped ? 'scale-x-[-1]' : ''}`}>
-                    <Lottie
-                        animationData={animationData.data}
-                        loop={true}
-                        autoplay={true}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            pointerEvents: 'none'
-                        }}
-                        rendererSettings={{
-                            preserveAspectRatio: 'xMidYMid slice'
-                        }}
-                    />
-                </div>
-            ) : (
-                // بک‌آپ برای زمانی که انیمیشن لود نمی‌شود
-                <div className="w-full h-full bg-gradient-to-br from-blue-900/10 to-purple-900/10 animate-pulse" />
-            )}
-        </motion.div>
-    )
-
     return (
         <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden z-0">
-            {/* Right Shape */}
-            <OptimizedFooterLottie
-                className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
-                       right-[-100px] h-[25%] sm:h-[35%] w-[60%]
-                       sm:right-[-50px] sm:w-[40%]
-                       md:right-[-400px] md:w-[95%] md:h-full
-                       lg:right-[-440px] lg:w-[80%]
-                       xl:right-[-470px] xl:w-[70%]
-                       2xl:right-[-470px] 2xl:w-[65%]
-                       max-sm:!scale-[1.8]"
-                style={{
-                    maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-                }}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                isFlipped={true}
-            />
-
-            {/* Left Shape */}
-            <OptimizedFooterLottie
-                className="absolute bottom-[0rem] md:top-[21rem] lg:top-[15rem] z-[1] pointer-events-none
-                       left-[-100px] h-[25%] sm:h-[35%] w-[60%]
-                       sm:left-[-50px] sm:w-[40%]
-                       md:left-[-400px] md:w-[95%] md:h-full
-                       lg:left-[-440px] lg:w-[80%]
-                       xl:left-[-470px] xl:w-[70%]
-                       2xl:left-[-470px] 2xl:w-[65%]
-                       max-sm:!scale-[1.8]"
-                style={{
-                    maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)',
-                }}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-            />
-
             <Container className='z-[10] relative'>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Top Section */}
@@ -368,16 +241,6 @@ export default function Footer() {
                     </motion.div>
                 </div>
             </Container>
-
-            {/* Loading indicator ساده */}
-            {!animationData.loaded && isInView && (
-                <div className="fixed bottom-4 right-4 z-50 bg-black/50 text-white px-3 py-2 rounded-lg text-xs backdrop-blur-sm">
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Loading animation...</span>
-                    </div>
-                </div>
-            )}
         </footer>
     )
 }
