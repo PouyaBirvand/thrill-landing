@@ -367,17 +367,7 @@ export default function Footer() {
                         </div>
                     </motion.div>
                 </div>
-            </Container>
-
-            {/* Loading indicator ساده */}
-            {!animationData.loaded && isInView && (
-                <div className="fixed bottom-4 right-4 z-50 bg-black/50 text-white px-3 py-2 rounded-lg text-xs backdrop-blur-sm">
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Loading animation...</span>
-                    </div>
-                </div>
-            )}
+            </Container>           
         </footer>
     )
 }
