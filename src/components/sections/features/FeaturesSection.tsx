@@ -7,7 +7,6 @@ export default function FeaturesSection() {
   const contentRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
 
-  // تشخیص موبایل
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
@@ -17,13 +16,11 @@ export default function FeaturesSection() {
 
   const isInView = useInView(contentRef, { once: true, margin: "-100px" })
 
-  // scroll animation برای کل container
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   })
 
-  // تبدیل های ساده - بیرون از useMemo
   const opacity = useTransform(
     scrollYProgress, 
     [0, 0.2, 0.6, 1], 
@@ -36,14 +33,12 @@ export default function FeaturesSection() {
     isMobile ? [0.98, 1, 1, 0.96] : [0.95, 1, 1, 0.9]
   )
 
-  // فقط برای دسکتاپ y transform اضافه می‌کنیم
   const y = useTransform(
     scrollYProgress, 
     [0, 0.5, 1], 
     isMobile ? ["0px", "0px", "0px"] : ["20px", "0px", "-30px"]
   )
 
-  // انیمیشن های ساده برای ورود elements
   const staggerVariants: Variants = {
     hidden: {},
     visible: {
@@ -74,7 +69,6 @@ export default function FeaturesSection() {
       ref={sectionRef}
       className="overflow-hidden pt-28 md:pt-52 pb-6 relative"
     >
-      {/* کل container با scroll animation */}
       <motion.div
         ref={contentRef}
         className="flex flex-col items-center justify-center gap-4 relative z-10 px-4 sm:px-6 md:px-8"

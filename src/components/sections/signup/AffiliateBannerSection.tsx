@@ -10,12 +10,11 @@ export default function AffiliateBannerSection() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false, amount: 0.25 });
 
-    // State for screen size detection
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsMobile(window.innerWidth < 768); // 768px is md breakpoint
+            setIsMobile(window.innerWidth < 768); 
         };
 
         checkScreenSize();
@@ -24,7 +23,6 @@ export default function AffiliateBannerSection() {
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
-    // Animation variants for the main container
     const containerVariants = {
         hidden: { opacity: 0, y: 30 },
         show: {
@@ -38,7 +36,6 @@ export default function AffiliateBannerSection() {
         }
     };
 
-    // Animation variants for corner plus icons
     const plusIconVariants = {
         hidden: { opacity: 0, scale: 0, rotate: -180 },
         show: {
@@ -52,7 +49,6 @@ export default function AffiliateBannerSection() {
         }
     };
 
-    // Animation variants for content blocks
     const getContentVariants = (delay = 0) => ({
         hidden: { opacity: 0, y: 20 },
         show: {
@@ -66,7 +62,6 @@ export default function AffiliateBannerSection() {
         }
     });
 
-    // Background glow animation
     const glowVariants = {
         hidden: { opacity: 0, scale: 0.8 },
         show: {
@@ -88,7 +83,6 @@ export default function AffiliateBannerSection() {
                 animate={isInView ? 'show' : 'hidden'}
                 variants={containerVariants}
             >
-                {/* Corner Plus Icons */}
                 <motion.div
                     className="absolute top-6 left-6 z-[2]"
                     variants={plusIconVariants}

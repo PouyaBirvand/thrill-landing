@@ -6,7 +6,7 @@ import { Navigation, Autoplay } from "swiper/modules"
 import type { Swiper as SwiperType } from "swiper"
 import "swiper/css"
 import "swiper/css/navigation"
-import { featuresDesktop, featuresMobile } from "@/constants/data/features"
+import { featuresDesktop } from "@/constants/data/features"
 import { Swiper, SwiperSlide } from "swiper/react"
 import FeatureCard from "./FeatureCard"
 
@@ -67,7 +67,7 @@ export default function FeatureSlider() {
         {/* Mobile: Stack cards vertically */}
         {isMobile ? (
           <div className="flex flex-col gap-4 px-4">
-            {featuresMobile.map((feature, index) => (
+            {featuresDesktop.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}

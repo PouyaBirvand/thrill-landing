@@ -7,7 +7,6 @@ export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
   
-  // تشخیص موبایل
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
@@ -16,17 +15,14 @@ export default function HeroSection() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Get scroll progress for this section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"]
   })
 
-  // Transforms برای scroll
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
   const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, isMobile ? 0.95 : 0.8])
 
-  // انیمیشن های ورود
   const containerVariants: Variants = {
     hidden: {},
     visible: {

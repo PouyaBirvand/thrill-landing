@@ -47,7 +47,6 @@ export default function FeatureCard({
 
   const isExpanded = forcedExpanded !== undefined ? forcedExpanded : localExpanded;
 
-  // تشخیص موبایل - فقط یک بار
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768;
@@ -56,7 +55,6 @@ export default function FeatureCard({
 
     checkMobile();
 
-    // فقط اگه resize شد چک کن - نه مدام
     let timeoutId: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(timeoutId);
@@ -70,35 +68,33 @@ export default function FeatureCard({
     };
   }, []);
 
-  // انیمیشن های ساده‌تر
   const containerVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: isMobile ? 20 : 30, // کمتر حرکت روی موبایل
+      y: isMobile ? 20 : 30, 
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: isMobile ? 0.4 : 0.6, // سریع‌تر روی موبایل
+        duration: isMobile ? 0.4 : 0.6, 
         ease: "easeOut",
-        staggerChildren: isMobile ? 0.05 : 0.1, // کمتر stagger
+        staggerChildren: isMobile ? 0.05 : 0.1,
       },
     },
   };
 
-  // SVG انیمیشن ساده‌تر
   const svgVariants: Variants = {
     hidden: {
       opacity: 0,
-      scale: 0.95, // کمتر scale تغییر
+      scale: 0.95, 
     },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: isMobile ? 0.3 : 0.5, // خیلی سریع‌تر روی موبایل
-        ease: "easeOut", // ease ساده‌تر
+        duration: isMobile ? 0.3 : 0.5, 
+        ease: "easeOut", 
       },
     },
   };
@@ -126,7 +122,6 @@ export default function FeatureCard({
     }
   };
 
-  // ساده‌تر شده - بدون محاسبات پیچیده
   const getFixedHeight = () => {
     if (isModal) {
       return isExpanded
@@ -139,7 +134,6 @@ export default function FeatureCard({
     }
   };
 
-  // ساده‌تر شده - dimensions ثابت
   const baseDimensions = {
     width: isExpanded ? 600 : 490,
     height: isModal ? (isExpanded ? 800 : 490) : (isExpanded ? 850 : 490)
@@ -151,7 +145,6 @@ export default function FeatureCard({
       className={`relative w-full transition-all duration-700 ease-out cursor-pointer mx-auto ${isExpanded ? "max-w-[490px] " : "max-w-[490px]"
         } ${getFixedHeight()}`}
     >
-      {/* SVG Border - ساده‌تر شده */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         viewBox={`0 0 ${baseDimensions.width} ${baseDimensions.height}`}
@@ -164,7 +157,7 @@ export default function FeatureCard({
       >
         <defs>
           <linearGradient
-            id={`borderGradient-${index}`} // ساده‌تر شده
+            id={`borderGradient-${index}`}
             gradientUnits="userSpaceOnUse"
             x1="0"
             y1="0"
@@ -178,7 +171,6 @@ export default function FeatureCard({
           </linearGradient>
         </defs>
 
-        {/* فقط یک border - نه ۳ تا */}
         <rect
           x="0.75"
           y="0.75"
@@ -217,7 +209,7 @@ export default function FeatureCard({
                 : "h-[220px] sm:h-[210px] md:h-[260px] lg:h-[250px] xl:h-[280px]"
               }`}
           >
-            {/* SVG Background - فقط اگه موبایل نباشه یا expanded باشه */}
+     
             {SvgComponent && (
               <motion.div
                 className={`relative ${maxstack && "z-[9]"} z-[99999]`}
@@ -227,24 +219,22 @@ export default function FeatureCard({
               </motion.div>
             )}
 
-            {/* Center PNG Image */}
+           
             <motion.div variants={imageVariants} className="absolute inset-0">
               <Image
                 fill
                 src={imagePath}
                 alt={title}
-                sizes="(max-width: 768px) 100vw, 50vw" // اضافه شده برای performance
+                sizes="(max-width: 768px) 100vw, 50vw" 
                 className={`object-contain scale-75 m-auto rounded-xl ${size && "scale-[1.0001] mt-2"} ${toleft && "2xl:ml-1 xl:ml-1.5 lg:ml-1 md:ml-1 sm:ml-1 ml-1 sm:scale-75 scale-[0.65]"}`}
                 style={{ zIndex: 1000 }}
-                loading="lazy" // lazy loading اضافه شده
+                loading="lazy"
               />
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Main Content Area */}
         <div className="flex-1 flex flex-col px-4 xs:px-5 sm:px-6 sm:pt-0 pt-3 min-h-0">
-          {/* Header Section */}
           {!isModal && (
             <div className="flex items-center justify-between flex-shrink-0 pt-3 h-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px] xl:h-[70px]">
               <h2
@@ -260,7 +250,7 @@ export default function FeatureCard({
                   onClick={onClose}
                   className="flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110 hover:rotate-90"
                   aria-label={`Close ${title} details`}
-                  whileTap={{ scale: 0.95 }} // ساده‌تر شده
+                  whileTap={{ scale: 0.95 }}
                 >
                   <X
                     size={14}
@@ -273,7 +263,7 @@ export default function FeatureCard({
                   onClick={toggleExpanded}
                   className="flex-shrink-0 relative bg-white/10 hover:bg-[#83FFDA20] hover:border-[#83FFDA40] p-1.5 xs:p-2 sm:p-2 rounded-full border border-white/5 transition-all duration-300 hover:scale-110"
                   aria-label={`Toggle ${title} details`}
-                  whileTap={{ scale: 0.95 }} // ساده‌تر شده
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Plus
                     size={14}
@@ -298,8 +288,8 @@ export default function FeatureCard({
               marginBottom: isExpanded ? "1.5rem" : 0,
             }}
             transition={{
-              duration: isMobile ? 0.4 : 0.6, // سریع‌تر روی موبایل
-              ease: "easeOut", // ساده‌تر
+              duration: isMobile ? 0.4 : 0.6, 
+              ease: "easeOut",
             }}
             className="overflow-hidden flex-1 min-h-0"
           >
