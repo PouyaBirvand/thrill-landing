@@ -8,6 +8,7 @@ import Container from '../common/Container'
 import { useRef } from 'react'
 import { useNavigate } from '@/hooks/useNavigate'
 import Link from 'next/link'
+import WavyLines from '@/app/WavyLines'
 
 export default function Footer() {
     const ref = useRef<HTMLElement | null>(null)
@@ -31,6 +32,14 @@ export default function Footer() {
 
     return (
         <footer ref={ref} id="footer" className="text-white py-16 md:pt-[18rem] pt-[15rem] relative overflow-hidden z-0">
+            {/* Wavy Lines Background */}
+            <div className="bottomLeftWavyLines">
+                <WavyLines />
+            </div>
+            <div className="bottomRightWavyLines">
+                <WavyLines />
+            </div>
+            
             <Container className='z-[10] relative'>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Top Section */}
